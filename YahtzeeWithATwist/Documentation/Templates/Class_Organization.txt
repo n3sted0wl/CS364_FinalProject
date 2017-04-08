@@ -1,0 +1,71 @@
+﻿/*************************************************************/
+/*                       Documentation                       */
+/*************************************************************/
+#region Documentation
+// Programmer: 
+
+#region Overview
+// --------------------
+/// <summary>
+/// </summary>
+#endregion
+
+#region Exceptions
+// --------------------
+#endregion
+
+#region Development
+// --------------------
+// TODO:
+#endregion
+#endregion
+
+/*************************************************************/
+/*                           Data                            */
+/*************************************************************/
+#region Data Elements
+#region Fields
+// --------------------
+#endregion
+
+#region Properties
+// --------------------
+#endregion
+
+#region Structures
+// --------------------
+#endregion
+
+#region Objects
+// --------------------
+#endregion
+
+#region Collections
+// --------------------
+#endregion
+
+#region Delegates
+// --------------------
+#endregion
+#endregion
+
+/*************************************************************/
+/*                       Functionality                       */
+/*************************************************************/
+#region Methods
+#region Constructors
+// --------------------
+#endregion
+
+#region Accessors
+// --------------------
+#endregion
+
+#region Mutators
+// --------------------
+#endregion
+
+#region Other Methods
+// --------------------
+#endregion
+#endregion
