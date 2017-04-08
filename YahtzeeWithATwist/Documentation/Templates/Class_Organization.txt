@@ -3,11 +3,7 @@
 
 
 
-
-/*********************************************************************/
-/*                           Documentation                           */
-/*********************************************************************/
-#region Development (TODOs)
+#region Development Notes and TODOs
 // --------------------
 // TODO: Remove unnecessary using statements
 // TODO: Remove unnecessary documentation

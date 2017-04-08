@@ -4,10 +4,7 @@
 // Date:        April 27, 2017
 // File Name:   Dice.cs
 
-/*********************************************************************/
-/*                           Documentation                           */
-/*********************************************************************/
-#region Development (TODOs)
+#region Development Notes and TODOs
 // --------------------
 #endregion
 
