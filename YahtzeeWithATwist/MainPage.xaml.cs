@@ -31,6 +31,8 @@ namespace YahtzeeWithATwist
         public MainPage()
         {
             this.InitializeComponent();
+            Dice newDice = new Dice();
+
         }
     }
 }

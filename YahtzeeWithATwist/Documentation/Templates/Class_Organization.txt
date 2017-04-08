@@ -1,27 +1,25 @@
-﻿/*************************************************************/
-/*                       Documentation                       */
-/*************************************************************/
-#region Documentation
-// Programmer: 
+﻿
 
-#region Overview
-// --------------------
-/// <summary>
-/// </summary>
-#endregion
 
-#region Exceptions
-// --------------------
-/// <exception cref="">Thrown when...</exception>
-#endregion
 
-#region Development
+
+
+/*********************************************************************/
+/*                           Documentation                           */
+/*********************************************************************/
+#region Development (TODOs)
 // --------------------
 // TODO: Remove unnecessary using statements
 // TODO: Remove unnecessary documentation
 // TODO: Override ToString()
 #endregion
-#endregion
+
+
+
+
+
+
+
 
 /*************************************************************/
 /*                           Data                            */

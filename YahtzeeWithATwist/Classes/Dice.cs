@@ -4,6 +4,16 @@
 // Date:        April 27, 2017
 // File Name:   Dice.cs
 
+/*********************************************************************/
+/*                           Documentation                           */
+/*********************************************************************/
+#region Development (TODOs)
+// --------------------
+// TODO: Remove unnecessary using statements
+// TODO: Remove unnecessary documentation
+// TODO: Override ToString()
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,42 +22,24 @@ using System.Threading.Tasks;
 
 namespace YahtzeeWithATwist.Classes
 {
+    #region Class Documentation
+    /// <summary>
+    ///     This is a dice object that will be used by the
+    ///     gameboard manager. Each dice has a face value and
+    ///     an image associated with each face value. These are
+    ///     stored in a static dictionary with the paths defined
+    ///     in static constant fields.
+    ///     Each dice is can be either rollable or held (enum).
+    ///     Rollable dice can run the "roll" method. Otherwise, 
+    ///     the method should fail and be handled.
+    /// </summary>
+    /// <exception cref="ArgumentOutOfRangeException">
+    ///     Thrown when trying to set the dice value outside the 
+    ///     valid range of dice face values.
+    /// </exception>
+    #endregion
     public class Dice
     {
-        /*************************************************************/
-        /*                       Documentation                       */
-        /*************************************************************/
-        #region Documentation
-        // Programmer: Paul Antonio
-
-        #region Overview
-        // --------------------
-        /// <summary>
-        ///     This is a dice object that will be used by the
-        ///     gameboard manager. Each dice has a face value and
-        ///     an image associated with each face value. These are
-        ///     stored in a static dictionary with the paths defined
-        ///     in static constant fields.
-        ///     Each dice is can be either rollable or held (enum).
-        ///     Rollable dice can run the "roll" method. Otherwise, 
-        ///     the method should fail and be handled.
-        /// </summary>
-        #endregion
-
-        #region Exceptions
-        // --------------------
-        /// <exception cref="ArgumentOutOfRangeException">
-        ///     Thrown when trying to set the dice value outside the 
-        ///     valid range of dice face values.
-        /// </exception>
-        #endregion
-
-        #region Development
-        // --------------------
-        // TODO:
-        #endregion
-        #endregion
-
         /*************************************************************/
         /*                           Data                            */
         /*************************************************************/
@@ -121,14 +113,53 @@ namespace YahtzeeWithATwist.Classes
         #region Methods
         #region Constructors
         // --------------------
+        /// <summary>
+        ///     Constructor for a dice object.
+        /// </summary>
+        /// 
+        /// <param name="initialFaceValue">
+        ///     Optional face value of the new dice
+        /// </param>
+        ///
+        /// <param name="initialStatus">
+        ///     Optional status of the new dice of type 
+        ///     "enum DiceStatus"
+        /// </param>
+        /// 
+        /// <returns>
+        ///     Nothing. This is a constructor.
+        /// </returns>
+        public Dice(
+            int        initialFaceValue = MIN_FACE_VALUE, 
+            DiceStatus initialStatus    = DiceStatus.Rollable)
+        {
+            this.faceValue = initialFaceValue;
+            this.status    = initialStatus;
+        }
         #endregion
 
         #region Overrides
         // --------------------
+        /// <summary>
+        ///     Overriden ToString method
+        /// </summary>
+        /// 
+        /// <returns>
+        ///     The face value of the dice and it's current status
+        ///     in a two-line string
+        /// </returns>
         public override string ToString()
         {
-            throw new NotImplementedException(
-                message: "ToString() override not implemented");
+            #region Data
+            string diceDescription = string.Empty;
+            #endregion
+
+            #region Logic
+            diceDescription += $"Face Value: { this.faceValue.ToString() }\n";
+            diceDescription += $"Status:     { this.status.ToString() }";
+            #endregion
+
+            return diceDescription;
         }
         #endregion
 
@@ -138,6 +169,21 @@ namespace YahtzeeWithATwist.Classes
 
         #region Mutators
         // --------------------
+        /// <summary>
+        ///     Rolls this dice. The faceValue property will be set
+        ///     to a random value.
+        /// </summary>
+        /// 
+        /// <returns>
+        ///     void
+        /// </returns>
+        public void roll ()
+        {
+            Random randomNumber = new Random();
+            this.faceValue = 
+                randomNumber.Next(MIN_FACE_VALUE, MAX_FACE_VALUE + 1);
+            return;
+        }
         #endregion
 
         #region Other Methods
