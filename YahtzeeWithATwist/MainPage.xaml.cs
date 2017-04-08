@@ -32,7 +32,6 @@ namespace YahtzeeWithATwist
         {
             this.InitializeComponent();
             Dice newDice = new Dice();
-
         }
     }
 }

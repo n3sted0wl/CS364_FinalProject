@@ -9,9 +9,6 @@
 /*********************************************************************/
 #region Development (TODOs)
 // --------------------
-// TODO: Remove unnecessary using statements
-// TODO: Remove unnecessary documentation
-// TODO: Override ToString()
 #endregion
 
 using System;
@@ -22,17 +19,7 @@ using System.Threading.Tasks;
 
 namespace YahtzeeWithATwist.Classes
 {
-    #region Class Documentation
-    /// <summary>
-    ///     This is a dice object that will be used by the
-    ///     gameboard manager. Each dice has a face value and
-    ///     an image associated with each face value. These are
-    ///     stored in a static dictionary with the paths defined
-    ///     in static constant fields.
-    ///     Each dice is can be either rollable or held (enum).
-    ///     Rollable dice can run the "roll" method. Otherwise, 
-    ///     the method should fail and be handled.
-    /// </summary>
+    #region IntelliSense Documentation
     /// <exception cref="ArgumentOutOfRangeException">
     ///     Thrown when trying to set the dice value outside the 
     ///     valid range of dice face values.
@@ -66,6 +53,7 @@ namespace YahtzeeWithATwist.Classes
         public int faceValue
         {
             get { return _faceValue; }
+
             set
             {
                 if (value < MIN_FACE_VALUE ||
@@ -114,7 +102,7 @@ namespace YahtzeeWithATwist.Classes
         #region Constructors
         // --------------------
         /// <summary>
-        ///     Constructor for a dice object.
+        ///     Constructor for a dice object
         /// </summary>
         /// 
         /// <param name="initialFaceValue">
@@ -125,6 +113,11 @@ namespace YahtzeeWithATwist.Classes
         ///     Optional status of the new dice of type 
         ///     "enum DiceStatus"
         /// </param>
+        /// 
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Thrown when trying to set the dice value outside the 
+        ///     valid range of dice face values.
+        /// </exception>
         /// 
         /// <returns>
         ///     Nothing. This is a constructor.
