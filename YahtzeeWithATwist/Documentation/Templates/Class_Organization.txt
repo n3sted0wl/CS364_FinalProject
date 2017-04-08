@@ -19,6 +19,7 @@
 // --------------------
 // TODO: Remove unnecessary using statements
 // TODO: Remove unnecessary documentation
+// TODO: Override ToString()
 #endregion
 #endregion
 
@@ -57,6 +58,15 @@
 #region Methods
 #region Constructors
 // --------------------
+#endregion
+
+#region Overrides
+// --------------------
+public override string ToString()
+{
+    throw new NotImplementedException(
+        message: "ToString() override not implemented");
+}
 #endregion
 
 #region Accessors

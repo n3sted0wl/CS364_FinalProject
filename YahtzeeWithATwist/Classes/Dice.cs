@@ -123,6 +123,15 @@ namespace YahtzeeWithATwist.Classes
         // --------------------
         #endregion
 
+        #region Overrides
+        // --------------------
+        public override string ToString()
+        {
+            throw new NotImplementedException(
+                message: "ToString() override not implemented");
+        }
+        #endregion
+
         #region Accessors
         // --------------------
         #endregion
