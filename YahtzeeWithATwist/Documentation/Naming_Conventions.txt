@@ -1,0 +1,31 @@
+﻿
+
+
+Front-end controls
+===========================
+All controls should have a prefix based on control type
+Use the initials of the control type
+Examples:
+- TextBox			tb_  ...	
+- TextBlock			tbl_ ...
+- Image				img_ ...
+- GridView			gv_  ...
+
+
+
+
+Classes and Strucutres and Other Types:
+- Title Cased and Camel Cased
+  "ExampleOfClassName"
+
+
+
+
+Data Elements:
+- Typically camel cased
+- Fields associated with properties are prefixed with '_'
+  Private field "_userId" is associated with property "userId"
+- Constants are ALL CAPS
+
+
+
