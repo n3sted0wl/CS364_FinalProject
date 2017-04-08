@@ -12,11 +12,13 @@
 
 #region Exceptions
 // --------------------
+/// <exception cref="">Thrown when...</exception>
 #endregion
 
 #region Development
 // --------------------
-// TODO:
+// TODO: Remove unnecessary using statements
+// TODO: Remove unnecessary documentation
 #endregion
 #endregion
 

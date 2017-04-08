@@ -1,6 +1,5 @@
-﻿// Programmers:
-// - Paul Antonio
-// - Seth Neds
+﻿// Programmers: Paul Antonio
+//              Seth Neds
 //
 // Date:        April 27, 2017
-// File Name:   FileName
+// File Name:   fileName
