@@ -48,6 +48,8 @@ namespace YahtzeeWithATwist.Classes
         private int          _faceValue;
         private Availability _availability;
 
+        private SelectDiceDelegate _diceSelected;
+        
         private static Random randomSeed = new Random();
         #endregion
 
@@ -92,6 +94,12 @@ namespace YahtzeeWithATwist.Classes
                     imageControl.Visibility = Visibility.Collapsed;
             }
         }
+
+        public SelectDiceDelegate diceSelected
+        {
+            get { return this._diceSelected; }
+            set { this._diceSelected = value; }
+        }
         #endregion
 
         #region Structures
@@ -124,6 +132,7 @@ namespace YahtzeeWithATwist.Classes
 
         #region Delegates
         // --------------------
+        public delegate void SelectDiceDelegate();
         #endregion
         #endregion
 
@@ -164,6 +173,8 @@ namespace YahtzeeWithATwist.Classes
             this.type         = initialType;
             this.imageControl = initialImage;
             this.availability = initialAvailability;
+
+            this.clearDiceSelectedMethod();
         }
         #endregion
 
@@ -212,6 +223,14 @@ namespace YahtzeeWithATwist.Classes
 
         #region Other Methods
         // --------------------
+        public void addDiceSelectedMethod(SelectDiceDelegate selectingMethod) =>
+            this.diceSelected += selectingMethod;
+
+        public void removeDiceSelectedMethod(SelectDiceDelegate selectingMethod) =>
+            this.diceSelected -= selectingMethod;
+
+        public void clearDiceSelectedMethod() =>
+            this.diceSelected = null;
         #endregion
         #endregion
     }
