@@ -5,6 +5,13 @@
 // Date:        April 27, 2017
 // File Name:   MainPage.xaml.cs
 
+#region Development Notes and TODOs
+// --------------------
+// TODO: Remove unnecessary using statements
+// TODO: Remove unnecessary documentation
+// TODO: Add exception documentation, if any
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,10 +36,44 @@ namespace YahtzeeWithATwist
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        /*************************************************************/
+        /*                           Data                            */
+        /*************************************************************/
+        #region Data Elements
+        #region Fields
+        // --------------------
+        #endregion
+
+        #region Properties
+        // --------------------
+        #endregion
+
+        #region Structures
+        // --------------------
+        #endregion
+
+        #region Enumerations
+        // --------------------
+        #endregion
+
+        #region Objects
+        // --------------------
+        #endregion
+
+        #region Collections
+        // --------------------
+        #endregion
+
+        #region Delegates
+        // --------------------
+        #endregion
+        #endregion
+
+        /*************************************************************/
+        /*                Page Initialization Method                 */
+        /*************************************************************/
         public MainPage()
         {
-            this.InitializeComponent();
-
             /* ---------------------------------------------------------
              * 
              *                     Initializations
@@ -56,5 +97,35 @@ namespace YahtzeeWithATwist
              * 
              * ------------------------------------------------------ */
         }
+
+        /*************************************************************/
+        /*                       Functionality                       */
+        /*************************************************************/
+        #region Methods
+        #region Constructors
+        // --------------------
+        #endregion
+
+        #region Overrides
+        // --------------------
+        public override string ToString()
+        {
+            throw new NotImplementedException(
+                message: "ToString() override not implemented");
+        }
+        #endregion
+
+        #region Accessors
+        // --------------------
+        #endregion
+
+        #region Mutators
+        // --------------------
+        #endregion
+
+        #region Other Methods
+        // --------------------
+        #endregion
+        #endregion
     }
 }

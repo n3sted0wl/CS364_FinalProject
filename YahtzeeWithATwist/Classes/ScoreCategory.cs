@@ -61,9 +61,15 @@ namespace YahtzeeWithATwist.Classes
                 // control.
                 this._status = value;
                 if (value == Status.Available)
-                    _EnableControl();
+                {
+                    if (EnableControl != null)
+                        EnableControl();
+                }
                 else
-                    _DisableControl();
+                {
+                    if (DisableControl != null)
+                        DisableControl();
+                }
             }
         }
 
@@ -76,7 +82,7 @@ namespace YahtzeeWithATwist.Classes
         public EnableAssociatedControl EnableControl
         {
             get { return this._EnableControl; }
-            set { this.EnableControl = value; }
+            set { this._EnableControl = value; }
         }
 
         public DisableAssociatedControl DisableControl
