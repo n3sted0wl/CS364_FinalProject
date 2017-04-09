@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using YahtzeeWithATwist.Classes;
 
@@ -31,7 +32,7 @@ namespace YahtzeeWithATwist
         public MainPage()
         {
             this.InitializeComponent();
-                        
+
             /* ---------------------------------------------------------
              * 
              *                     Initializations

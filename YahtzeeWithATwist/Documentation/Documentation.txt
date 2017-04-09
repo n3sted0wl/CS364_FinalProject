@@ -1,1 +1,8 @@
 ﻿
+
+
+
+This is where I keep stuff that I need to figure out
+
+Changing an image source dynamically:
+    rollDie1.Source = new BitmapImage(new Uri(this.BaseUri, "/Assets/Dice/Dice2.png"));
