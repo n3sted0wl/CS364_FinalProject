@@ -24,7 +24,8 @@ using System.Threading.Tasks;
 namespace YahtzeeWithATwist.Classes
 {
     #region IntelliSense Documentation
-    /// <exception cref="">
+    /// <exception cref="NullReferenceException">
+    ///     Thrown if a delegate with no methods assigned is called
     /// </exception>
     #endregion
     public class ScoreCategory

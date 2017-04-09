@@ -74,10 +74,14 @@ namespace YahtzeeWithATwist
         /*************************************************************/
         public MainPage()
         {
-            /* ---------------------------------------------------------
+            this.InitializeComponent();
+
+            /* --------------------------------------------------------
              * 
              *                     Initializations
-             *                     
+             * 
+             * --------------------------------------------------------
+             * 
              * The only logic that should go into here is the stuff to 
              * link the front end to the code behind.
              * 

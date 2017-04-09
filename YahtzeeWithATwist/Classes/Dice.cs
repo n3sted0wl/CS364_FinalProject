@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace YahtzeeWithATwist.Classes
 {
@@ -30,12 +31,12 @@ namespace YahtzeeWithATwist.Classes
         #region Data Elements
         #region Fields
         // --------------------
-        private const string IMG_PATH_DICE_1 = @"/Assets/Dice/Dice1.png";
-        private const string IMG_PATH_DICE_2 = @"/Assets/Dice/Dice2.png";
-        private const string IMG_PATH_DICE_3 = @"/Assets/Dice/Dice3.png";
-        private const string IMG_PATH_DICE_4 = @"/Assets/Dice/Dice4.png";
-        private const string IMG_PATH_DICE_5 = @"/Assets/Dice/Dice5.png";
-        private const string IMG_PATH_DICE_6 = @"/Assets/Dice/Dice6.png";
+        private const string IMG_PATH_DICE_1 = "/Assets/Dice/Dice1.png";
+        private const string IMG_PATH_DICE_2 = "/Assets/Dice/Dice2.png";
+        private const string IMG_PATH_DICE_3 = "/Assets/Dice/Dice3.png";
+        private const string IMG_PATH_DICE_4 = "/Assets/Dice/Dice4.png";
+        private const string IMG_PATH_DICE_5 = "/Assets/Dice/Dice5.png";
+        private const string IMG_PATH_DICE_6 = "/Assets/Dice/Dice6.png";
         private const int    MIN_FACE_VALUE = 1;
         private const int    MAX_FACE_VALUE = 6;
 
@@ -62,6 +63,14 @@ namespace YahtzeeWithATwist.Classes
                 _faceValue = value;
             }
         }
+        
+        public string imagePath
+        {
+            get
+            {
+                return ImageLocations[this.faceValue];
+            }
+        }
         #endregion
 
         #region Structures
@@ -79,7 +88,7 @@ namespace YahtzeeWithATwist.Classes
 
         #region Collections
         // --------------------
-        public static Dictionary<int, string> ImageLocations =
+        private static Dictionary<int, string> ImageLocations =
             new Dictionary<int, string>()
             {
                 { 1, IMG_PATH_DICE_1 },
