@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
 namespace YahtzeeWithATwist.Classes
 {
@@ -36,12 +37,14 @@ namespace YahtzeeWithATwist.Classes
         #region Data Elements
         #region Fields
         // --------------------
-        private string _description;
-        private Status _status;
+        private string  _description;
+        private Status  _status;
+        private TextBox _textBox;
 
         private ValueCalculator          _CalculateValue; // Only assign one
         private EnableAssociatedControl  _EnableControl;  // Can assign multiple
         private DisableAssociatedControl _DisableControl; // Can assign muliple
+
         #endregion
 
         #region Properties
@@ -49,7 +52,14 @@ namespace YahtzeeWithATwist.Classes
         public string description
         {
             get         { return this._description; }
-            private set { this._description = value; }
+            private set
+            {
+                this._description = value;
+                if (this.textBox != null)
+                {
+                    textBox.Text = description;
+                }
+            }
         }
 
         public Status status
@@ -71,6 +81,16 @@ namespace YahtzeeWithATwist.Classes
                     if (DisableControl != null)
                         DisableControl();
                 }
+            }
+        }
+
+        public TextBox textBox
+        {
+            get { return this._textBox; }
+            set
+            {
+                this.textBox      = value;
+                this.textBox.Text = description;
             }
         }
 
@@ -125,8 +145,9 @@ namespace YahtzeeWithATwist.Classes
         #region Constructors
         // --------------------
         public ScoreCategory(
-            string initialDescription,
-            Status initialStatus = Status.Available)
+            string  initialDescription,
+            Status  initialStatus  = Status.Available,
+            TextBox initialTextBox = null)
         {
             this.description = initialDescription;
             this.status      = initialStatus;
