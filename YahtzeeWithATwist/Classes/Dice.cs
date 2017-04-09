@@ -206,12 +206,8 @@ namespace YahtzeeWithATwist.Classes
         /// <returns>
         ///     void
         /// </returns>
-        public void roll()
-        {
-            this.faceValue =
-                randomSeed.Next(MIN_FACE_VALUE, MAX_FACE_VALUE + 1);
-            return;
-        }
+        public void roll() =>
+            this.faceValue = randomSeed.Next(MIN_FACE_VALUE, MAX_FACE_VALUE + 1);
         #endregion
 
         #region Other Methods
