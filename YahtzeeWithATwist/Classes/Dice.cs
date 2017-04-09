@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace YahtzeeWithATwist.Classes
@@ -40,9 +42,13 @@ namespace YahtzeeWithATwist.Classes
         private const int    MIN_FACE_VALUE = 1;
         private const int    MAX_FACE_VALUE = 6;
 
-        public DiceStatus status;
+        public  DiceType type;
+        public  Image    imageControl;
 
-        private int _faceValue;
+        private int          _faceValue;
+        private Availability _availability;
+
+        private static Random randomSeed = new Random();
         #endregion
 
         #region Properties
@@ -71,6 +77,21 @@ namespace YahtzeeWithATwist.Classes
                 return ImageLocations[this.faceValue];
             }
         }
+
+        public Availability availability
+        {
+            get { return _availability; }
+            set
+            {
+                _availability = value;
+                if (availability == Availability.Available &&
+                    this.imageControl != null)
+                    imageControl.Visibility = Visibility.Visible;
+                else if (availability == Availability.Unavailable &&
+                    this.imageControl != null)
+                    imageControl.Visibility = Visibility.Collapsed;
+            }
+        }
         #endregion
 
         #region Structures
@@ -79,7 +100,8 @@ namespace YahtzeeWithATwist.Classes
 
         #region Enumerations
         // --------------------
-        public enum DiceStatus { Rollable, Held }
+        public enum DiceType     { Rollable, Held }
+        public enum Availability { Available, Unavailable}
         #endregion
 
         #region Objects
@@ -133,11 +155,13 @@ namespace YahtzeeWithATwist.Classes
         ///     Nothing. This is a constructor.
         /// </returns>
         public Dice(
-            int        initialFaceValue = MIN_FACE_VALUE, 
-            DiceStatus initialStatus    = DiceStatus.Rollable)
+            int        initialFaceValue = MIN_FACE_VALUE,
+            DiceType   initialType      = DiceType.Rollable,
+            Image      initialImage     = null)
         {
-            this.faceValue = initialFaceValue;
-            this.status    = initialStatus;
+            this.faceValue    = initialFaceValue;
+            this.type         = initialType;
+            this.imageControl = initialImage;
         }
         #endregion
 
@@ -159,7 +183,7 @@ namespace YahtzeeWithATwist.Classes
 
             #region Logic
             diceDescription += $"Face Value: { this.faceValue.ToString() }\n";
-            diceDescription += $"Status:     { this.status.ToString() }";
+            diceDescription += $"Status:     { this.type.ToString() }";
             #endregion
 
             return diceDescription;
@@ -182,9 +206,8 @@ namespace YahtzeeWithATwist.Classes
         /// </returns>
         public void roll()
         {
-            Random randomNumber = new Random();
-            this.faceValue = 
-                randomNumber.Next(MIN_FACE_VALUE, MAX_FACE_VALUE + 1);
+            this.faceValue =
+                randomSeed.Next(MIN_FACE_VALUE, MAX_FACE_VALUE + 1);
             return;
         }
         #endregion

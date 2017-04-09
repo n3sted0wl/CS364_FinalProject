@@ -36,6 +36,7 @@ namespace YahtzeeWithATwist.Classes
         #region Data Elements
         #region Fields
         // --------------------
+        private const int NUMBER_OF_DICE = 5;
         #endregion
 
         #region Properties
@@ -56,6 +57,11 @@ namespace YahtzeeWithATwist.Classes
 
         #region Collections
         // --------------------
+        // Dice are not zero-indexed
+        public static Dictionary<int, Dice> RollableDice =
+            new Dictionary<int, Dice>();
+        public static Dictionary<int, Dice> HeldDice =
+            new Dictionary<int, Dice>();              
         #endregion
 
         #region Delegates
@@ -67,8 +73,18 @@ namespace YahtzeeWithATwist.Classes
         /*                       Functionality                       */
         /*************************************************************/
         #region Methods
-        #region Constructors
+        #region Initializer
         // --------------------
+        public static void initialize()
+        {
+            // Create all the dice
+            for (int diceCount = 1; diceCount <= NUMBER_OF_DICE; diceCount += 1)
+            {
+                RollableDice.Add(diceCount, new Dice());
+                HeldDice.Add(diceCount, new Dice());
+            }
+            return;
+        }
         #endregion
 
         #region Overrides

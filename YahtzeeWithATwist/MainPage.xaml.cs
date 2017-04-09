@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -40,6 +41,21 @@ namespace YahtzeeWithATwist
         /*                           Data                            */
         /*************************************************************/
         #region Data Elements
+        #region Controls
+        // Backend Control mapping to decouple front-end naming 
+        public Image  img_rollDice_1,
+                      img_rollDice_2,
+                      img_rollDice_3,
+                      img_rollDice_4,
+                      img_rollDice_5,
+                      img_heldDice_1,
+                      img_heldDice_2,
+                      img_heldDice_3,
+                      img_heldDice_4,
+                      img_heldDice_5;
+
+        #endregion
+
         #region Fields
         // --------------------
         #endregion
@@ -67,6 +83,7 @@ namespace YahtzeeWithATwist
         #region Delegates
         // --------------------
         #endregion
+
         #endregion
 
         /*************************************************************/
@@ -75,6 +92,21 @@ namespace YahtzeeWithATwist
         public MainPage()
         {
             this.InitializeComponent();
+            this.mapControls();
+            GameBoard.initialize();
+
+            // Link up the GameBoard Dice to the image controls
+            GameBoard.RollableDice[1].imageControl = img_rollDice_1;
+            GameBoard.RollableDice[2].imageControl = img_rollDice_2;
+            GameBoard.RollableDice[3].imageControl = img_rollDice_3;
+            GameBoard.RollableDice[4].imageControl = img_rollDice_4;
+            GameBoard.RollableDice[5].imageControl = img_rollDice_5;
+
+            GameBoard.HeldDice[1].imageControl     = img_heldDice_1;
+            GameBoard.HeldDice[2].imageControl     = img_heldDice_2;
+            GameBoard.HeldDice[3].imageControl     = img_heldDice_3;
+            GameBoard.HeldDice[4].imageControl     = img_heldDice_4;
+            GameBoard.HeldDice[5].imageControl     = img_heldDice_5;
 
             /* --------------------------------------------------------
              * 
@@ -106,19 +138,6 @@ namespace YahtzeeWithATwist
         /*                       Functionality                       */
         /*************************************************************/
         #region Methods
-        #region Constructors
-        // --------------------
-        #endregion
-
-        #region Overrides
-        // --------------------
-        public override string ToString()
-        {
-            throw new NotImplementedException(
-                message: "ToString() override not implemented");
-        }
-        #endregion
-
         #region Accessors
         // --------------------
         #endregion
@@ -130,6 +149,43 @@ namespace YahtzeeWithATwist
         #region Other Methods
         // --------------------
         #endregion
+        private void mapControls()
+        {
+            // TODO: Map each image to the final naming used
+            this.img_rollDice_1 = rollDie1;
+            this.img_rollDice_2 = rollDie2;
+            this.img_rollDice_3 = rollDie3;
+            this.img_rollDice_4 = rollDie4;
+            this.img_rollDice_5 = rollDie5;
+
+            this.img_heldDice_1 = heldDie1;
+            this.img_heldDice_2 = heldDie2;
+            this.img_heldDice_3 = heldDie3;
+            this.img_heldDice_4 = heldDie4;
+            this.img_heldDice_5 = heldDie5;
+            return;
+        }
+
+        private void updateImageSource(
+            Image imageToUpdate, string newImagePath)
+        {
+            imageToUpdate.Source =
+                new BitmapImage(new Uri(this.BaseUri, newImagePath));
+        }
+        #endregion
+
+        #region Event Handlers
+        // --------------------
+        private void rollDieButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (KeyValuePair<int, Dice> rollableDice in GameBoard.RollableDice)
+            {
+                Dice currentDice = rollableDice.Value;
+
+                currentDice.roll();
+                updateImageSource(currentDice.imageControl, currentDice.imagePath);
+            }
+        }
         #endregion
     }
 }
