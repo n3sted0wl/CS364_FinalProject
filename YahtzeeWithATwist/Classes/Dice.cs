@@ -171,7 +171,7 @@ namespace YahtzeeWithATwist.Classes
         /// <returns>
         ///     void
         /// </returns>
-        public void roll ()
+        public void roll()
         {
             Random randomNumber = new Random();
             this.faceValue = 
