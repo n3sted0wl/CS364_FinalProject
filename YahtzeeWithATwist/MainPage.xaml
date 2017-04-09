@@ -37,7 +37,8 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="906,0,0,0" TextWrapping="Wrap" Text="Score Card" VerticalAlignment="Top" Height="59" Width="176" FontSize="36"/>
+
+        <!--<TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="906,0,0,0" TextWrapping="Wrap" Text="Score Card" VerticalAlignment="Top" Height="59" Width="176" FontSize="36"/>
         <TextBlock x:Name="onesLabel" HorizontalAlignment="Left" Margin="784,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
             <Run FontWeight="Bold" Text="Ones:"/>
         </TextBlock>
@@ -139,6 +140,6 @@
         </TextBlock>
         <TextBlock x:Name="totalScore" HorizontalAlignment="Left" Margin="1105,630,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
             <Run FontWeight="Bold" Text="15"/>
-        </TextBlock>
-
-    </Grid></Page>
+        </TextBlock>-->
+    </Grid>
+</Page>

@@ -3,12 +3,6 @@
 
 
 
-#region Development Notes and TODOs
-// --------------------
-// TODO: Remove unnecessary using statements
-// TODO: Remove unnecessary documentation
-// TODO: Override ToString()
-#endregion
 
 
 
@@ -30,6 +24,10 @@
 #endregion
 
 #region Structures
+// --------------------
+#endregion
+
+#region Enumerations
 // --------------------
 #endregion
 

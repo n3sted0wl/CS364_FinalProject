@@ -30,8 +30,7 @@ namespace YahtzeeWithATwist.Classes
         #region Data Elements
         #region Fields
         // --------------------
-        public enum DiceStatus { Rollable, Held }
-        public      DiceStatus status;
+        public DiceStatus status;
 
         private const string IMG_PATH_DICE_1 = @"/Assets/Dice/dice_1.png";
         private const string IMG_PATH_DICE_2 = @"/Assets/Dice/dice_2.png";
@@ -67,6 +66,11 @@ namespace YahtzeeWithATwist.Classes
 
         #region Structures
         // --------------------
+        #endregion
+
+        #region Enumerations
+        // --------------------
+        public enum DiceStatus { Rollable, Held }
         #endregion
 
         #region Objects

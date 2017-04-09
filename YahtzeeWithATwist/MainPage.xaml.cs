@@ -31,7 +31,18 @@ namespace YahtzeeWithATwist
         public MainPage()
         {
             this.InitializeComponent();
-            Dice newDice = new Dice();
+                        
+            /* Initializations
+             * Foreach score category, create a ScoreCategory object
+             * Each object needs a single CalculateValue method defined
+             * and assigned to the object's CalculateValue delegate
+             *    I should probably create a static class with all the 
+             *    game calculations in it. 
+             *    And a static GAMEBOARD class that has all the data
+             *    of the current game in it...
+             * Then, each object needs assigned to it all the methods
+             * that will enable and disable the associated controls
+             * */
         }
     }
 }

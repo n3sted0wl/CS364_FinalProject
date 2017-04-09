@@ -3,3 +3,11 @@
 //
 // Date:        April 27, 2017
 // File Name:   fileName
+
+#region Development Notes and TODOs
+// --------------------
+// TODO: Change file header file name
+// TODO: Remove unnecessary using statements
+// TODO: Remove unnecessary documentation
+// TODO: Override ToString()
+#endregion

@@ -96,7 +96,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Sample.cs" />
+    <Compile Include="Classes\Dice.cs" />
+    <Compile Include="Classes\ScoreCategory.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -110,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documentation\Documentation.txt" />
+    <Content Include="Documentation\Naming_Conventions.txt" />
     <Content Include="Documentation\Templates\Class_Organization.txt" />
     <Content Include="Documentation\Templates\Code_Behind_Header.txt" />
     <Content Include="Documentation\Templates\Method_Organization.txt" />
@@ -133,8 +135,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\Dice\" />
     <Folder Include="Collections\" />
     <Folder Include="Constants\" />
+    <Folder Include="Enumerations\" />
     <Folder Include="Event_Handlers\" />
     <Folder Include="Structures\" />
   </ItemGroup>
