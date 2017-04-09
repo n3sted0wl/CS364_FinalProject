@@ -58,10 +58,8 @@ namespace YahtzeeWithATwist.Classes
         #region Collections
         // --------------------
         // Dice are not zero-indexed
-        public static Dictionary<int, Dice> RollableDice =
-            new Dictionary<int, Dice>();
-        public static Dictionary<int, Dice> HeldDice =
-            new Dictionary<int, Dice>();              
+        public static Dictionary<int, Dice> RollableDice;
+        public static Dictionary<int, Dice> HeldDice;
         #endregion
 
         #region Delegates
@@ -77,8 +75,13 @@ namespace YahtzeeWithATwist.Classes
         // --------------------
         public static void initialize()
         {
+            RollableDice = new Dictionary<int, Dice>();
+            HeldDice     = new Dictionary<int, Dice>();
+            
             // Create all the dice
-            for (int diceCount = 1; diceCount <= NUMBER_OF_DICE; diceCount += 1)
+            for (int diceCount = 1; 
+                 diceCount <= NUMBER_OF_DICE; 
+                 diceCount += 1)
             {
                 RollableDice.Add(diceCount, new Dice());
                 HeldDice.Add(diceCount, new Dice());
