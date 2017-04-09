@@ -117,6 +117,17 @@ namespace YahtzeeWithATwist.Classes
         #region Methods
         #region Constructors
         // --------------------
+        public ScoreCategory(
+            string initialDescription,
+            Status initialStatus = Status.Available)
+        {
+            this.description = initialDescription;
+            this.status      = initialStatus;
+
+            this.clearCalculateValueMethod();
+            this.clearEnableControlMethods();
+            this.clearDisablingControlMethods();
+        }
         #endregion
 
         #region Overrides
@@ -159,7 +170,7 @@ namespace YahtzeeWithATwist.Classes
         public void removeDisableControlMethod(DisableAssociatedControl disablingMethod) =>
             this.DisableControl -= disablingMethod;
 
-        public void clearDisablingControlMethod() =>
+        public void clearDisablingControlMethods() =>
             this.DisableControl = null;
         #endregion
 
