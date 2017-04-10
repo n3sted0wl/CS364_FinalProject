@@ -95,31 +95,6 @@ namespace YahtzeeWithATwist
             this.mapControls();
             GameBoard.initialize();
             this.initializeDice();
-
-            /* --------------------------------------------------------
-             * 
-             *                     Initializations
-             * 
-             * --------------------------------------------------------
-             * 
-             * The only logic that should go into here is the stuff to 
-             * link the front end to the code behind.
-             * 
-             * Foreach score category, create a ScoreCategory object
-             * Each object needs a single CalculateValue method defined
-             * and assigned to the object's CalculateValue delegate
-             *    I should probably create a static class with all the 
-             *    game calculations in it. 
-             *    And a static GAMEBOARD class that has all the data
-             *    of the current game in it...
-             * Then, each object needs assigned to it all the methods
-             * that will enable and disable the associated controls
-             * 
-             * For each dice, (haven't thought this entirely through)
-             * should probably initialize the data structures two 
-             * arrays that hold them (in the static GameBoard class?)
-             * 
-             * ----------------------------------------------------- */
         }
 
         /*************************************************************/
