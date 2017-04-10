@@ -78,12 +78,12 @@ namespace YahtzeeWithATwist
 
         #region Collections
         // --------------------
+        private List<Image> allDiceImages;
         #endregion
 
         #region Delegates
         // --------------------
         #endregion
-
         #endregion
 
         /*************************************************************/
@@ -94,19 +94,7 @@ namespace YahtzeeWithATwist
             this.InitializeComponent();
             this.mapControls();
             GameBoard.initialize();
-
-            // Link up the GameBoard Dice to the image controls
-            GameBoard.RollableDice[1].imageControl = img_rollDice_1;
-            GameBoard.RollableDice[2].imageControl = img_rollDice_2;
-            GameBoard.RollableDice[3].imageControl = img_rollDice_3;
-            GameBoard.RollableDice[4].imageControl = img_rollDice_4;
-            GameBoard.RollableDice[5].imageControl = img_rollDice_5;
-
-            GameBoard.HeldDice[1].imageControl     = img_heldDice_1;
-            GameBoard.HeldDice[2].imageControl     = img_heldDice_2;
-            GameBoard.HeldDice[3].imageControl     = img_heldDice_3;
-            GameBoard.HeldDice[4].imageControl     = img_heldDice_4;
-            GameBoard.HeldDice[5].imageControl     = img_heldDice_5;
+            this.initializeDice();
 
             /* --------------------------------------------------------
              * 
@@ -131,7 +119,7 @@ namespace YahtzeeWithATwist
              * should probably initialize the data structures two 
              * arrays that hold them (in the static GameBoard class?)
              * 
-             * ------------------------------------------------------ */
+             * ----------------------------------------------------- */
         }
 
         /*************************************************************/
@@ -148,7 +136,6 @@ namespace YahtzeeWithATwist
 
         #region Other Methods
         // --------------------
-        #endregion
         private void mapControls()
         {
             // TODO: Map each image to the final naming used
@@ -166,8 +153,59 @@ namespace YahtzeeWithATwist
             return;
         }
 
-        private void updateImageSource(
-            Image imageToUpdate, string newImagePath)
+        private void initializeDice()
+        {
+            // Assign the delegate method that updates the image sourcess
+            Dice.updateImageDelegate += updateImageSource;
+
+            // Put all dice images into the collection
+            allDiceImages = new List<Image>();
+
+            allDiceImages.Add(img_rollDice_1);
+            allDiceImages.Add(img_rollDice_2);
+            allDiceImages.Add(img_rollDice_3);
+            allDiceImages.Add(img_rollDice_4);
+            allDiceImages.Add(img_rollDice_5);
+
+            allDiceImages.Add(img_heldDice_1);
+            allDiceImages.Add(img_heldDice_2);
+            allDiceImages.Add(img_heldDice_3);
+            allDiceImages.Add(img_heldDice_4);
+            allDiceImages.Add(img_heldDice_5);
+
+            // Link up the GameBoard Dice to the image controls
+            GameBoard.RollableDice[1].imageControl = img_rollDice_1;
+            GameBoard.RollableDice[2].imageControl = img_rollDice_2;
+            GameBoard.RollableDice[3].imageControl = img_rollDice_3;
+            GameBoard.RollableDice[4].imageControl = img_rollDice_4;
+            GameBoard.RollableDice[5].imageControl = img_rollDice_5;
+
+            GameBoard.HeldDice[1].imageControl = img_heldDice_1;
+            GameBoard.HeldDice[2].imageControl = img_heldDice_2;
+            GameBoard.HeldDice[3].imageControl = img_heldDice_3;
+            GameBoard.HeldDice[4].imageControl = img_heldDice_4;
+            GameBoard.HeldDice[5].imageControl = img_heldDice_5;
+
+            // Make all rollable dice images visible and each held dice invisible
+            foreach (KeyValuePair<int, Dice> item in GameBoard.RollableDice)
+            {
+                item.Value.availability = Dice.Availability.Available;
+            }
+            foreach (KeyValuePair<int, Dice> item in GameBoard.HeldDice)
+            {
+                item.Value.availability = Dice.Availability.Unavailable;
+            }
+
+            // Connect the click event handler
+            foreach (Image diceImage in allDiceImages)
+            {
+                diceImage.PointerReleased += new PointerEventHandler(diceClicked);
+            }
+
+            return;
+        }
+
+        private void updateImageSource(Image imageToUpdate, string newImagePath)
         {
             imageToUpdate.Source =
                 new BitmapImage(new Uri(this.BaseUri, newImagePath));
@@ -176,16 +214,44 @@ namespace YahtzeeWithATwist
 
         #region Event Handlers
         // --------------------
+        private void diceClicked(object sender, RoutedEventArgs e)
+        {
+            Dice currentDice = GameBoard.getDiceByImageControl((Image) sender);
+            int  diceIndex   = GameBoard.getDiceIndex(currentDice);
+
+            currentDice.availability = Dice.Availability.Unavailable;
+
+            // Swap out the dice positions
+            if (GameBoard.HeldDice.Values.Contains(currentDice))
+            {
+                GameBoard.RollableDice[diceIndex].availability =
+                    Dice.Availability.Available;
+            }
+            else if (GameBoard.RollableDice.Values.Contains(currentDice))
+            {
+                GameBoard.HeldDice[diceIndex].faceValue =
+                    currentDice.faceValue;
+                GameBoard.HeldDice[diceIndex].availability =
+                    Dice.Availability.Available;
+            }
+            else
+            {
+                throw new InvalidOperationException(
+                    message: "An unmapped dice image has been clicked");
+            }
+
+            return;
+        }
+
         private void rollDieButton_Click(object sender, RoutedEventArgs e)
         {
             foreach (KeyValuePair<int, Dice> rollableDice in GameBoard.RollableDice)
             {
-                Dice currentDice = rollableDice.Value;
-
-                currentDice.roll();
-                updateImageSource(currentDice.imageControl, currentDice.imagePath);
+                rollableDice.Value.roll();
             }
+            return;
         }
+        #endregion
         #endregion
     }
 }

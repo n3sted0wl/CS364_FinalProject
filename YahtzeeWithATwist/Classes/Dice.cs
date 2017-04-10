@@ -43,13 +43,13 @@ namespace YahtzeeWithATwist.Classes
         private const int    MAX_FACE_VALUE  = 6;
 
         public  DiceType type;
-        public  Image    imageControl;
 
+        public  Image        _imageControl;
         private int          _faceValue;
         private Availability _availability;
 
-        private SelectDiceDelegate _diceSelected;
-        
+        private static UpdateImageSource _updateImage;
+
         private static Random randomSeed = new Random();
         #endregion
 
@@ -69,15 +69,30 @@ namespace YahtzeeWithATwist.Classes
                 }
 
                 _faceValue = value;
+
+                if (imageControl != null)
+                {
+                    updateImageDelegate?.Invoke(this.imageControl, this.imagePath);
+                }
             }
         }
         
+        public Image imageControl
+        {
+            get { return _imageControl; }
+            set
+            {
+                this._imageControl = value;
+                if (imageControl != null)
+                {
+                    updateImageDelegate?.Invoke(this.imageControl, this.imagePath);
+                }
+            }
+        }
+
         public string imagePath
         {
-            get
-            {
-                return ImageLocations[this.faceValue];
-            }
+            get { return ImageLocations[this.faceValue]; }
         }
 
         public Availability availability
@@ -86,19 +101,24 @@ namespace YahtzeeWithATwist.Classes
             set
             {
                 _availability = value;
-                if (availability == Availability.Available &&
+
+                if (this.availability == Availability.Available &&
                     this.imageControl != null)
                     imageControl.Visibility = Visibility.Visible;
-                else if (availability == Availability.Unavailable &&
+                else if (this.availability == Availability.Unavailable &&
                     this.imageControl != null)
                     imageControl.Visibility = Visibility.Collapsed;
             }
         }
 
-        public SelectDiceDelegate diceSelected
+        public static UpdateImageSource updateImageDelegate
         {
-            get { return this._diceSelected; }
-            set { this._diceSelected = value; }
+            get { return _updateImage; }
+            set
+            {
+                _updateImage = null;
+                _updateImage += value;
+            }
         }
         #endregion
 
@@ -132,7 +152,7 @@ namespace YahtzeeWithATwist.Classes
 
         #region Delegates
         // --------------------
-        public delegate void SelectDiceDelegate();
+        public delegate void UpdateImageSource (Image image, string path);
         #endregion
         #endregion
 
@@ -164,17 +184,17 @@ namespace YahtzeeWithATwist.Classes
         ///     Nothing. This is a constructor.
         /// </returns>
         public Dice(
-            int          initialFaceValue    = MIN_FACE_VALUE,
-            DiceType     initialType         = DiceType.Rollable,
-            Image        initialImage        = null,
-            Availability initialAvailability = Availability.Available)
+            int               initialFaceValue    = MIN_FACE_VALUE,
+            DiceType          initialType         = DiceType.Rollable,
+            Image             initialImage        = null,
+            Availability      initialAvailability = Availability.Available,
+            UpdateImageSource initialImageModifier = null)
         {
-            this.faceValue    = initialFaceValue;
-            this.type         = initialType;
-            this.imageControl = initialImage;
-            this.availability = initialAvailability;
-
-            this.clearDiceSelectedMethod();
+            this.faceValue      = initialFaceValue;
+            this.type           = initialType;
+            this.imageControl   = initialImage;
+            this.availability   = initialAvailability;
+            updateImageDelegate = initialImageModifier;
         }
         #endregion
 
@@ -217,20 +237,17 @@ namespace YahtzeeWithATwist.Classes
         /// <returns>
         ///     void
         /// </returns>
-        public void roll() =>
-            this.faceValue = randomSeed.Next(MIN_FACE_VALUE, MAX_FACE_VALUE + 1);
+        public void roll()
+        {
+            if (this.availability == Availability.Available)
+                this.faceValue = randomSeed.Next(
+                    MIN_FACE_VALUE, 
+                    MAX_FACE_VALUE + 1);
+        }
         #endregion
 
         #region Other Methods
         // --------------------
-        public void addDiceSelectedMethod(SelectDiceDelegate selectingMethod) =>
-            this.diceSelected += selectingMethod;
-
-        public void removeDiceSelectedMethod(SelectDiceDelegate selectingMethod) =>
-            this.diceSelected -= selectingMethod;
-
-        public void clearDiceSelectedMethod() =>
-            this.diceSelected = null;
         #endregion
         #endregion
     }
