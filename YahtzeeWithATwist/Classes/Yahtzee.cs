@@ -83,6 +83,7 @@ namespace YahtzeeWithATwist.Classes
         {
             #region Data
             int longestDetectedRun = 1;
+            int currentRunLength   = 1;
             int previousFaceValue  = 0;
             int currentFaceValue   = 0;
             List<Dice> orderedDice;
@@ -98,7 +99,9 @@ namespace YahtzeeWithATwist.Classes
                 currentFaceValue = dice.faceValue;
                 if (currentFaceValue - previousFaceValue == 1)
                 {
-                    longestDetectedRun += 1;
+                    currentRunLength   += 1;
+                    if (currentRunLength > longestDetectedRun)
+                        longestDetectedRun = currentRunLength;
                 }
                 else if (currentFaceValue - previousFaceValue == 0)
                 {
@@ -106,7 +109,7 @@ namespace YahtzeeWithATwist.Classes
                 }
                 else
                 {
-                    longestDetectedRun = 1;
+                    currentRunLength = 1;
                 }
                 previousFaceValue = dice.faceValue;
             }
