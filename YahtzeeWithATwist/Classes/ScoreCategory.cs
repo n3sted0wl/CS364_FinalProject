@@ -9,7 +9,6 @@
 // TODO: Remove unnecessary using statements
 // TODO: Insert IntelliSense Documentation template before class
 // TODO: Remove unnecessary documentation
-// TODO: Override ToString()
 #endregion
 
 using System;
@@ -158,8 +157,7 @@ namespace YahtzeeWithATwist.Classes
         // --------------------
         public override string ToString()
         {
-            throw new NotImplementedException(
-                message: "ToString() override not implemented");
+            return $"Score Description: {this.description}";
         }
         #endregion
 

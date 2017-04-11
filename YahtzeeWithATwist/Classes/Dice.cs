@@ -44,7 +44,7 @@ namespace YahtzeeWithATwist.Classes
         private const string IMG_BONUS_HALSEY = "/Assets/Dice/Dice1_Halsey.png";
         private const string IMG_BONUS_SPARKS = "/Assets/Dice/Dice1_Sparks.png";
         private const string IMG_BONUS_STEMEN = "/Assets/Dice/Dice1_Stemen.png";
-        private const string IMG_BONUS_HOWELL = "/Assets/Dice/Dice1_Sparks.png"; // Change this when available
+        private const string IMG_BONUS_HOWELL = "/Assets/Dice/Dice1_Howell.png";
 
         private const int    MIN_FACE_VALUE  = 1;
         private const int    MAX_FACE_VALUE  = 6;
