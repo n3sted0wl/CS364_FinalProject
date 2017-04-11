@@ -113,6 +113,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Dice\Dice1.png" />
+    <Content Include="Assets\Dice\Dice1_Geary.png" />
+    <Content Include="Assets\Dice\Dice1_Halsey.png" />
+    <Content Include="Assets\Dice\Dice1_Sparks.png" />
+    <Content Include="Assets\Dice\Dice1_Stemen.png" />
     <Content Include="Assets\Dice\Dice2.png" />
     <Content Include="Assets\Dice\Dice3.png" />
     <Content Include="Assets\Dice\Dice4.png" />

@@ -39,6 +39,13 @@ namespace YahtzeeWithATwist.Classes
         private const string IMG_PATH_DICE_4 = "/Assets/Dice/Dice4.png";
         private const string IMG_PATH_DICE_5 = "/Assets/Dice/Dice5.png";
         private const string IMG_PATH_DICE_6 = "/Assets/Dice/Dice6.png";
+
+        private const string IMG_BONUS_GEARY  = "/Assets/Dice/Dice1_Geary.png";
+        private const string IMG_BONUS_HALSEY = "/Assets/Dice/Dice1_Halsey.png";
+        private const string IMG_BONUS_SPARKS = "/Assets/Dice/Dice1_Sparks.png";
+        private const string IMG_BONUS_STEMEN = "/Assets/Dice/Dice1_Stemen.png";
+        private const string IMG_BONUS_HOWELL = "/Assets/Dice/Dice1_Sparks.png"; // Change this when available
+
         private const int    MIN_FACE_VALUE  = 1;
         private const int    MAX_FACE_VALUE  = 6;
 
@@ -47,6 +54,7 @@ namespace YahtzeeWithATwist.Classes
         public  Image        _imageControl;
         private int          _faceValue;
         private Availability _availability;
+        private BonusFaces?  _bonusFace;
 
         private static UpdateImageSource _updateImage;
 
@@ -70,6 +78,28 @@ namespace YahtzeeWithATwist.Classes
 
                 _faceValue = value;
 
+                if (faceValue != 1)
+                {
+                    this.bonusFace = null;
+                }
+                else
+                {
+                    // Depending on probabilities, set a bonus face
+                    int probability = randomSeed.Next(1, 20);
+                    if (probability < 2)
+                        this.bonusFace = BonusFaces.Howell;
+                    else if (probability < 5)
+                        this.bonusFace = BonusFaces.Sparks;
+                    else if (probability < 7)
+                        this.bonusFace = BonusFaces.Geary;
+                    else if (probability < 10)
+                        this.bonusFace = BonusFaces.Halsey;
+                    else if (probability < 12)
+                        this.bonusFace = BonusFaces.Stemen;
+                    else
+                        this.bonusFace = null;
+                }
+
                 if (imageControl != null)
                 {
                     updateImageDelegate?.Invoke(this.imageControl, this.imagePath);
@@ -88,12 +118,26 @@ namespace YahtzeeWithATwist.Classes
                     updateImageDelegate?.Invoke(this.imageControl, this.imagePath);
                 }
             }
-        }
+        } // update path
 
         public string imagePath
         {
-            get { return ImageLocations[this.faceValue]; }
-        }
+            get
+            {
+                string imageLocation;
+
+                if (this.bonusFace != null && this.faceValue == 1)
+                {
+                    imageLocation = BonusImageLocations[bonusFace];
+                }
+                else
+                {
+                    imageLocation = ImageLocations[this.faceValue];
+                }
+
+                return imageLocation;
+            }
+        } // R-O; if bonusFace != null, use different dictionary
 
         public Availability availability
         {
@@ -109,7 +153,28 @@ namespace YahtzeeWithATwist.Classes
                     this.imageControl != null)
                     imageControl.Visibility = Visibility.Collapsed;
             }
-        }
+        } // update visibility
+
+        public BonusFaces? bonusFace
+        {
+            set
+            {
+                if (this.faceValue == 1)
+                {
+                    this._bonusFace = value;
+                    updateImageDelegate?.Invoke(this.imageControl, this.imagePath);
+                }
+                else
+                {
+                    this._bonusFace = null;
+                }
+            }
+
+            get
+            {
+                return this._bonusFace;
+            }
+        } // try to set; if fv != 1, set bF to null
 
         public static UpdateImageSource updateImageDelegate
         {
@@ -130,6 +195,7 @@ namespace YahtzeeWithATwist.Classes
         // --------------------
         public enum DiceType     { Rollable, Held }
         public enum Availability { Available, Unavailable}
+        public enum BonusFaces   { Geary, Halsey, Sparks, Stemen, Howell }
         #endregion
 
         #region Objects
@@ -147,6 +213,16 @@ namespace YahtzeeWithATwist.Classes
                 { 4, IMG_PATH_DICE_4 },
                 { 5, IMG_PATH_DICE_5 },
                 { 6, IMG_PATH_DICE_6 }
+            };
+
+        private static Dictionary<BonusFaces?, string> BonusImageLocations =
+            new Dictionary<BonusFaces?, string>()
+            {
+                { BonusFaces.Geary,  IMG_BONUS_GEARY },
+                { BonusFaces.Halsey, IMG_BONUS_HALSEY },
+                { BonusFaces.Howell, IMG_BONUS_HOWELL },
+                { BonusFaces.Sparks, IMG_BONUS_SPARKS },
+                { BonusFaces.Stemen, IMG_BONUS_STEMEN }
             };
         #endregion
 
@@ -184,10 +260,10 @@ namespace YahtzeeWithATwist.Classes
         ///     Nothing. This is a constructor.
         /// </returns>
         public Dice(
-            int               initialFaceValue    = MIN_FACE_VALUE,
-            DiceType          initialType         = DiceType.Rollable,
-            Image             initialImage        = null,
-            Availability      initialAvailability = Availability.Available,
+            int               initialFaceValue     = MIN_FACE_VALUE,
+            DiceType          initialType          = DiceType.Rollable,
+            Image             initialImage         = null,
+            Availability      initialAvailability  = Availability.Available,
             UpdateImageSource initialImageModifier = null)
         {
             this.faceValue      = initialFaceValue;
@@ -239,10 +315,14 @@ namespace YahtzeeWithATwist.Classes
         /// </returns>
         public void roll()
         {
+            // Set the face value
             if (this.availability == Availability.Available)
+            {
                 this.faceValue = randomSeed.Next(
-                    MIN_FACE_VALUE, 
+                    MIN_FACE_VALUE,
                     MAX_FACE_VALUE + 1);
+            }
+            return;
         }
         #endregion
 
