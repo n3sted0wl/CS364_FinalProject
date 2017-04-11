@@ -50,8 +50,8 @@ namespace YahtzeeWithATwist.Classes
         private const int    MAX_FACE_VALUE  = 6;
 
         public  DiceType type;
+        public Image     _imageControl;
 
-        public  Image        _imageControl;
         private int          _faceValue;
         private Availability _availability;
         private BonusFaces?  _bonusFace;
@@ -107,6 +107,10 @@ namespace YahtzeeWithATwist.Classes
             }
         }
         
+        /// <summary>
+        ///     get: standard
+        ///     set: if not set to null, update the image path
+        /// </summary>
         public Image imageControl
         {
             get { return _imageControl; }
@@ -118,8 +122,13 @@ namespace YahtzeeWithATwist.Classes
                     updateImageDelegate?.Invoke(this.imageControl, this.imagePath);
                 }
             }
-        } // update path
+        } 
 
+        /// <summary>
+        ///     Set: not defined
+        ///     Get: if a bonusFace is assigned, use the bonus image locations dictionary
+        ///          otherwise, use the default image path collection
+        /// </summary>
         public string imagePath
         {
             get
@@ -137,8 +146,12 @@ namespace YahtzeeWithATwist.Classes
 
                 return imageLocation;
             }
-        } // R-O; if bonusFace != null, use different dictionary
+        } 
 
+        /// <summary>
+        ///     get: standard
+        ///     set: update the visibility of the image control
+        /// </summary>
         public Availability availability
         {
             get { return _availability; }
@@ -153,10 +166,16 @@ namespace YahtzeeWithATwist.Classes
                     this.imageControl != null)
                     imageControl.Visibility = Visibility.Collapsed;
             }
-        } // update visibility
+        } 
 
+        /// <summary>
+        ///     Get: standard
+        ///     Set: Check if the faceValue == 1 (probably should not)
+        /// </summary>
         public BonusFaces? bonusFace
         {
+            get { return this._bonusFace; }
+
             set
             {
                 if (this.faceValue == 1)
@@ -169,13 +188,12 @@ namespace YahtzeeWithATwist.Classes
                     this._bonusFace = null;
                 }
             }
+        } 
 
-            get
-            {
-                return this._bonusFace;
-            }
-        } // try to set; if fv != 1, set bF to null
-
+        /// <summary>
+        ///     Get: standard
+        ///     Set: Limit to 1 delegated method only at any time
+        /// </summary>
         public static UpdateImageSource updateImageDelegate
         {
             get { return _updateImage; }
