@@ -99,6 +99,7 @@
     <Compile Include="Classes\Dice.cs" />
     <Compile Include="Classes\GameBoard.cs" />
     <Compile Include="Classes\ScoreCategory.cs" />
+    <Compile Include="Classes\Yahtzee.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
