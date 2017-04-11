@@ -23,15 +23,15 @@ namespace YahtzeeWithATwist.Classes
         // --------------------
         private static IEnumerable<DiceGroup> diceCountsByValue;
 
-        private const int FULL_HOUSE_SCORE_VALUE  = 25;
+        private const int FULL_HOUSE_SCORE_VALUE = 25;
         private const int SM_STRAIGHT_SCORE_VALUE = 30;
         private const int LG_STRAIGHT_SCORE_VALUE = 40;
-        private const int YAHTZEE_SCORE_VALUE     = 50;
+        private const int YAHTZEE_SCORE_VALUE = 50;
 
         private const int SM_STRAIGHT_SIZE = 4;
         private const int LG_STRAIGHT_SIZE = 5;
         #endregion
-        
+
         #region Structures
         // --------------------
         public struct DiceGroup
@@ -83,9 +83,9 @@ namespace YahtzeeWithATwist.Classes
         {
             #region Data
             int longestDetectedRun = 1;
-            int currentRunLength   = 1;
-            int previousFaceValue  = 0;
-            int currentFaceValue   = 0;
+            int currentRunLength = 1;
+            int previousFaceValue = 0;
+            int currentFaceValue = 0;
             List<Dice> orderedDice;
             #endregion
 
@@ -99,13 +99,14 @@ namespace YahtzeeWithATwist.Classes
                 currentFaceValue = dice.faceValue;
                 if (currentFaceValue - previousFaceValue == 1)
                 {
-                    currentRunLength   += 1;
-                    if (currentRunLength > longestDetectedRun)
+                    currentRunLength += 1;
+                    if (currentRunLength >= longestDetectedRun)
                         longestDetectedRun = currentRunLength;
                 }
                 else if (currentFaceValue - previousFaceValue == 0)
                 {
-                    // IDK if I need this...
+                    if (currentRunLength >= longestDetectedRun)
+                        longestDetectedRun = currentRunLength;
                 }
                 else
                 {
@@ -115,7 +116,7 @@ namespace YahtzeeWithATwist.Classes
             }
             #endregion
 
-            return longestDetectedRun >= targetStraightLength;
+            return (longestDetectedRun - 1) >= targetStraightLength;
         }
 
         public static int calculateAces(List<Dice> heldDice)
@@ -271,7 +272,7 @@ namespace YahtzeeWithATwist.Classes
             if (diceCountsByValue.Any(record => record.count >= 4))
             {
                 score = getSumOfDice(diceCountsByValue);
-            }            
+            }
             #endregion
 
             return score;
@@ -308,7 +309,7 @@ namespace YahtzeeWithATwist.Classes
             #region Data
             bool hasSmStraight = hasStraight(heldDice, LG_STRAIGHT_SIZE);
             #endregion
-            
+
             return hasSmStraight ? LG_STRAIGHT_SCORE_VALUE : 0;
         }
 
