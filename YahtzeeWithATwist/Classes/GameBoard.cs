@@ -9,13 +9,6 @@
 // TODO: Remove unnecessary using statements
 // TODO: Remove unnecessary documentation
 // TODO: Fill out Exception documentation
-//
-// I haven't come up with a design for this yet
-// All I know is that it is going to contain 
-//   universal data like total points and turn
-//   counter.
-// It will also be where I define the functions
-//   that calculate the points of a given hand
 #endregion
 
 using System;

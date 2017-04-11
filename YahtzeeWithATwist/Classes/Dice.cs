@@ -46,11 +46,11 @@ namespace YahtzeeWithATwist.Classes
         private const string IMG_BONUS_STEMEN = "/Assets/Dice/Dice1_Stemen.png";
         private const string IMG_BONUS_HOWELL = "/Assets/Dice/Dice1_Howell.png";
 
-        private const int    MIN_FACE_VALUE  = 1;
-        private const int    MAX_FACE_VALUE  = 6;
+        private const int    MIN_FACE_VALUE   = 1;
+        private const int    MAX_FACE_VALUE   = 6;
 
-        public  DiceType type;
-        public Image     _imageControl;
+        public  DiceType     type;
+        public Image         _imageControl;
 
         private int          _faceValue;
         private Availability _availability;
