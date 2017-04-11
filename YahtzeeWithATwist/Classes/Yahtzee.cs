@@ -33,6 +33,9 @@ namespace YahtzeeWithATwist.Classes
         private const int SM_STRAIGHT_SCORE_VALUE = 30;
         private const int LG_STRAIGHT_SCORE_VALUE = 40;
         private const int YAHTZEE_SCORE_VALUE     = 50;
+
+        private const int SM_STRAIGHT_SIZE = 4;
+        private const int LG_STRAIGHT_SIZE = 5;
         #endregion
 
         #region Properties
@@ -109,6 +112,42 @@ namespace YahtzeeWithATwist.Classes
             #endregion
 
             return score;
+        }
+
+        private static bool hasStraight(List<Dice> diceToScan, int targetStraightLength)
+        {
+            #region Data
+            int longestDetectedRun = 1;
+            int previousFaceValue  = 0;
+            int currentFaceValue   = 0;
+            List<Dice> orderedDice;
+            #endregion
+
+            #region Logic
+            // Order the list
+            orderedDice = diceToScan.OrderBy(dice => dice.faceValue).ToList();
+
+            // Loop through looking for gaps in the list
+            foreach (Dice dice in orderedDice)
+            {
+                currentFaceValue = dice.faceValue;
+                if (currentFaceValue - previousFaceValue == 1)
+                {
+                    longestDetectedRun += 1;
+                }
+                else if (currentFaceValue - previousFaceValue == 0)
+                {
+                    // IDK if I need this...
+                }
+                else
+                {
+                    longestDetectedRun = 1;
+                }
+                previousFaceValue = dice.faceValue;
+            }
+            #endregion
+
+            return longestDetectedRun >= targetStraightLength;
         }
 
         public static int calculateAces(List<Dice> heldDice)
@@ -290,11 +329,7 @@ namespace YahtzeeWithATwist.Classes
         public static int calculateSmallStraight(List<Dice> heldDice)
         {
             #region Data
-            bool hasSmStraight = false;
-            #endregion
-
-            #region Logic
-            // TODO: set hasSmStraight;
+            bool hasSmStraight = hasStraight(heldDice, SM_STRAIGHT_SIZE);
             #endregion
 
             return hasSmStraight ? SM_STRAIGHT_SCORE_VALUE : 0;
@@ -303,13 +338,10 @@ namespace YahtzeeWithATwist.Classes
         public static int calculateLargeStraight(List<Dice> heldDice)
         {
             #region Data
-            bool hasSmStraight = false;
+            bool hasSmStraight = hasStraight(heldDice, LG_STRAIGHT_SIZE);
             #endregion
-
-            #region Logic
-            #endregion
-
-            return hasSmStraight ? SM_STRAIGHT_SCORE_VALUE : 0;
+            
+            return hasSmStraight ? LG_STRAIGHT_SCORE_VALUE : 0;
         }
 
         public static int calculateYahtzee(List<Dice> heldDice)
