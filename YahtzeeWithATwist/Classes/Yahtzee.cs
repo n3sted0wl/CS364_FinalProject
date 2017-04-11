@@ -8,6 +8,7 @@
 // --------------------
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,10 +24,10 @@ namespace YahtzeeWithATwist.Classes
         // --------------------
         private static IEnumerable<DiceGroup> diceCountsByValue;
 
-        private const int FULL_HOUSE_SCORE_VALUE = 25;
+        private const int FULL_HOUSE_SCORE_VALUE  = 25;
         private const int SM_STRAIGHT_SCORE_VALUE = 30;
         private const int LG_STRAIGHT_SCORE_VALUE = 40;
-        private const int YAHTZEE_SCORE_VALUE = 50;
+        private const int YAHTZEE_SCORE_VALUE     = 50;
 
         private const int SM_STRAIGHT_SIZE = 4;
         private const int LG_STRAIGHT_SIZE = 5;
@@ -45,6 +46,20 @@ namespace YahtzeeWithATwist.Classes
                 count = initialCount;
             }
         }
+
+        public struct BonusGroup
+        {
+            public Dice.BonusFaces? bonusFace;
+            public int              count;
+
+            public BonusGroup(
+                Dice.BonusFaces? initialBonusFace, 
+                int              initialCount)
+            {
+                bonusFace = initialBonusFace;
+                count = initialCount;
+            }
+        }
         #endregion
         #endregion
 
@@ -59,6 +74,16 @@ namespace YahtzeeWithATwist.Classes
                 from dice in diceToGroup
                 group dice by dice.faceValue into byValue
                 select new DiceGroup(byValue.Key, byValue.Count());
+
+            return groupedDice;
+        }
+
+        private static IEnumerable<BonusGroup> groupDiceByBonuses(List<Dice> diceToGroup)
+        {
+            IEnumerable<BonusGroup> groupedDice =
+                from dice in diceToGroup
+                group dice by dice.bonusFace into byBonusFace
+                select new BonusGroup(byBonusFace.Key, byBonusFace.Count());
 
             return groupedDice;
         }
@@ -337,6 +362,44 @@ namespace YahtzeeWithATwist.Classes
             #endregion
 
             return getSumOfDice(diceCountsByValue);
+        }
+
+        public static int calculateBonus(List<Dice> heldDice, int baseScore = 0)
+        {
+            #region Data
+            IEnumerable<BonusGroup> diceByBonus;
+            int                     score = 0;
+            #endregion
+
+            #region Logic
+            // Get the counts of each bonus type in the hand
+            diceByBonus = groupDiceByBonuses(heldDice);
+            foreach (BonusGroup bonusCategory in diceByBonus)
+            {
+                switch (bonusCategory.bonusFace)
+                {
+                    case Dice.BonusFaces.Geary:
+                        score += (10 * bonusCategory.count);
+                        break;
+                    case Dice.BonusFaces.Halsey:
+                        score += (20 * bonusCategory.count);
+                        break;
+                    case Dice.BonusFaces.Howell:
+                        score += (30 * bonusCategory.count);
+                        break;
+                    case Dice.BonusFaces.Sparks:
+                        score += (40 * bonusCategory.count);
+                        break;
+                    case Dice.BonusFaces.Stemen:
+                        score += (50 * bonusCategory.count);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            #endregion
+
+            return score;
         }
         #endregion
     }

@@ -88,7 +88,7 @@ namespace YahtzeeWithATwist.Classes
                 { GameMessages.ConfirmScoreCategorySelection,
                     "Confirm your selection." }
             };
-
+        public static List<Dice> ScoreableDice;
         #endregion
 
         #region Delegates
@@ -116,6 +116,7 @@ namespace YahtzeeWithATwist.Classes
                 HeldDice.Add(diceCount, new Dice(
                     initialAvailability: Dice.Availability.Unavailable));
             }
+
             return;
         }
         #endregion
