@@ -6,16 +6,10 @@
 
 #region Development Notes and TODOs
 // --------------------
-// TODO: Remove unnecessary using statements
-// TODO: Remove unnecessary documentation
-// TODO: Add exception documentation, if any
 #endregion
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YahtzeeWithATwist.Classes
 {
@@ -37,11 +31,7 @@ namespace YahtzeeWithATwist.Classes
         private const int SM_STRAIGHT_SIZE = 4;
         private const int LG_STRAIGHT_SIZE = 5;
         #endregion
-
-        #region Properties
-        // --------------------
-        #endregion
-
+        
         #region Structures
         // --------------------
         public struct DiceGroup
@@ -56,36 +46,11 @@ namespace YahtzeeWithATwist.Classes
             }
         }
         #endregion
-
-        #region Enumerations
-        // --------------------
-        #endregion
-
-        #region Objects
-        // --------------------
-        #endregion
-
-        #region Collections
-        // --------------------
-        #endregion
-
-        #region Delegates
-        // --------------------
-        #endregion
         #endregion
 
         /*************************************************************/
         /*                       Functionality                       */
         /*************************************************************/
-        #region Methods
-        #region Accessors
-        // --------------------
-        #endregion
-
-        #region Mutators
-        // --------------------
-        #endregion
-
         #region Other Methods
         // --------------------
         private static IEnumerable<DiceGroup> groupDiceByValue(List<Dice> diceToGroup)
@@ -369,7 +334,6 @@ namespace YahtzeeWithATwist.Classes
 
             return getSumOfDice(diceCountsByValue);
         }
-        #endregion
         #endregion
     }
 }

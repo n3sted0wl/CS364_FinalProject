@@ -10,9 +10,6 @@
 // TODO: Insert IntelliSense Documentation template before class
 // TODO: Remove unnecessary documentation
 // TODO: Override ToString()
-
-// Each score category is going to contain a description, point value,
-// 
 #endregion
 
 using System;
