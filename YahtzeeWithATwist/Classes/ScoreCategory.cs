@@ -41,7 +41,6 @@ namespace YahtzeeWithATwist.Classes
         private ValueCalculator          _CalculateValue; // Only assign one
         private EnableAssociatedControl  _EnableControl;  // Can assign multiple
         private DisableAssociatedControl _DisableControl; // Can assign muliple
-
         #endregion
 
         #region Properties

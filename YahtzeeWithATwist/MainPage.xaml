@@ -14,7 +14,7 @@
         <Image x:Name="rollDie3" HorizontalAlignment="Left" Height="100" Margin="350,150,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice1.png"/>
         <Image x:Name="rollDie4" HorizontalAlignment="Left" Height="100" Margin="455,150,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice4.png"/>
         <Image x:Name="rollDie5" HorizontalAlignment="Left" Height="100" Margin="560,150,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice6.png"/>
-        <Button x:Name="rollDieButton" Content="Roll Dice Now!" HorizontalAlignment="Left" Margin="324,302,0,0" VerticalAlignment="Top" Height="74" Width="276" FontSize="36" Click="rollDieButton_Click"/>
+        <Button x:Name="rollDieButton" Content="Roll Dice Now!" HorizontalAlignment="Left" Margin="245,308,0,0" VerticalAlignment="Top" Height="74" Width="276" FontSize="36" Click="rollDieButton_Click"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="602" Margin="738,74,0,0" Stroke="Black" VerticalAlignment="Top" Width="492"/>
         <Rectangle HorizontalAlignment="Left" Height="144" Margin="129,128,0,0" Stroke="Black" VerticalAlignment="Top" Width="550" Canvas.ZIndex="-5">
             <Rectangle.Fill>
