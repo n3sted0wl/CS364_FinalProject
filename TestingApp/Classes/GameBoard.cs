@@ -16,7 +16,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
 
 namespace YahtzeeWithATwist.Classes
 {
@@ -128,29 +127,6 @@ namespace YahtzeeWithATwist.Classes
 
         #region Other Methods
         // --------------------
-        public static Dice getDiceByImageControl(Image targetImageControl)
-        {
-            Dice foundDice = null;
-
-            foreach (KeyValuePair<int, Dice> testDice in RollableDice)
-            {
-                if (testDice.Value.imageControl == targetImageControl)
-                    foundDice = testDice.Value;
-            }
-
-            foreach (KeyValuePair<int, Dice> testDice in HeldDice)
-            {
-                if (testDice.Value.imageControl == targetImageControl)
-                    foundDice = testDice.Value;
-            }
-
-            if (foundDice == null)
-                throw new NullReferenceException("Could not find current dice");
-
-
-            return foundDice;
-        }
-
         public static int getDiceIndex(Dice targetDice)
         {
             int index = 0;

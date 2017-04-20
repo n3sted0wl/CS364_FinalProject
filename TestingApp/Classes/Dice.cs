@@ -13,9 +13,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace YahtzeeWithATwist.Classes
 {
@@ -50,13 +47,10 @@ namespace YahtzeeWithATwist.Classes
         private const int    MAX_FACE_VALUE   = 6;
 
         public  DiceType     type;
-        public Image         _imageControl;
 
         private int          _faceValue;
         private Availability _availability;
         private BonusFaces?  _bonusFace;
-
-        private static UpdateImageSource _updateImage;
 
         private static Random randomSeed = new Random();
         #endregion
@@ -99,31 +93,9 @@ namespace YahtzeeWithATwist.Classes
                     else
                         this.bonusFace = null;
                 }
-
-                if (imageControl != null)
-                {
-                    updateImageDelegate?.Invoke(this.imageControl, this.imagePath);
-                }
             }
         }
         
-        /// <summary>
-        ///     get: standard
-        ///     set: if not set to null, update the image path
-        /// </summary>
-        public Image imageControl
-        {
-            get { return _imageControl; }
-            set
-            {
-                this._imageControl = value;
-                if (imageControl != null)
-                {
-                    updateImageDelegate?.Invoke(this.imageControl, this.imagePath);
-                }
-            }
-        } 
-
         /// <summary>
         ///     Set: not defined
         ///     Get: if a bonusFace is assigned, use the bonus image locations dictionary
@@ -158,13 +130,6 @@ namespace YahtzeeWithATwist.Classes
             set
             {
                 _availability = value;
-
-                if (this.availability == Availability.Available &&
-                    this.imageControl != null)
-                    imageControl.Visibility = Visibility.Visible;
-                else if (this.availability == Availability.Unavailable &&
-                    this.imageControl != null)
-                    imageControl.Visibility = Visibility.Collapsed;
             }
         } 
 
@@ -181,7 +146,6 @@ namespace YahtzeeWithATwist.Classes
                 if (this.faceValue == 1)
                 {
                     this._bonusFace = value;
-                    updateImageDelegate?.Invoke(this.imageControl, this.imagePath);
                 }
                 else
                 {
@@ -189,20 +153,6 @@ namespace YahtzeeWithATwist.Classes
                 }
             }
         } 
-
-        /// <summary>
-        ///     Get: standard
-        ///     Set: Limit to 1 delegated method only at any time
-        /// </summary>
-        public static UpdateImageSource updateImageDelegate
-        {
-            get { return _updateImage; }
-            set
-            {
-                _updateImage = null;
-                _updateImage += value;
-            }
-        }
         #endregion
 
         #region Structures
@@ -246,7 +196,6 @@ namespace YahtzeeWithATwist.Classes
 
         #region Delegates
         // --------------------
-        public delegate void UpdateImageSource (Image image, string path);
         #endregion
         #endregion
 
@@ -280,15 +229,11 @@ namespace YahtzeeWithATwist.Classes
         public Dice(
             int               initialFaceValue     = MIN_FACE_VALUE,
             DiceType          initialType          = DiceType.Rollable,
-            Image             initialImage         = null,
-            Availability      initialAvailability  = Availability.Available,
-            UpdateImageSource initialImageModifier = null)
+            Availability      initialAvailability  = Availability.Available)
         {
             this.faceValue      = initialFaceValue;
             this.type           = initialType;
-            this.imageControl   = initialImage;
             this.availability   = initialAvailability;
-            updateImageDelegate = initialImageModifier;
         }
         #endregion
 

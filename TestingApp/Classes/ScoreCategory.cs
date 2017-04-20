@@ -16,7 +16,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
 
 namespace YahtzeeWithATwist.Classes
 {
@@ -35,7 +34,6 @@ namespace YahtzeeWithATwist.Classes
         // --------------------
         private string  _description;
         private Status  _status;
-        private TextBox _textBox;
 
         private ValueCalculator          _CalculateValue; // Only assign one
         private EnableAssociatedControl  _EnableControl;  // Can assign multiple
@@ -50,10 +48,6 @@ namespace YahtzeeWithATwist.Classes
             private set
             {
                 this._description = value;
-                if (this.textBox != null)
-                {
-                    textBox.Text = description;
-                }
             }
         }
 
@@ -76,16 +70,6 @@ namespace YahtzeeWithATwist.Classes
                     if (DisableControl != null)
                         DisableControl();
                 }
-            }
-        }
-
-        public TextBox textBox
-        {
-            get { return this._textBox; }
-            set
-            {
-                this.textBox      = value;
-                this.textBox.Text = description;
             }
         }
 
@@ -141,8 +125,7 @@ namespace YahtzeeWithATwist.Classes
         // --------------------
         public ScoreCategory(
             string  initialDescription,
-            Status  initialStatus  = Status.Available,
-            TextBox initialTextBox = null)
+            Status  initialStatus  = Status.Available)
         {
             this.description = initialDescription;
             this.status      = initialStatus;
