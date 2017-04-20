@@ -138,15 +138,11 @@
         <TextBlock x:Name="totalScore" HorizontalAlignment="Left" Margin="1101,656,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
             <Run FontWeight="Bold" Text="15"/>
         </TextBlock>
-        <TextBlock x:Name="yahtzeeLabel_Copy" HorizontalAlignment="Left" Margin="779,549,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited">
+        <TextBlock x:Name="yahtzeeLabel_Copy" HorizontalAlignment="Left" Margin="779,549,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
             <Run FontWeight="Bold" Text="BONUS:"/>
         </TextBlock>
-        <TextBlock x:Name="bonusScore" HorizontalAlignment="Left" Margin="1101,549,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
-            <Run FontWeight="Bold" Text="15"/>
-        </TextBlock>
-        <TextBlock x:Name="gameBoardMessageBox" HorizontalAlignment="Left" Margin="93,413,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" Width="550" Height="97">
-            <Run FontWeight="Bold" Text=""/>
-        </TextBlock>
+        <TextBlock x:Name="bonusScore" HorizontalAlignment="Left" Margin="1101,549,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" FontWeight="Bold" />
+        <TextBlock x:Name="gameBoardMessageBox" HorizontalAlignment="Left" Margin="93,413,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" Width="550" Height="97" FontWeight="Bold" />
         <TextBlock x:Name="yahtzeeGameTitle" HorizontalAlignment="Left" Margin="239,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontFamily="Segoe UI Black" Foreground="#FFEC962F">
             <Run Foreground="#FFF77E19" FontWeight="Bold" Text="Yahtzee!"/>
         </TextBlock>
