@@ -277,8 +277,6 @@ namespace YahtzeeWithATwist
             consoleOutput += $"Chance:      {Yahtzee.calculateChance(scoreableDice)}\n";
             consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
 
-            tb_testConsole.Text = consoleOutput;
-
             return;
         }
 
