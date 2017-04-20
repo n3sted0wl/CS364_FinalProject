@@ -364,110 +364,16 @@ namespace YahtzeeWithATwist.Classes
             return getSumOfDice(diceCountsByValue);
         }
 
-        public static int calculateBonus(List<Dice> heldDice, int baseScore = 0)
+        public static int calculateBonus(List<Dice> heldDice)
         {
             #region Data
-            IEnumerable<BonusGroup> diceByBonus;
-            int                     bonusScore        = 0;
-            int                     modifiedBaseScore = baseScore;
-            bool                    lostBonus         = false;
+            int bonusScore = 0;
             #endregion
 
             #region Logic
-            // Get the counts of each bonus type in the hand
-            diceByBonus = groupDiceByBonuses(heldDice);
+            // Get the counts of each bonus grouping
 
-            if (diceByBonus.Count() == 5) // One of each teacher
-            {
-                bonusScore += 600;
-            }
-            else if (diceByBonus.Any(x => x.count == 5)) // Five of a teacher
-            {
-                bonusScore += 1000;
-            }
-            else
-            {
-                foreach (BonusGroup bonusCategory in diceByBonus)
-                {
-                    switch (bonusCategory.bonusFace)
-                    {
-                        case Dice.BonusFaces.Geary: // Double base score for each
-                            #region Geary Bonus
-                            for (int bonus = 1; bonus <= bonusCategory.count; bonus += 1)
-                                modifiedBaseScore *= 2;
-                            #endregion
-                            break;
-                        case Dice.BonusFaces.Halsey: // Flat 10 point bonus
-                            #region Halsey Bonus
-                            bonusScore += 10;
-                            #endregion
-                            break;
-                        case Dice.BonusFaces.Howell: // Base score multiplier
-                            #region Howell Bonus
-                            switch (bonusCategory.count)
-                            {
-                                case 1:
-                                    lostBonus = true;
-                                    break;
-                                case 2:
-                                    modifiedBaseScore *= 4;
-                                    break;
-                                case 3:
-                                    modifiedBaseScore *= 10;
-                                    break;
-                                default:
-                                    modifiedBaseScore *= 50;
-                                    break;
-                            }
-                            #endregion
-                            break;
-                        case Dice.BonusFaces.Sparks:
-                            #region Sparks Bonus
-                            
-                            #endregion
-                            break;
-                        case Dice.BonusFaces.Stemen:
-                            #region Stemen Bonus
-                            if (diceByBonus.Any(dice => 
-                                dice.bonusFace == Dice.BonusFaces.Geary))
-                            {
-                                bonusScore += 50;
-                            }
-                            if (diceByBonus.Any(dice => 
-                                dice.bonusFace == Dice.BonusFaces.Halsey))
-                            {
-                                bonusScore += 100;
-                            }
-                            if (diceByBonus.Any(dice => 
-                                dice.bonusFace == Dice.BonusFaces.Howell))
-                            {
-                                // Negate the negative effects of Howell
-                                lostBonus   = false;
-                                bonusScore += 150;
-                            }
-                            if (diceByBonus.Any(dice => 
-                                dice.bonusFace == Dice.BonusFaces.Sparks))
-                            {
-
-                            }
-                            #endregion
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
             #endregion
-
-            if (lostBonus)
-            {
-                bonusScore = 0;
-            }
-            else
-            {
-                if (modifiedBaseScore > baseScore)
-                    bonusScore += (modifiedBaseScore - baseScore);
-            }
 
             return bonusScore;
         }

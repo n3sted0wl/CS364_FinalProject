@@ -250,32 +250,32 @@ namespace YahtzeeWithATwist
             }
 
             consoleOutput += $"Aces:        {Yahtzee.calculateAces(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice, Yahtzee.calculateAces(scoreableDice))}\n";
+            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
             consoleOutput += $"Twos:        {Yahtzee.calculateTwos(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice, Yahtzee.calculateTwos(scoreableDice))}\n";
+            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
             consoleOutput += $"Threes:      {Yahtzee.calculateThrees(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice, Yahtzee.calculateThrees(scoreableDice))}\n";
+            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
             consoleOutput += $"Fours:       {Yahtzee.calculateFours(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice, Yahtzee.calculateFours(scoreableDice))}\n";
+            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
             consoleOutput += $"Fives:       {Yahtzee.calculateFives(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice, Yahtzee.calculateFives(scoreableDice))}\n";
+            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
             consoleOutput += $"Sixes:       {Yahtzee.calculateSixes(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice, Yahtzee.calculateSixes(scoreableDice))}\n";
+            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
             consoleOutput += $"";
             consoleOutput += $"Full House:  {Yahtzee.calculateFullHouse(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice, Yahtzee.calculateFullHouse(scoreableDice))}\n";
+            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
             consoleOutput += $"Four/Kind:   {Yahtzee.calculateFourOfAKind(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice, Yahtzee.calculateFourOfAKind(scoreableDice))}\n";
+            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
             consoleOutput += $"Three/Kind:  {Yahtzee.calculateThreeOfAKind(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice, Yahtzee.calculateThreeOfAKind(scoreableDice))}\n";
+            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
             consoleOutput += $"SM Straight: {Yahtzee.calculateSmallStraight(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice, Yahtzee.calculateSmallStraight(scoreableDice))}\n";
+            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
             consoleOutput += $"LG Straight: {Yahtzee.calculateLargeStraight(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice, Yahtzee.calculateLargeStraight(scoreableDice))}\n";
+            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
             consoleOutput += $"Yahtzee:     {Yahtzee.calculateYahtzee(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice, Yahtzee.calculateYahtzee(scoreableDice))}\n";
+            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
             consoleOutput += $"Chance:      {Yahtzee.calculateChance(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice, Yahtzee.calculateChance(scoreableDice))}\n";
+            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
 
             tb_testConsole.Text = consoleOutput;
 
