@@ -368,11 +368,59 @@ namespace YahtzeeWithATwist.Classes
         {
             #region Data
             int bonusScore = 0;
+            IEnumerable<BonusGroup> diceByBonus;
+            BonusGroup currentBonusGroup;
             #endregion
 
             #region Logic
             // Get the counts of each bonus grouping
+            diceByBonus = groupDiceByBonuses(heldDice);
 
+            // Check for all five of a kind or one of each
+            if (diceByBonus.Count() == 5) // One of each teacher
+                bonusScore += 600;
+            else if (diceByBonus.Any(x => x.count == 5)) // Five of a teacher
+                bonusScore += 1000;
+
+            // Apply dice bonuses (preserver order of operations)
+            #region STEMEN BONUS: Team Player; increase each category count by one
+            #endregion
+
+            #region HOWELL BONUS: Risky; Lose or multiply total score
+            #endregion
+
+            #region GEARY BONUS: guaranteed points
+            if (diceByBonus.Any(group => group.bonusFace == Dice.BonusFaces.Geary))
+            {
+                currentBonusGroup =
+                    diceByBonus.First(group => group.bonusFace == Dice.BonusFaces.Geary);
+                switch (currentBonusGroup.count)
+                {
+                    case 1:
+                        bonusScore += 20;
+                        break;
+                    case 2:
+                        bonusScore += 50;
+                        break;
+                    case 3:
+                        bonusScore += 100;
+                        break;
+                    case 4:
+                        bonusScore += 200;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            #endregion
+
+            #region HALSEY BONUS: Multiply category score
+            #endregion
+
+            #region SPARKS BONUS: "Caveat"; Multiply bonus category, lose one roll
+            #endregion
+
+            // End of bonus calculations
             #endregion
 
             return bonusScore;

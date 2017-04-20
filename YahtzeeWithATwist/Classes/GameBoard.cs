@@ -34,6 +34,7 @@ namespace YahtzeeWithATwist.Classes
         public  const int ROLLS_PER_TURN = 3;
 
         private static int _rollNumber;
+        private static int _totalScore;
         #endregion
 
         #region Properties
@@ -47,6 +48,19 @@ namespace YahtzeeWithATwist.Classes
                     throw new ArgumentOutOfRangeException();
 
                 _rollNumber = value;
+            }
+        }
+
+        public static int totalScore
+        {
+            get { return _totalScore; }
+
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("Score can't be negative");
+
+                _totalScore = value;
             }
         }
         #endregion
