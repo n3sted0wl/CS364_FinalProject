@@ -17,6 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
+using System.Windows;
 
 namespace YahtzeeWithATwist.Classes
 {
@@ -33,9 +34,11 @@ namespace YahtzeeWithATwist.Classes
         #region Data Elements
         #region Fields
         // --------------------
-        private string  _description;
-        private Status  _status;
-        private TextBox _textBox;
+        private string    _description = string.Empty;
+        private int       _scoreValue  = 0;
+        private Status    _status;
+        private TextBlock _descriptionTextBlock;
+        private TextBlock _scoreTextBlock;
 
         private ValueCalculator          _CalculateValue; // Only assign one
         private EnableAssociatedControl  _EnableControl;  // Can assign multiple
@@ -46,14 +49,15 @@ namespace YahtzeeWithATwist.Classes
         // --------------------
         public string description
         {
-            get         { return this._description; }
+            get { return this._description; }
             private set
             {
                 this._description = value;
-                if (this.textBox != null)
-                {
-                    textBox.Text = description;
-                }
+
+                // Update the associated textbox
+                if (this.descriptionTextBlock != null &&
+                    this.status == Status.Available)
+                    descriptionTextBlock.Text = this.description;
             }
         }
 
@@ -68,31 +72,78 @@ namespace YahtzeeWithATwist.Classes
                 this._status = value;
                 if (value == Status.Available)
                 {
+                    if (descriptionTextBlock != null)
+                    {
+
+                    }
+
+                    if (scoreTextBlock != null)
+                    {
+
+                    }
+
                     if (EnableControl != null)
                         EnableControl();
                 }
                 else
                 {
+                    if (descriptionTextBlock != null)
+                    {
+
+                    }
+
+                    if (scoreTextBlock != null)
+                    {
+
+                    }
+
                     if (DisableControl != null)
                         DisableControl();
                 }
             }
         }
 
-        public TextBox textBox
+        public TextBlock descriptionTextBlock
         {
-            get { return this._textBox; }
+            get { return this._descriptionTextBlock; }
             set
             {
-                this.textBox      = value;
-                this.textBox.Text = description;
+                this._descriptionTextBlock      = value;
+                if (_descriptionTextBlock != null)
+                    this._descriptionTextBlock.Text = description;
+            }
+        }
+
+        public TextBlock scoreTextBlock
+        {
+            get { return _scoreTextBlock; }
+            set
+            {
+                _scoreTextBlock = value;
+
+                // Update the textbox value
+                if (_scoreTextBlock != null)
+                    _scoreTextBlock.Text = this.scoreValue.ToString();
+            }
+        }
+
+        public int scoreValue
+        {
+            get { return _scoreValue; }
+            set
+            {
+                _scoreValue = value;
+
+                // Update the associated textbox
+                if (scoreTextBlock != null)
+                    scoreTextBlock.Text = _scoreValue.ToString();
             }
         }
 
         public ValueCalculator CalculateValue
         {
             get { return this._CalculateValue; }
-            private set { this._CalculateValue = value; }
+            set { this._CalculateValue = value; }
         }
 
         public EnableAssociatedControl EnableControl
@@ -127,7 +178,7 @@ namespace YahtzeeWithATwist.Classes
 
         #region Delegates
         // --------------------
-        public delegate int  ValueCalculator();
+        public delegate int  ValueCalculator(List<Dice> scoreableDice);
         public delegate void EnableAssociatedControl();
         public delegate void DisableAssociatedControl();
         #endregion
@@ -140,12 +191,15 @@ namespace YahtzeeWithATwist.Classes
         #region Constructors
         // --------------------
         public ScoreCategory(
-            string  initialDescription,
-            Status  initialStatus  = Status.Available,
-            TextBox initialTextBox = null)
+            string    initialDescription,
+            Status    initialStatus               = Status.Available,
+            TextBlock initialdescriptionTextBlock = null,
+            TextBlock initialScoreTextBlock       = null)
         {
-            this.description = initialDescription;
-            this.status      = initialStatus;
+            this.description          = initialDescription;
+            this.status               = initialStatus;
+            this.descriptionTextBlock = initialdescriptionTextBlock;
+            this.scoreTextBlock       = initialScoreTextBlock;
 
             this.clearCalculateValueMethod();
             this.clearEnableControlMethods();

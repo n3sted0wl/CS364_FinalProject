@@ -103,9 +103,11 @@ namespace YahtzeeWithATwist
         public MainPage()
         {
             this.InitializeComponent();
-            this.mapControls();
+
             GameBoard.initialize();
+            this.mapControls();
             this.initializeDice();
+            this.initializeDelegates();
         }
 
         /*************************************************************/
@@ -125,6 +127,8 @@ namespace YahtzeeWithATwist
         private void mapControls()
         {
             // TODO: Map each image to the final naming used
+
+            // Map dice to images
             this.img_rollDice_1 = rollDie1;
             this.img_rollDice_2 = rollDie2;
             this.img_rollDice_3 = rollDie3;
@@ -136,6 +140,37 @@ namespace YahtzeeWithATwist
             this.img_heldDice_3 = heldDie3;
             this.img_heldDice_4 = heldDie4;
             this.img_heldDice_5 = heldDie5;
+
+            // Map score categories to labels and score textblocks
+            GameBoard.ScoreCategories["Aces"].descriptionTextBlock   = onesLabel;
+            GameBoard.ScoreCategories["Twos"].descriptionTextBlock   = twosLabel;
+            GameBoard.ScoreCategories["Threes"].descriptionTextBlock = threesLabel;
+            GameBoard.ScoreCategories["Fours"].descriptionTextBlock  = foursLabel;
+            GameBoard.ScoreCategories["Fives"].descriptionTextBlock  = fivesLabel;
+            GameBoard.ScoreCategories["Sixes"].descriptionTextBlock  = sixesLabel;
+
+            GameBoard.ScoreCategories["Full_House"].descriptionTextBlock      = fullHouseLabel;
+            GameBoard.ScoreCategories["Four_of_a_Kind"].descriptionTextBlock  = fourOfKindLabel;
+            GameBoard.ScoreCategories["Three_of_a_Kind"].descriptionTextBlock = threeOfKindLabel;
+            GameBoard.ScoreCategories["Small_Straight"].descriptionTextBlock  = smallStraightLabel;
+            GameBoard.ScoreCategories["Large_Straight"].descriptionTextBlock  = largeStraightLabel;
+            GameBoard.ScoreCategories["Yahtzee"].descriptionTextBlock         = yahtzeeLabel;
+            GameBoard.ScoreCategories["Chance"].descriptionTextBlock          = chanceLabel;
+
+            GameBoard.ScoreCategories["Aces"].scoreTextBlock   = onesScore;
+            GameBoard.ScoreCategories["Twos"].scoreTextBlock   = twosScore;
+            GameBoard.ScoreCategories["Threes"].scoreTextBlock = threesScore;
+            GameBoard.ScoreCategories["Fours"].scoreTextBlock  = foursScore;
+            GameBoard.ScoreCategories["Fives"].scoreTextBlock  = fivesScore;
+            GameBoard.ScoreCategories["Sixes"].scoreTextBlock  = sixesScore;
+
+            GameBoard.ScoreCategories["Full_House"].scoreTextBlock      = fullHouseScore;
+            GameBoard.ScoreCategories["Four_of_a_Kind"].scoreTextBlock  = fourOfKindScore;
+            GameBoard.ScoreCategories["Three_of_a_Kind"].scoreTextBlock = threeOfKindScore;
+            GameBoard.ScoreCategories["Small_Straight"].scoreTextBlock  = smallStraightScore;
+            GameBoard.ScoreCategories["Large_Straight"].scoreTextBlock  = largeStraightScore;
+            GameBoard.ScoreCategories["Yahtzee"].scoreTextBlock         = yahtzeeScore;
+            GameBoard.ScoreCategories["Chance"].scoreTextBlock          = chanceScore;
             return;
         }
 
@@ -191,6 +226,25 @@ namespace YahtzeeWithATwist
             return;
         }
 
+        private void initializeDelegates()
+        {
+            GameBoard.ScoreCategories["Aces"].setCalculateValueMethod(Yahtzee.calculateAces);
+            GameBoard.ScoreCategories["Twos"].setCalculateValueMethod(Yahtzee.calculateTwos);
+            GameBoard.ScoreCategories["Threes"].setCalculateValueMethod(Yahtzee.calculateThrees);
+            GameBoard.ScoreCategories["Fours"].setCalculateValueMethod(Yahtzee.calculateFours);
+            GameBoard.ScoreCategories["Fives"].setCalculateValueMethod(Yahtzee.calculateFives);
+            GameBoard.ScoreCategories["Sixes"].setCalculateValueMethod(Yahtzee.calculateSixes);
+
+            GameBoard.ScoreCategories["Full_House"].setCalculateValueMethod(Yahtzee.calculateFullHouse);
+            GameBoard.ScoreCategories["Four_of_a_Kind"].setCalculateValueMethod(Yahtzee.calculateFourOfAKind);
+            GameBoard.ScoreCategories["Three_of_a_Kind"].setCalculateValueMethod(Yahtzee.calculateThreeOfAKind);
+            GameBoard.ScoreCategories["Small_Straight"].setCalculateValueMethod(Yahtzee.calculateSmallStraight);
+            GameBoard.ScoreCategories["Large_Straight"].setCalculateValueMethod(Yahtzee.calculateLargeStraight);
+            GameBoard.ScoreCategories["Yahtzee"].setCalculateValueMethod(Yahtzee.calculateYahtzee);
+            GameBoard.ScoreCategories["Chance"].setCalculateValueMethod(Yahtzee.calculateChance);
+            return;
+        }
+
         private void updateImageSource(Image imageToUpdate, string newImagePath)
         {
             imageToUpdate.Source =
@@ -235,61 +289,21 @@ namespace YahtzeeWithATwist
 
         private void rollDieButton_Click(object sender, RoutedEventArgs e)
         {
+            // Roll the dice
             foreach (KeyValuePair<int, Dice> rollableDice in GameBoard.RollableDice)
             {
                 rollableDice.Value.roll();
             }
-            testConsole();
-            return;
-        }
-        #endregion
-        #endregion
-        
-        /*************************************************************/
-        /*                        REMOVE THIS                        */
-        /*************************************************************/
-        private void testConsole()
-        {
-            string consoleOutput = string.Empty;
-            List<Dice> scoreableDice = new List<Dice>();
-            foreach (KeyValuePair<int, Dice> dice in GameBoard.HeldDice)
+
+            // Calculate the possible values
+            foreach (KeyValuePair<string, ScoreCategory> category in GameBoard.ScoreCategories)
             {
-                if (dice.Value.availability == Dice.Availability.Available)
-                {
-                    scoreableDice.Add(dice.Value);
-                }
+                category.Value.scoreValue = category.Value.CalculateValue(GameBoard.ScoreableDice);
             }
 
-            consoleOutput += $"Aces:        {Yahtzee.calculateAces(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
-            consoleOutput += $"Twos:        {Yahtzee.calculateTwos(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
-            consoleOutput += $"Threes:      {Yahtzee.calculateThrees(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
-            consoleOutput += $"Fours:       {Yahtzee.calculateFours(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
-            consoleOutput += $"Fives:       {Yahtzee.calculateFives(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
-            consoleOutput += $"Sixes:       {Yahtzee.calculateSixes(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
-            consoleOutput += $"";
-            consoleOutput += $"Full House:  {Yahtzee.calculateFullHouse(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
-            consoleOutput += $"Four/Kind:   {Yahtzee.calculateFourOfAKind(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
-            consoleOutput += $"Three/Kind:  {Yahtzee.calculateThreeOfAKind(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
-            consoleOutput += $"SM Straight: {Yahtzee.calculateSmallStraight(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
-            consoleOutput += $"LG Straight: {Yahtzee.calculateLargeStraight(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
-            consoleOutput += $"Yahtzee:     {Yahtzee.calculateYahtzee(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
-            consoleOutput += $"Chance:      {Yahtzee.calculateChance(scoreableDice)}\n";
-            consoleOutput += $"      Bonus: {Yahtzee.calculateBonus(scoreableDice)}\n";
-
             return;
         }
-
+        #endregion
+        #endregion
     }
 }

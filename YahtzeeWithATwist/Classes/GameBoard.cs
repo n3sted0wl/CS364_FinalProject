@@ -34,6 +34,7 @@ namespace YahtzeeWithATwist.Classes
         public  const int ROLLS_PER_TURN = 3;
 
         private static int _rollNumber;
+        private static int _totalScore;
         #endregion
 
         #region Properties
@@ -47,6 +48,35 @@ namespace YahtzeeWithATwist.Classes
                     throw new ArgumentOutOfRangeException();
 
                 _rollNumber = value;
+            }
+        }
+
+        public static int totalScore
+        {
+            get { return _totalScore; }
+
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("Score can't be negative");
+
+                _totalScore = value;
+            }
+        }
+
+        public static List<Dice> ScoreableDice
+        {
+            get
+            {
+                _scoreableDice = new List<Dice>();
+                foreach (KeyValuePair<int, Dice> dice in GameBoard.HeldDice)
+                {
+                    if (dice.Value.availability == Dice.Availability.Available)
+                    {
+                        _scoreableDice.Add(dice.Value);
+                    }
+                }
+                return _scoreableDice;
             }
         }
         #endregion
@@ -71,17 +101,11 @@ namespace YahtzeeWithATwist.Classes
         #region Collections
         // --------------------
         // Dice are not zero-indexed
-        public static Dictionary<int, Dice> RollableDice;
-        public static Dictionary<int, Dice> HeldDice;
-        public static Dictionary<GameMessages, string> Messages =
-            new Dictionary<GameMessages, string>()
-            {
-                { GameMessages.NoMoreRolls,
-                    "Cannot roll anymore this turn. Choose a Score Category." },
-                { GameMessages.ConfirmScoreCategorySelection,
-                    "Confirm your selection." }
-            };
-        public static List<Dice> ScoreableDice;
+        public  static Dictionary<int, Dice>             RollableDice;
+        public  static Dictionary<int, Dice>             HeldDice;
+        public  static Dictionary<GameMessages, string>  Messages;
+        public  static Dictionary<string, ScoreCategory> ScoreCategories;
+        private static List<Dice>                        _scoreableDice;
         #endregion
 
         #region Delegates
@@ -97,10 +121,10 @@ namespace YahtzeeWithATwist.Classes
         // --------------------
         public static void initialize()
         {
+            // Create all the dice
             RollableDice = new Dictionary<int, Dice>();
             HeldDice     = new Dictionary<int, Dice>();
             
-            // Create all the dice
             for (int diceCount = 1; 
                  diceCount <= NUMBER_OF_DICE; 
                  diceCount += 1)
@@ -110,6 +134,34 @@ namespace YahtzeeWithATwist.Classes
                     initialAvailability: Dice.Availability.Unavailable));
             }
 
+            // Create all the score categories
+            ScoreCategories = new Dictionary<string, ScoreCategory>()
+            {
+                { "Aces",   new ScoreCategory("Aces")},
+                { "Twos",   new ScoreCategory("Twos")},
+                { "Threes", new ScoreCategory("Threes")},
+                { "Fours",  new ScoreCategory("Fours")},
+                { "Fives",  new ScoreCategory("Fives")},
+                { "Sixes",  new ScoreCategory("Sixes")},
+
+                { "Full_House",      new ScoreCategory("Full House")},
+                { "Four_of_a_Kind",  new ScoreCategory("Four of a Kind")},
+                { "Three_of_a_Kind", new ScoreCategory("Three of a Kind")},
+                { "Small_Straight",  new ScoreCategory("Small Straight")},
+                { "Large_Straight",  new ScoreCategory("Large Straight")},
+                { "Yahtzee",         new ScoreCategory("Yahtzee")},
+                { "Chance",          new ScoreCategory("Chance")},
+            };
+
+            // Create all Messages
+            Messages = new Dictionary<GameMessages, string>()
+            {
+                { GameMessages.NoMoreRolls,
+                    "Cannot roll anymore this turn. Choose a Score Category." },
+                { GameMessages.ConfirmScoreCategorySelection,
+                    "Confirm your selection." }
+            };
+            
             return;
         }
         #endregion
@@ -124,6 +176,7 @@ namespace YahtzeeWithATwist.Classes
 
         #region Mutators
         // --------------------
+        public static void resetTotalScore() => totalScore = 0;
         #endregion
 
         #region Other Methods

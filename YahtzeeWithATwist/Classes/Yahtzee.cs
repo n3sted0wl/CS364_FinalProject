@@ -144,6 +144,20 @@ namespace YahtzeeWithATwist.Classes
             return (longestDetectedRun - 1) >= targetStraightLength;
         }
 
+        private static int getCategoryCount(bool hasStemen, BonusGroup currentBonusGroup)
+        {
+            #region Data
+            int categoryCount;
+            #endregion
+
+            #region Logic
+            categoryCount = currentBonusGroup.count;
+            if (hasStemen) categoryCount += 1;
+            #endregion
+
+            return categoryCount;
+        }
+
         public static int calculateAces(List<Dice> heldDice)
         {
             #region Data
@@ -367,12 +381,142 @@ namespace YahtzeeWithATwist.Classes
         public static int calculateBonus(List<Dice> heldDice)
         {
             #region Data
-            int bonusScore = 0;
+            int              bonusScore    = 0;
+            int              categoryCount = 0;
+            bool             hasStemen     = false;
+            List<BonusGroup> diceByBonus;
+            BonusGroup       currentBonusGroup;
             #endregion
 
             #region Logic
             // Get the counts of each bonus grouping
+            diceByBonus = (List<BonusGroup>) groupDiceByBonuses(heldDice);
 
+            // Check for all five of a kind or one of each
+            if (diceByBonus.Count() == 5) // One of each teacher
+                bonusScore += 600;
+            else if (diceByBonus.Any(x => x.count == 5)) // Five of a teacher
+                bonusScore += 1000;
+
+            // Apply dice bonuses (preserver order of operations)
+            #region STEMEN BONUS: Team Player; increase each category count by one
+            if (diceByBonus.Any(group => group.bonusFace == Dice.BonusFaces.Stemen))
+                hasStemen = true;
+            #endregion
+
+            #region HOWELL BONUS: Risky; Lose or multiply total score
+            if (diceByBonus.Any(group => group.bonusFace == Dice.BonusFaces.Howell))
+            {
+                currentBonusGroup =
+                    diceByBonus.First(group => group.bonusFace == Dice.BonusFaces.Howell);
+
+                categoryCount = getCategoryCount(hasStemen, currentBonusGroup);
+
+                switch (categoryCount)
+                {
+                    case 1:
+                        GameBoard.totalScore = 0;
+                        break;
+                    case 2:
+                        GameBoard.totalScore *= 2;
+                        break;
+                    case 3:
+                        GameBoard.totalScore *= 3;
+                        break;
+                    case 4:
+                        GameBoard.totalScore *= 4;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            #endregion
+
+            #region GEARY BONUS: guaranteed points
+            if (diceByBonus.Any(group => group.bonusFace == Dice.BonusFaces.Geary))
+            {
+                currentBonusGroup =
+                    diceByBonus.First(group => group.bonusFace == Dice.BonusFaces.Geary);
+
+                categoryCount = getCategoryCount(hasStemen, currentBonusGroup);
+
+                switch (categoryCount)
+                {
+                    case 1:
+                        bonusScore += 20;
+                        break;
+                    case 2:
+                        bonusScore += 50;
+                        break;
+                    case 3:
+                        bonusScore += 100;
+                        break;
+                    case 4:
+                        bonusScore += 200;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            #endregion
+
+            #region HALSEY BONUS: Multiply category score
+            if (diceByBonus.Any(group => group.bonusFace == Dice.BonusFaces.Halsey))
+            {
+                currentBonusGroup =
+                    diceByBonus.First(group => group.bonusFace == Dice.BonusFaces.Halsey);
+
+                categoryCount = getCategoryCount(hasStemen, currentBonusGroup);
+
+                switch (categoryCount)
+                {
+                    case 1:
+                        bonusScore *= 2;
+                        break;
+                    case 2:
+                        bonusScore *= 3;
+                        break;
+                    case 3:
+                        bonusScore *= 4;
+                        break;
+                    case 4:
+                        bonusScore *= 5;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            #endregion
+
+            #region SPARKS BONUS: "Caveat"; Multiply bonus category, lose one roll
+            if (diceByBonus.Any(group => group.bonusFace == Dice.BonusFaces.Sparks))
+            {
+                currentBonusGroup =
+                    diceByBonus.First(group => group.bonusFace == Dice.BonusFaces.Sparks);
+
+                categoryCount = getCategoryCount(hasStemen, currentBonusGroup);
+
+                switch (categoryCount)
+                {
+                    case 1:
+                        bonusScore *= 2;
+                        break;
+                    case 2:
+                        bonusScore *= 3;
+                        break;
+                    case 3:
+                        bonusScore *= 4;
+                        break;
+                    case 4:
+                        bonusScore *= 5;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            #endregion
+
+            // End of bonus calculations
             #endregion
 
             return bonusScore;
