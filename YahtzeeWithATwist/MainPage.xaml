@@ -147,13 +147,13 @@
         <TextBlock x:Name="gameBoardMessageBox" HorizontalAlignment="Left" Margin="93,413,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" Width="550" Height="97">
             <Run FontWeight="Bold" Text=""/>
         </TextBlock>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="239,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontFamily="Segoe UI Black" Foreground="#FFEC962F">
+        <TextBlock x:Name="yahtzeeGameTitle" HorizontalAlignment="Left" Margin="239,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontFamily="Segoe UI Black" Foreground="#FFEC962F">
             <Run Foreground="#FFF77E19" FontWeight="Bold" Text="Yahtzee!"/>
         </TextBlock>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="239,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Gabriola" FontSize="48">
+        <TextBlock x:Name="professorText" HorizontalAlignment="Left" Margin="239,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Gabriola" FontSize="48">
             <Run FontWeight="Bold" FontStyle="Italic" Text="Professor Edition"/>
         </TextBlock>
-        <Button x:Name="button" Content="?" HorizontalAlignment="Left" Margin="1209,633,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Arial Black" Width="54">
+        <Button x:Name="helpButton" Content="?" HorizontalAlignment="Left" Margin="1209,633,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Arial Black" Width="54">
         </Button>
 
     </Grid>
