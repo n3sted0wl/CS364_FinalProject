@@ -29,6 +29,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using YahtzeeWithATwist.Classes;
+using static YahtzeeWithATwist.Classes.GameBoard;
 
 namespace YahtzeeWithATwist
 {
@@ -131,35 +132,35 @@ namespace YahtzeeWithATwist
             this.img_heldDice_5 = heldDie5;
 
             // Map score categories to labels and score textblocks
-            GameBoard.ScoreCategories["Aces"].descriptionTextBlock   = onesLabel;
-            GameBoard.ScoreCategories["Twos"].descriptionTextBlock   = twosLabel;
-            GameBoard.ScoreCategories["Threes"].descriptionTextBlock = threesLabel;
-            GameBoard.ScoreCategories["Fours"].descriptionTextBlock  = foursLabel;
-            GameBoard.ScoreCategories["Fives"].descriptionTextBlock  = fivesLabel;
-            GameBoard.ScoreCategories["Sixes"].descriptionTextBlock  = sixesLabel;
+            ScoreCategories[Categories.Aces].descriptionTextBlock            = onesLabel;
+            ScoreCategories[Categories.Twos].descriptionTextBlock            = twosLabel;
+            ScoreCategories[Categories.Threes].descriptionTextBlock          = threesLabel;
+            ScoreCategories[Categories.Fours].descriptionTextBlock           = foursLabel;
+            ScoreCategories[Categories.Fives].descriptionTextBlock           = fivesLabel;
+            ScoreCategories[Categories.Sixes].descriptionTextBlock           = sixesLabel;
 
-            GameBoard.ScoreCategories["Full_House"].descriptionTextBlock      = fullHouseLabel;
-            GameBoard.ScoreCategories["Four_of_a_Kind"].descriptionTextBlock  = fourOfKindLabel;
-            GameBoard.ScoreCategories["Three_of_a_Kind"].descriptionTextBlock = threeOfKindLabel;
-            GameBoard.ScoreCategories["Small_Straight"].descriptionTextBlock  = smallStraightLabel;
-            GameBoard.ScoreCategories["Large_Straight"].descriptionTextBlock  = largeStraightLabel;
-            GameBoard.ScoreCategories["Yahtzee"].descriptionTextBlock         = yahtzeeLabel;
-            GameBoard.ScoreCategories["Chance"].descriptionTextBlock          = chanceLabel;
+            ScoreCategories[Categories.Full_House].descriptionTextBlock      = fullHouseLabel;
+            ScoreCategories[Categories.Four_of_a_Kind].descriptionTextBlock  = fourOfKindLabel;
+            ScoreCategories[Categories.Three_of_a_Kind].descriptionTextBlock = threeOfKindLabel;
+            ScoreCategories[Categories.Small_Straight].descriptionTextBlock  = smallStraightLabel;
+            ScoreCategories[Categories.Large_Straight].descriptionTextBlock  = largeStraightLabel;
+            ScoreCategories[Categories.Yahtzee].descriptionTextBlock         = yahtzeeLabel;
+            ScoreCategories[Categories.Chance].descriptionTextBlock          = chanceLabel;
 
-            GameBoard.ScoreCategories["Aces"].scoreTextBlock   = onesScore;
-            GameBoard.ScoreCategories["Twos"].scoreTextBlock   = twosScore;
-            GameBoard.ScoreCategories["Threes"].scoreTextBlock = threesScore;
-            GameBoard.ScoreCategories["Fours"].scoreTextBlock  = foursScore;
-            GameBoard.ScoreCategories["Fives"].scoreTextBlock  = fivesScore;
-            GameBoard.ScoreCategories["Sixes"].scoreTextBlock  = sixesScore;
+            ScoreCategories[Categories.Aces].scoreTextBlock                  = onesScore;
+            ScoreCategories[Categories.Twos].scoreTextBlock                  = twosScore;
+            ScoreCategories[Categories.Threes].scoreTextBlock                = threesScore;
+            ScoreCategories[Categories.Fours].scoreTextBlock                 = foursScore;
+            ScoreCategories[Categories.Fives].scoreTextBlock                 = fivesScore;
+            ScoreCategories[Categories.Sixes].scoreTextBlock                 = sixesScore;
 
-            GameBoard.ScoreCategories["Full_House"].scoreTextBlock      = fullHouseScore;
-            GameBoard.ScoreCategories["Four_of_a_Kind"].scoreTextBlock  = fourOfKindScore;
-            GameBoard.ScoreCategories["Three_of_a_Kind"].scoreTextBlock = threeOfKindScore;
-            GameBoard.ScoreCategories["Small_Straight"].scoreTextBlock  = smallStraightScore;
-            GameBoard.ScoreCategories["Large_Straight"].scoreTextBlock  = largeStraightScore;
-            GameBoard.ScoreCategories["Yahtzee"].scoreTextBlock         = yahtzeeScore;
-            GameBoard.ScoreCategories["Chance"].scoreTextBlock          = chanceScore;
+            ScoreCategories[Categories.Full_House].scoreTextBlock            = fullHouseScore;
+            ScoreCategories[Categories.Four_of_a_Kind].scoreTextBlock        = fourOfKindScore;
+            ScoreCategories[Categories.Three_of_a_Kind].scoreTextBlock       = threeOfKindScore;
+            ScoreCategories[Categories.Small_Straight].scoreTextBlock        = smallStraightScore;
+            ScoreCategories[Categories.Large_Straight].scoreTextBlock        = largeStraightScore;
+            ScoreCategories[Categories.Yahtzee].scoreTextBlock               = yahtzeeScore;
+            ScoreCategories[Categories.Chance].scoreTextBlock                = chanceScore;
             return;
         }
 
@@ -217,20 +218,20 @@ namespace YahtzeeWithATwist
 
         private void initializeDelegates()
         {
-            GameBoard.ScoreCategories["Aces"].setCalculateValueMethod(Yahtzee.calculateAces);
-            GameBoard.ScoreCategories["Twos"].setCalculateValueMethod(Yahtzee.calculateTwos);
-            GameBoard.ScoreCategories["Threes"].setCalculateValueMethod(Yahtzee.calculateThrees);
-            GameBoard.ScoreCategories["Fours"].setCalculateValueMethod(Yahtzee.calculateFours);
-            GameBoard.ScoreCategories["Fives"].setCalculateValueMethod(Yahtzee.calculateFives);
-            GameBoard.ScoreCategories["Sixes"].setCalculateValueMethod(Yahtzee.calculateSixes);
+            ScoreCategories[Categories.Aces].setCalculateValueMethod(Yahtzee.calculateAces);
+            ScoreCategories[Categories.Twos].setCalculateValueMethod(Yahtzee.calculateTwos);
+            ScoreCategories[Categories.Threes].setCalculateValueMethod(Yahtzee.calculateThrees);
+            ScoreCategories[Categories.Fours].setCalculateValueMethod(Yahtzee.calculateFours);
+            ScoreCategories[Categories.Fives].setCalculateValueMethod(Yahtzee.calculateFives);
+            ScoreCategories[Categories.Sixes].setCalculateValueMethod(Yahtzee.calculateSixes);
 
-            GameBoard.ScoreCategories["Full_House"].setCalculateValueMethod(Yahtzee.calculateFullHouse);
-            GameBoard.ScoreCategories["Four_of_a_Kind"].setCalculateValueMethod(Yahtzee.calculateFourOfAKind);
-            GameBoard.ScoreCategories["Three_of_a_Kind"].setCalculateValueMethod(Yahtzee.calculateThreeOfAKind);
-            GameBoard.ScoreCategories["Small_Straight"].setCalculateValueMethod(Yahtzee.calculateSmallStraight);
-            GameBoard.ScoreCategories["Large_Straight"].setCalculateValueMethod(Yahtzee.calculateLargeStraight);
-            GameBoard.ScoreCategories["Yahtzee"].setCalculateValueMethod(Yahtzee.calculateYahtzee);
-            GameBoard.ScoreCategories["Chance"].setCalculateValueMethod(Yahtzee.calculateChance);
+            ScoreCategories[Categories.Full_House].setCalculateValueMethod(Yahtzee.calculateFullHouse);
+            ScoreCategories[Categories.Four_of_a_Kind].setCalculateValueMethod(Yahtzee.calculateFourOfAKind);
+            ScoreCategories[Categories.Three_of_a_Kind].setCalculateValueMethod(Yahtzee.calculateThreeOfAKind);
+            ScoreCategories[Categories.Small_Straight].setCalculateValueMethod(Yahtzee.calculateSmallStraight);
+            ScoreCategories[Categories.Large_Straight].setCalculateValueMethod(Yahtzee.calculateLargeStraight);
+            ScoreCategories[Categories.Yahtzee].setCalculateValueMethod(Yahtzee.calculateYahtzee);
+            ScoreCategories[Categories.Chance].setCalculateValueMethod(Yahtzee.calculateChance);
             return;
         }
 
@@ -285,7 +286,7 @@ namespace YahtzeeWithATwist
             }
 
             // Calculate the possible values
-            foreach (KeyValuePair<string, ScoreCategory> category in GameBoard.ScoreCategories)
+            foreach (KeyValuePair<Categories, ScoreCategory> category in GameBoard.ScoreCategories)
             {
                 category.Value.scoreValue = category.Value.CalculateValue(GameBoard.ScoreableDice);
             }

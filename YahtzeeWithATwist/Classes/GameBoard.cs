@@ -92,6 +92,24 @@ namespace YahtzeeWithATwist.Classes
             NoMoreRolls,
             ConfirmScoreCategorySelection,
         }
+
+        public enum Categories
+        {
+            Aces,
+            Twos,
+            Threes,
+            Fours,
+            Fives,
+            Sixes,
+            Full_House,
+            Four_of_a_Kind,
+            Three_of_a_Kind,
+            Small_Straight,
+            Large_Straight,
+            Yahtzee,
+            Chance
+        }
+
         #endregion
 
         #region Objects
@@ -101,11 +119,11 @@ namespace YahtzeeWithATwist.Classes
         #region Collections
         // --------------------
         // Dice are not zero-indexed
-        public  static Dictionary<int, Dice>             RollableDice;
-        public  static Dictionary<int, Dice>             HeldDice;
-        public  static Dictionary<GameMessages, string>  Messages;
-        public  static Dictionary<string, ScoreCategory> ScoreCategories;
-        private static List<Dice>                        _scoreableDice;
+        public  static Dictionary<int, Dice>                 RollableDice;
+        public  static Dictionary<int, Dice>                 HeldDice;
+        public  static Dictionary<GameMessages, string>      Messages;
+        public  static Dictionary<Categories, ScoreCategory> ScoreCategories;
+        private static List<Dice>                            _scoreableDice;
         #endregion
 
         #region Delegates
@@ -135,22 +153,22 @@ namespace YahtzeeWithATwist.Classes
             }
 
             // Create all the score categories
-            ScoreCategories = new Dictionary<string, ScoreCategory>()
+            ScoreCategories = new Dictionary<Categories, ScoreCategory>()
             {
-                { "Aces",   new ScoreCategory("Aces")},
-                { "Twos",   new ScoreCategory("Twos")},
-                { "Threes", new ScoreCategory("Threes")},
-                { "Fours",  new ScoreCategory("Fours")},
-                { "Fives",  new ScoreCategory("Fives")},
-                { "Sixes",  new ScoreCategory("Sixes")},
+                { Categories.Aces,   new ScoreCategory("Aces")},
+                { Categories.Twos,   new ScoreCategory("Twos")},
+                { Categories.Threes, new ScoreCategory("Threes")},
+                { Categories.Fours,  new ScoreCategory("Fours")},
+                { Categories.Fives,  new ScoreCategory("Fives")},
+                { Categories.Sixes,  new ScoreCategory("Sixes")},
 
-                { "Full_House",      new ScoreCategory("Full House")},
-                { "Four_of_a_Kind",  new ScoreCategory("Four of a Kind")},
-                { "Three_of_a_Kind", new ScoreCategory("Three of a Kind")},
-                { "Small_Straight",  new ScoreCategory("Small Straight")},
-                { "Large_Straight",  new ScoreCategory("Large Straight")},
-                { "Yahtzee",         new ScoreCategory("Yahtzee")},
-                { "Chance",          new ScoreCategory("Chance")},
+                { Categories.Full_House,      new ScoreCategory("Full House")},
+                { Categories.Four_of_a_Kind,  new ScoreCategory("Four of a Kind")},
+                { Categories.Three_of_a_Kind, new ScoreCategory("Three of a Kind")},
+                { Categories.Small_Straight,  new ScoreCategory("Small Straight")},
+                { Categories.Large_Straight,  new ScoreCategory("Large Straight")},
+                { Categories.Yahtzee,         new ScoreCategory("Yahtzee")},
+                { Categories.Chance,          new ScoreCategory("Chance")},
             };
 
             // Create all Messages
