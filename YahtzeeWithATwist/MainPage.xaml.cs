@@ -278,11 +278,13 @@ namespace YahtzeeWithATwist
 
         private void rollDieButton_Click(object sender, RoutedEventArgs e)
         {
+            // Roll the dice
             foreach (KeyValuePair<int, Dice> rollableDice in GameBoard.RollableDice)
             {
                 rollableDice.Value.roll();
             }
 
+            // Calculate the possible values
             foreach (KeyValuePair<string, ScoreCategory> category in GameBoard.ScoreCategories)
             {
                 category.Value.scoreValue = category.Value.CalculateValue(GameBoard.ScoreableDice);

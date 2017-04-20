@@ -17,6 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
+using System.Windows;
 
 namespace YahtzeeWithATwist.Classes
 {
@@ -71,11 +72,31 @@ namespace YahtzeeWithATwist.Classes
                 this._status = value;
                 if (value == Status.Available)
                 {
+                    if (descriptionTextBlock != null)
+                    {
+
+                    }
+
+                    if (scoreTextBlock != null)
+                    {
+
+                    }
+
                     if (EnableControl != null)
                         EnableControl();
                 }
                 else
                 {
+                    if (descriptionTextBlock != null)
+                    {
+
+                    }
+
+                    if (scoreTextBlock != null)
+                    {
+
+                    }
+
                     if (DisableControl != null)
                         DisableControl();
                 }
