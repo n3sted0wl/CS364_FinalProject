@@ -63,6 +63,22 @@ namespace YahtzeeWithATwist.Classes
                 _totalScore = value;
             }
         }
+
+        public static List<Dice> ScoreableDice
+        {
+            get
+            {
+                _scoreableDice = new List<Dice>();
+                foreach (KeyValuePair<int, Dice> dice in GameBoard.HeldDice)
+                {
+                    if (dice.Value.availability == Dice.Availability.Available)
+                    {
+                        _scoreableDice.Add(dice.Value);
+                    }
+                }
+                return _scoreableDice;
+            }
+        }
         #endregion
 
         #region Structures
@@ -85,11 +101,11 @@ namespace YahtzeeWithATwist.Classes
         #region Collections
         // --------------------
         // Dice are not zero-indexed
-        public static Dictionary<int, Dice>             RollableDice;
-        public static Dictionary<int, Dice>             HeldDice;
-        public static Dictionary<GameMessages, string>  Messages;
-        public static List<Dice>                        ScoreableDice;
-        public static Dictionary<string, ScoreCategory> ScoreCategories;
+        public  static Dictionary<int, Dice>             RollableDice;
+        public  static Dictionary<int, Dice>             HeldDice;
+        public  static Dictionary<GameMessages, string>  Messages;
+        public  static Dictionary<string, ScoreCategory> ScoreCategories;
+        private static List<Dice>                        _scoreableDice;
         #endregion
 
         #region Delegates

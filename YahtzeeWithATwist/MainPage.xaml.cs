@@ -282,7 +282,12 @@ namespace YahtzeeWithATwist
             {
                 rollableDice.Value.roll();
             }
-            //testConsole();
+
+            foreach (KeyValuePair<string, ScoreCategory> category in GameBoard.ScoreCategories)
+            {
+                category.Value.scoreValue = category.Value.CalculateValue(GameBoard.ScoreableDice);
+            }
+
             return;
         }
         #endregion
