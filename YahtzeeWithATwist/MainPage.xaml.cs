@@ -20,6 +20,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -54,6 +55,16 @@ namespace YahtzeeWithATwist
                       img_heldDice_3,
                       img_heldDice_4,
                       img_heldDice_5;
+
+        private void scoreLabel_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            (sender as TextBlock).Foreground = new SolidColorBrush(Colors.Black);
+        }
+
+        private void scoreLabel_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            (sender as TextBlock).Foreground = new SolidColorBrush(Colors.OrangeRed);
+        }
 
         #endregion
 
