@@ -40,46 +40,46 @@
 
 
 
-        <TextBlock x:Name="onesLabel" HorizontalAlignment="Left" Margin="779,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="onesLabel" HorizontalAlignment="Left" Margin="779,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited">
             <Run FontWeight="Bold" Text="Ones:"/>
         </TextBlock>
-        <TextBlock x:Name="twosLabel" HorizontalAlignment="Left" Margin="779,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="twosLabel" HorizontalAlignment="Left" Margin="779,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited">
             <Run FontWeight="Bold" Text="Twos:"/>
         </TextBlock>
-        <TextBlock x:Name="threesLabel" HorizontalAlignment="Left" Margin="779,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="threesLabel" HorizontalAlignment="Left" Margin="779,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited">
             <Run FontWeight="Bold" Text="Threes:"/>
         </TextBlock>
-        <TextBlock x:Name="foursLabel" HorizontalAlignment="Left" Margin="779,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="foursLabel" HorizontalAlignment="Left" Margin="779,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited">
             <Run FontWeight="Bold" Text="Fours:"/>
         </TextBlock>
-        <TextBlock x:Name="fivesLabel" HorizontalAlignment="Left" Margin="779,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="fivesLabel" HorizontalAlignment="Left" Margin="779,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited">
             <Run FontWeight="Bold" Text="Fives:"/>
         </TextBlock>
-        <TextBlock x:Name="sixesLabel" HorizontalAlignment="Left" Margin="778,244,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="sixesLabel" HorizontalAlignment="Left" Margin="778,244,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited">
             <Run FontWeight="Bold" Text="Sixes:"/>
         </TextBlock>
-        <TextBlock x:Name="sumLabel" HorizontalAlignment="Left" Margin="778,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" >
+        <TextBlock x:Name="sumLabel" HorizontalAlignment="Left" Margin="778,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited">
             <Run FontWeight="Bold" Text="Sum:" />
         </TextBlock>
-        <TextBlock x:Name="threeOfKindLabel" HorizontalAlignment="Left" Margin="778,311,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="threeOfKindLabel" HorizontalAlignment="Left" Margin="778,311,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited">
             <Run FontWeight="Bold" Text="Three of a kind:"/>
         </TextBlock>
-        <TextBlock x:Name="fourOfKindLabel" HorizontalAlignment="Left" Margin="779,345,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="fourOfKindLabel" HorizontalAlignment="Left" Margin="779,345,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited">
             <Run FontWeight="Bold" Text="Four of a kind:"/>
         </TextBlock>
-        <TextBlock x:Name="fullHouseLabel" HorizontalAlignment="Left" Margin="779,379,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="fullHouseLabel" HorizontalAlignment="Left" Margin="779,379,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited">
             <Run FontWeight="Bold" Text="Full House:"/>
         </TextBlock>
-        <TextBlock x:Name="smallStraightLabel" HorizontalAlignment="Left" Margin="779,413,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="smallStraightLabel" HorizontalAlignment="Left" Margin="779,413,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited">
             <Run FontWeight="Bold" Text="Small Straight:"/>
         </TextBlock>
-        <TextBlock x:Name="largeStraightLabel" HorizontalAlignment="Left" Margin="778,447,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="largeStraightLabel" HorizontalAlignment="Left" Margin="778,447,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited">
             <Run FontWeight="Bold" Text="Large Straight:"/>
         </TextBlock>
-        <TextBlock x:Name="chanceLabel" HorizontalAlignment="Left" Margin="778,481,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="chanceLabel" HorizontalAlignment="Left" Margin="778,481,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited">
             <Run FontWeight="Bold" Text="Chance:"/>
         </TextBlock>
-        <TextBlock x:Name="yahtzeeLabel" HorizontalAlignment="Left" Margin="778,515,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="yahtzeeLabel" HorizontalAlignment="Left" Margin="778,515,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited">
             <Run FontWeight="Bold" Text="YAHTZEE:"/>
         </TextBlock>
         <TextBlock x:Name="totalScoreLabel" HorizontalAlignment="Left" Margin="779,656,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
@@ -93,7 +93,7 @@
             <LineBreak/>
             <Run FontWeight="Bold"/>
         </TextBlock>
-        <TextBlock x:Name="textBlock1_Copy17" HorizontalAlignment="Left" Margin="1083,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="textBlock1_Copy17" HorizontalAlignment="Left" Margin="1083,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" >
             <Run FontWeight="Bold" Text="Score"/>
         </TextBlock>
         <TextBlock x:Name="twosScore" HorizontalAlignment="Left" Margin="1100,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
@@ -138,7 +138,7 @@
         <TextBlock x:Name="totalScore" HorizontalAlignment="Left" Margin="1101,656,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
             <Run FontWeight="Bold" Text="15"/>
         </TextBlock>
-        <TextBlock x:Name="yahtzeeLabel_Copy" HorizontalAlignment="Left" Margin="779,549,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="yahtzeeLabel_Copy" HorizontalAlignment="Left" Margin="779,549,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited">
             <Run FontWeight="Bold" Text="BONUS:"/>
         </TextBlock>
         <TextBlock x:Name="bonusScore" HorizontalAlignment="Left" Margin="1101,549,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
