@@ -286,7 +286,7 @@ namespace YahtzeeWithATwist
         {
             Button rollButton = (sender as Button);
 
-            if (GameBoard.rollsRemaining >= 1)
+            if (GameBoard.rollsRemaining >= 1) // TODO: Check for rollable dice
             {
                 // Roll the dice
                 foreach (KeyValuePair<int, Dice> rollableDice in GameBoard.RollableDice)
@@ -352,6 +352,10 @@ namespace YahtzeeWithATwist
 
                 // Reset all the dice
                 GameBoard.resetDice();
+                foreach (KeyValuePair<int, Dice> dice in GameBoard.RollableDice)
+                {
+                    dice.Value.roll();
+                }
 
                 // Enable the roll button
                 rollDieButton.IsEnabled = true;
