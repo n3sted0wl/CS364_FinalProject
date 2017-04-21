@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
 namespace YahtzeeWithATwist.Classes
 {
@@ -29,23 +30,69 @@ namespace YahtzeeWithATwist.Classes
         #region Data Elements
         #region Fields
         // --------------------
-        private const int NUMBER_OF_DICE = 5;
-        public  const int ROLLS_PER_TURN = 3;
+        private const int NUMBER_OF_DICE   = 5;
+        public  const int ROLLS_PER_TURN   = 3;
 
-        private static int _rollNumber;
+        private static int _rollsRemaining = ROLLS_PER_TURN;
+        private static int _totalScore     = 0;
+
+        public static TextBlock totalScoreTextBox;
         #endregion
 
         #region Properties
         // --------------------
-        public static int rollNumber
+        public static int rollsRemaining
         {
-            get { return _rollNumber; }
+            get { return _rollsRemaining; }
             set
             {
-                if (value < 1 || value > ROLLS_PER_TURN)
+                if (value < 0 || value > ROLLS_PER_TURN)
                     throw new ArgumentOutOfRangeException();
 
-                _rollNumber = value;
+                _rollsRemaining = value;
+            }
+        }
+
+        public static int totalScore
+        {
+            get { return _totalScore; }
+
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("Score can't be negative");
+
+                _totalScore = value;
+                if (totalScoreTextBox != null)
+                {
+                    totalScoreTextBox.Text = totalScore.ToString();
+                }
+
+            }
+        }
+
+        public static List<Dice> ScoreableDice
+        {
+            get
+            {
+                _scoreableDice = new List<Dice>();
+                foreach (KeyValuePair<int, Dice> dice in GameBoard.HeldDice)
+                {
+                    if (dice.Value.availability == Dice.Availability.Available)
+                    {
+                        _scoreableDice.Add(dice.Value);
+                    }
+                }
+
+                foreach (KeyValuePair<int, Dice> dice in GameBoard.RollableDice)
+                {
+                    if (dice.Value.availability == Dice.Availability.Available)
+                    {
+                        _scoreableDice.Add(dice.Value);
+                    }
+                }
+
+                return _scoreableDice;
             }
         }
         #endregion
@@ -61,6 +108,24 @@ namespace YahtzeeWithATwist.Classes
             NoMoreRolls,
             ConfirmScoreCategorySelection,
         }
+
+        public enum Categories
+        {
+            Aces,
+            Twos,
+            Threes,
+            Fours,
+            Fives,
+            Sixes,
+            Full_House,
+            Four_of_a_Kind,
+            Three_of_a_Kind,
+            Small_Straight,
+            Large_Straight,
+            Yahtzee,
+            Chance
+        }
+
         #endregion
 
         #region Objects
@@ -70,17 +135,11 @@ namespace YahtzeeWithATwist.Classes
         #region Collections
         // --------------------
         // Dice are not zero-indexed
-        public static Dictionary<int, Dice> RollableDice;
-        public static Dictionary<int, Dice> HeldDice;
-        public static Dictionary<GameMessages, string> Messages =
-            new Dictionary<GameMessages, string>()
-            {
-                { GameMessages.NoMoreRolls,
-                    "Cannot roll anymore this turn. Choose a Score Category." },
-                { GameMessages.ConfirmScoreCategorySelection,
-                    "Confirm your selection." }
-            };
-        public static List<Dice> ScoreableDice;
+        public  static Dictionary<int, Dice>                 RollableDice;
+        public  static Dictionary<int, Dice>                 HeldDice;
+        public  static Dictionary<GameMessages, string>      Messages;
+        public  static Dictionary<Categories, ScoreCategory> ScoreCategories;
+        private static List<Dice>                            _scoreableDice;
         #endregion
 
         #region Delegates
@@ -96,10 +155,10 @@ namespace YahtzeeWithATwist.Classes
         // --------------------
         public static void initialize()
         {
+            // Create all the dice
             RollableDice = new Dictionary<int, Dice>();
             HeldDice     = new Dictionary<int, Dice>();
             
-            // Create all the dice
             for (int diceCount = 1; 
                  diceCount <= NUMBER_OF_DICE; 
                  diceCount += 1)
@@ -109,6 +168,34 @@ namespace YahtzeeWithATwist.Classes
                     initialAvailability: Dice.Availability.Unavailable));
             }
 
+            // Create all the score categories
+            ScoreCategories = new Dictionary<Categories, ScoreCategory>()
+            {
+                { Categories.Aces,   new ScoreCategory("Aces")},
+                { Categories.Twos,   new ScoreCategory("Twos")},
+                { Categories.Threes, new ScoreCategory("Threes")},
+                { Categories.Fours,  new ScoreCategory("Fours")},
+                { Categories.Fives,  new ScoreCategory("Fives")},
+                { Categories.Sixes,  new ScoreCategory("Sixes")},
+
+                { Categories.Full_House,      new ScoreCategory("Full House")},
+                { Categories.Four_of_a_Kind,  new ScoreCategory("Four of a Kind")},
+                { Categories.Three_of_a_Kind, new ScoreCategory("Three of a Kind")},
+                { Categories.Small_Straight,  new ScoreCategory("Small Straight")},
+                { Categories.Large_Straight,  new ScoreCategory("Large Straight")},
+                { Categories.Yahtzee,         new ScoreCategory("Yahtzee")},
+                { Categories.Chance,          new ScoreCategory("Chance")},
+            };
+
+            // Create all Messages
+            Messages = new Dictionary<GameMessages, string>()
+            {
+                { GameMessages.NoMoreRolls,
+                    "Cannot roll anymore this turn. Choose a Score Category." },
+                { GameMessages.ConfirmScoreCategorySelection,
+                    "Confirm your selection." }
+            };
+            
             return;
         }
         #endregion
@@ -123,10 +210,55 @@ namespace YahtzeeWithATwist.Classes
 
         #region Mutators
         // --------------------
+        public static void resetTotalScore() => totalScore = 0;
         #endregion
 
         #region Other Methods
         // --------------------
+        public static ScoreCategory getScoreCategoryByTextBlockControl(TextBlock targetTextBlock)
+        {
+            #region Data
+            ScoreCategory foundScoreCategory = null;
+            #endregion
+
+            #region Logic
+            foreach (KeyValuePair<Categories, ScoreCategory> category in ScoreCategories)
+            {
+                if (targetTextBlock == category.Value.descriptionTextBlock)
+                {
+                    foundScoreCategory = category.Value;
+                    break;
+                }
+
+            }
+            #endregion
+
+            return foundScoreCategory;
+        }
+
+        public static Dice getDiceByImageControl(Image targetImageControl)
+        {
+            Dice foundDice = null;
+
+            foreach (KeyValuePair<int, Dice> testDice in RollableDice)
+            {
+                if (testDice.Value.imageControl == targetImageControl)
+                    foundDice = testDice.Value;
+            }
+
+            foreach (KeyValuePair<int, Dice> testDice in HeldDice)
+            {
+                if (testDice.Value.imageControl == targetImageControl)
+                    foundDice = testDice.Value;
+            }
+
+            if (foundDice == null)
+                throw new NullReferenceException("Could not find current dice");
+
+
+            return foundDice;
+        }
+
         public static int getDiceIndex(Dice targetDice)
         {
             int index = 0;
@@ -152,6 +284,29 @@ namespace YahtzeeWithATwist.Classes
                 throw new InvalidOperationException("Target dice not found");
 
             return index;
+        }
+
+        public static void resetDice()
+        {
+            for (int diceIndex = 1; diceIndex <= NUMBER_OF_DICE; diceIndex += 1)
+            {
+                RollableDice[diceIndex].availability = Dice.Availability.Available;
+                HeldDice[diceIndex].availability = Dice.Availability.Unavailable;
+            }
+
+            return;
+        }
+
+        public static void calculateAllScores()
+        {
+            #region Logic
+            foreach (KeyValuePair<Categories, ScoreCategory> category in GameBoard.ScoreCategories)
+            {
+                category.Value.scoreValue = category.Value.CalculateValue(GameBoard.ScoreableDice);
+            }
+            #endregion
+
+            return;
         }
         #endregion
         #endregion
