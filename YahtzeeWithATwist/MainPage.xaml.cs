@@ -55,37 +55,13 @@ namespace YahtzeeWithATwist
                       img_heldDice_3,
                       img_heldDice_4,
                       img_heldDice_5;
-        #endregion
-
-        #region Fields
-        // --------------------
-        #endregion
-
-        #region Properties
-        // --------------------
-        #endregion
-
-        #region Structures
-        // --------------------
-        #endregion
-
-        #region Enumerations
-        // --------------------
-        #endregion
-
-        #region Objects
-        // --------------------
+        public Button bt_rollDice;
         #endregion
 
         #region Collections
         // --------------------
         private List<Image> allDiceImages;
         #endregion
-
-        #region Delegates
-        // --------------------
-        #endregion
-
         #endregion
 
         /*************************************************************/
@@ -95,8 +71,9 @@ namespace YahtzeeWithATwist
         {
             this.InitializeComponent();
 
-            GameBoard.initialize();
+            GameBoard.initialize(); // Includes score categories
             this.mapControls();
+            this.initializePageControls();
             this.initializeDice();
             this.initializeDelegates();
         }
@@ -105,14 +82,6 @@ namespace YahtzeeWithATwist
         /*                       Functionality                       */
         /*************************************************************/
         #region Methods
-        #region Accessors
-        // --------------------
-        #endregion
-
-        #region Mutators
-        // --------------------
-        #endregion
-
         #region Other Methods
         // --------------------
         private void mapControls()
@@ -163,6 +132,9 @@ namespace YahtzeeWithATwist
 
             // Map the gameboard controls
             GameBoard.totalScoreTextBox = totalScore;
+
+            // Buttons
+            bt_rollDice = rollDieButton;
             return;
         }
 
@@ -234,6 +206,18 @@ namespace YahtzeeWithATwist
             ScoreCategories[Categories.Large_Straight].setCalculateValueMethod(Yahtzee.calculateLargeStraight);
             ScoreCategories[Categories.Yahtzee].setCalculateValueMethod(Yahtzee.calculateYahtzee);
             ScoreCategories[Categories.Chance].setCalculateValueMethod(Yahtzee.calculateChance);
+
+            return;
+        }
+
+        private void initializePageControls()
+        {
+            #region Data
+            #endregion
+
+            #region Logic
+            resetRollDiceButton();
+            #endregion
 
             return;
         }
@@ -358,9 +342,19 @@ namespace YahtzeeWithATwist
                 }
 
                 // Enable the roll button
-                rollDieButton.IsEnabled = true;
-                GameBoard.rollsRemaining = GameBoard.ROLLS_PER_TURN;
+                resetRollDiceButton();
             }
+            #endregion
+
+            return;
+        }
+
+        private void resetRollDiceButton()
+        {
+            #region Logic
+            bt_rollDice.IsEnabled    = true;
+            GameBoard.rollsRemaining = GameBoard.ROLLS_PER_TURN;
+            bt_rollDice.Content      = GameBoard.rollsRemaining.ToString();
             #endregion
 
             return;
