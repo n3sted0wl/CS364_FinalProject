@@ -55,17 +55,6 @@ namespace YahtzeeWithATwist
                       img_heldDice_3,
                       img_heldDice_4,
                       img_heldDice_5;
-
-        private void scoreLabel_PointerExited(object sender, PointerRoutedEventArgs e)
-        {
-            (sender as TextBlock).Foreground = new SolidColorBrush(Colors.Black);
-        }
-
-        private void scoreLabel_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            (sender as TextBlock).Foreground = new SolidColorBrush(Colors.OrangeRed);
-        }
-
         #endregion
 
         #region Fields
@@ -96,6 +85,7 @@ namespace YahtzeeWithATwist
         #region Delegates
         // --------------------
         #endregion
+
         #endregion
 
         /*************************************************************/
@@ -127,8 +117,6 @@ namespace YahtzeeWithATwist
         // --------------------
         private void mapControls()
         {
-            // TODO: Map each image to the final naming used
-
             // Map dice to images
             this.img_rollDice_1 = rollDie1;
             this.img_rollDice_2 = rollDie2;
@@ -172,6 +160,9 @@ namespace YahtzeeWithATwist
             ScoreCategories[Categories.Large_Straight].scoreTextBlock        = largeStraightScore;
             ScoreCategories[Categories.Yahtzee].scoreTextBlock               = yahtzeeScore;
             ScoreCategories[Categories.Chance].scoreTextBlock                = chanceScore;
+
+            // Map the gameboard controls
+            GameBoard.totalScoreTextBox = totalScore;
             return;
         }
 
@@ -243,6 +234,7 @@ namespace YahtzeeWithATwist
             ScoreCategories[Categories.Large_Straight].setCalculateValueMethod(Yahtzee.calculateLargeStraight);
             ScoreCategories[Categories.Yahtzee].setCalculateValueMethod(Yahtzee.calculateYahtzee);
             ScoreCategories[Categories.Chance].setCalculateValueMethod(Yahtzee.calculateChance);
+
             return;
         }
 
@@ -285,22 +277,87 @@ namespace YahtzeeWithATwist
                     message: "An unmapped dice image has been clicked");
             }
 
+            GameBoard.calculateAllScores();
+
             return;
         }
 
         private void rollDieButton_Click(object sender, RoutedEventArgs e)
         {
-            // Roll the dice
-            foreach (KeyValuePair<int, Dice> rollableDice in GameBoard.RollableDice)
+            Button rollButton = (sender as Button);
+
+            if (GameBoard.rollsRemaining >= 1)
             {
-                rollableDice.Value.roll();
+                // Roll the dice
+                foreach (KeyValuePair<int, Dice> rollableDice in GameBoard.RollableDice)
+                {
+                    rollableDice.Value.roll();
+                }
+
+                // Calculate the possible values
+                GameBoard.calculateAllScores();
+
+                if (GameBoard.rollsRemaining == 1)
+                {
+                    rollButton.IsEnabled = false;
+                }
+
+                GameBoard.rollsRemaining -= 1;
             }
 
-            // Calculate the possible values
-            foreach (KeyValuePair<Categories, ScoreCategory> category in GameBoard.ScoreCategories)
+            return;
+        }
+
+        private void scoreLabel_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            ScoreCategory currentCategory = 
+                GameBoard.getScoreCategoryByTextBlockControl(sender as TextBlock);
+
+            if (currentCategory.status == ScoreCategory.Status.Unused)
             {
-                category.Value.scoreValue = category.Value.CalculateValue(GameBoard.ScoreableDice);
+                currentCategory.descriptionTextBlock.Foreground =
+                    new SolidColorBrush(Colors.Black);
             }
+
+            return;
+        }
+
+        private void scoreLabel_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            ScoreCategory currentCategory = 
+                GameBoard.getScoreCategoryByTextBlockControl(sender as TextBlock);
+            if (currentCategory.status == ScoreCategory.Status.Unused)
+            {
+                currentCategory.descriptionTextBlock.Foreground =
+                    new SolidColorBrush(Colors.OrangeRed);
+            }
+
+            return;
+        }
+
+        private void scoreLabel_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            #region Data
+            ScoreCategory currentCategory =
+                GameBoard.getScoreCategoryByTextBlockControl(sender as TextBlock);
+            #endregion
+
+            #region Logic
+            if (currentCategory.status == ScoreCategory.Status.Unused)
+            {
+                currentCategory.status = ScoreCategory.Status.Used;
+
+                // Apply points
+                GameBoard.totalScore += currentCategory.scoreValue;
+
+                // Reset all the dice
+                GameBoard.resetDice();
+
+                // Enable the roll button
+                rollDieButton.IsEnabled = true;
+                GameBoard.rollsRemaining = GameBoard.ROLLS_PER_TURN;
+            }
+            #endregion
 
             return;
         }

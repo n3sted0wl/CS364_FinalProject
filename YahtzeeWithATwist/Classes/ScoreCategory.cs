@@ -18,6 +18,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using System.Windows;
+using Windows.UI;
+using Windows.UI.Xaml.Media;
 
 namespace YahtzeeWithATwist.Classes
 {
@@ -56,7 +58,7 @@ namespace YahtzeeWithATwist.Classes
 
                 // Update the associated textbox
                 if (this.descriptionTextBlock != null &&
-                    this.status == Status.Available)
+                    this.status == Status.Unused)
                     descriptionTextBlock.Text = this.description;
             }
         }
@@ -70,35 +72,37 @@ namespace YahtzeeWithATwist.Classes
                 // either enable or disable the associated front-end
                 // control.
                 this._status = value;
-                if (value == Status.Available)
+                if (value == Status.Unused)
                 {
                     if (descriptionTextBlock != null)
                     {
-
                     }
 
                     if (scoreTextBlock != null)
                     {
-
                     }
 
                     if (EnableControl != null)
+                    {
                         EnableControl();
+                    }
                 }
-                else
+                else if (value == Status.Used)
                 {
                     if (descriptionTextBlock != null)
                     {
-
+                        descriptionTextBlock.Foreground = new SolidColorBrush(Colors.LightGray);
                     }
 
                     if (scoreTextBlock != null)
                     {
-
+                        scoreTextBlock.Foreground = new SolidColorBrush(Colors.Green);
                     }
 
                     if (DisableControl != null)
+                    {
                         DisableControl();
+                    }
                 }
             }
         }
@@ -130,13 +134,17 @@ namespace YahtzeeWithATwist.Classes
         public int scoreValue
         {
             get { return _scoreValue; }
+
             set
             {
-                _scoreValue = value;
+                if (this.status == Status.Unused)
+                {
+                    _scoreValue = value;
 
-                // Update the associated textbox
-                if (scoreTextBlock != null)
-                    scoreTextBlock.Text = _scoreValue.ToString();
+                    // Update the associated textbox
+                    if (scoreTextBlock != null)
+                        scoreTextBlock.Text = _scoreValue.ToString();
+                }
             }
         }
 
@@ -165,7 +173,7 @@ namespace YahtzeeWithATwist.Classes
 
         #region Enumerations
         // --------------------
-        public enum Status { Available, Unavailable }
+        public enum Status { Used, Unused }
         #endregion
 
         #region Objects
@@ -192,7 +200,7 @@ namespace YahtzeeWithATwist.Classes
         // --------------------
         public ScoreCategory(
             string    initialDescription,
-            Status    initialStatus               = Status.Available,
+            Status    initialStatus               = Status.Unused,
             TextBlock initialdescriptionTextBlock = null,
             TextBlock initialScoreTextBlock       = null)
         {

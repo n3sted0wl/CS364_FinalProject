@@ -30,24 +30,26 @@ namespace YahtzeeWithATwist.Classes
         #region Data Elements
         #region Fields
         // --------------------
-        private const int NUMBER_OF_DICE = 5;
-        public  const int ROLLS_PER_TURN = 3;
+        private const int NUMBER_OF_DICE   = 5;
+        public  const int ROLLS_PER_TURN   = 3;
 
-        private static int _rollNumber;
-        private static int _totalScore;
+        private static int _rollsRemaining = ROLLS_PER_TURN;
+        private static int _totalScore     = 0;
+
+        public static TextBlock totalScoreTextBox;
         #endregion
 
         #region Properties
         // --------------------
-        public static int rollNumber
+        public static int rollsRemaining
         {
-            get { return _rollNumber; }
+            get { return _rollsRemaining; }
             set
             {
-                if (value < 1 || value > ROLLS_PER_TURN)
+                if (value < 0 || value > ROLLS_PER_TURN)
                     throw new ArgumentOutOfRangeException();
 
-                _rollNumber = value;
+                _rollsRemaining = value;
             }
         }
 
@@ -61,6 +63,11 @@ namespace YahtzeeWithATwist.Classes
                     throw new ArgumentOutOfRangeException("Score can't be negative");
 
                 _totalScore = value;
+                if (totalScoreTextBox != null)
+                {
+                    totalScoreTextBox.Text = totalScore.ToString();
+                }
+
             }
         }
 
@@ -76,6 +83,15 @@ namespace YahtzeeWithATwist.Classes
                         _scoreableDice.Add(dice.Value);
                     }
                 }
+
+                foreach (KeyValuePair<int, Dice> dice in GameBoard.RollableDice)
+                {
+                    if (dice.Value.availability == Dice.Availability.Available)
+                    {
+                        _scoreableDice.Add(dice.Value);
+                    }
+                }
+
                 return _scoreableDice;
             }
         }
@@ -199,6 +215,27 @@ namespace YahtzeeWithATwist.Classes
 
         #region Other Methods
         // --------------------
+        public static ScoreCategory getScoreCategoryByTextBlockControl(TextBlock targetTextBlock)
+        {
+            #region Data
+            ScoreCategory foundScoreCategory = null;
+            #endregion
+
+            #region Logic
+            foreach (KeyValuePair<Categories, ScoreCategory> category in ScoreCategories)
+            {
+                if (targetTextBlock == category.Value.descriptionTextBlock)
+                {
+                    foundScoreCategory = category.Value;
+                    break;
+                }
+
+            }
+            #endregion
+
+            return foundScoreCategory;
+        }
+
         public static Dice getDiceByImageControl(Image targetImageControl)
         {
             Dice foundDice = null;
@@ -247,6 +284,29 @@ namespace YahtzeeWithATwist.Classes
                 throw new InvalidOperationException("Target dice not found");
 
             return index;
+        }
+
+        public static void resetDice()
+        {
+            for (int diceIndex = 1; diceIndex <= NUMBER_OF_DICE; diceIndex += 1)
+            {
+                RollableDice[diceIndex].availability = Dice.Availability.Available;
+                HeldDice[diceIndex].availability = Dice.Availability.Unavailable;
+            }
+
+            return;
+        }
+
+        public static void calculateAllScores()
+        {
+            #region Logic
+            foreach (KeyValuePair<Categories, ScoreCategory> category in GameBoard.ScoreCategories)
+            {
+                category.Value.scoreValue = category.Value.CalculateValue(GameBoard.ScoreableDice);
+            }
+            #endregion
+
+            return;
         }
         #endregion
         #endregion
