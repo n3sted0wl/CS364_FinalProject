@@ -306,6 +306,35 @@ namespace YahtzeeWithATwist.Classes
 
             return;
         }
+
+        public static bool isGameOver()
+        {
+            bool isGameOver = true;
+
+            foreach (ScoreCategory category in ScoreCategories.Values)
+            {
+                if (category.status == ScoreCategory.Status.Unused)
+                {
+                    isGameOver = false;
+                    break;
+                }
+            }
+
+            return isGameOver;
+        }
+
+        public static void hideAllDice()
+        {
+            foreach (Dice dice in HeldDice.Values)
+            {
+                dice.availability = Dice.Availability.Unavailable;
+            }
+
+            foreach (Dice dice in RollableDice.Values)
+            {
+                dice.availability = Dice.Availability.Unavailable;
+            }
+        }
         #endregion
         #endregion
     }

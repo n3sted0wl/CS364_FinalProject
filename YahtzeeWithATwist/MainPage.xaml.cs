@@ -225,12 +225,18 @@ namespace YahtzeeWithATwist
         // --------------------
         private void helpButton_Click(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void newGame_Click(object sender, RoutedEventArgs e)
+        {
             GameBoard.resetScoreCategories();
             GameBoard.resetTotalScore();
             GameBoard.resetDice();
             GameBoard.calculateAllScores();
-        }
 
+            gameBoardMessageBox.Text = String.Empty;
+            bt_rollDice.IsEnabled    = true;
+        }
 
         private void diceClicked(object sender, RoutedEventArgs e)
         {
@@ -356,9 +362,17 @@ namespace YahtzeeWithATwist
                 // Enable the roll button
                 resetRollDiceButton();
 
-                // Calculate all teh scores
+                // Calculate all the scores
                 GameBoard.calculateAllScores();
             }
+
+            if (GameBoard.isGameOver())
+            {
+                gameBoardMessageBox.Text = $"Game Over. Final Score: {GameBoard.totalScore.ToString()}";
+                bt_rollDice.IsEnabled    = false;
+                GameBoard.hideAllDice();
+            }
+
             #endregion
 
             return;
@@ -368,7 +382,7 @@ namespace YahtzeeWithATwist
         {
             #region Logic
             bt_rollDice.IsEnabled    = true;
-            GameBoard.rollsRemaining = GameBoard.ROLLS_PER_TURN;
+            GameBoard.rollsRemaining = GameBoard.ROLLS_PER_TURN - 1;
             bt_rollDice.Content      = $" Rolls Remaining: ";
             bt_rollDice.Content     += GameBoard.rollsRemaining.ToString();
             #endregion
