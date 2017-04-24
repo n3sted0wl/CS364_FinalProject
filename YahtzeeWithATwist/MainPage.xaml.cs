@@ -228,6 +228,7 @@ namespace YahtzeeWithATwist
             GameBoard.resetScoreCategories();
             GameBoard.resetTotalScore();
             GameBoard.resetDice();
+            GameBoard.calculateAllScores();
         }
 
 
@@ -354,6 +355,9 @@ namespace YahtzeeWithATwist
 
                 // Enable the roll button
                 resetRollDiceButton();
+
+                // Calculate all teh scores
+                GameBoard.calculateAllScores();
             }
             #endregion
 
