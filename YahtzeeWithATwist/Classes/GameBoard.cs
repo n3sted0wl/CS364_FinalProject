@@ -14,8 +14,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 
 namespace YahtzeeWithATwist.Classes
@@ -36,7 +34,8 @@ namespace YahtzeeWithATwist.Classes
         private static int _rollsRemaining = ROLLS_PER_TURN;
         private static int _totalScore     = 0;
 
-        public static TextBlock totalScoreTextBox;
+        public static TextBlock totalScoreTextBlock;
+        public static TextBlock bonusScoreTextBlock;
         #endregion
 
         #region Properties
@@ -59,13 +58,10 @@ namespace YahtzeeWithATwist.Classes
 
             set
             {
-                if (value < 0)
-                    throw new ArgumentOutOfRangeException("Score can't be negative");
-
                 _totalScore = value;
-                if (totalScoreTextBox != null)
+                if (totalScoreTextBlock != null)
                 {
-                    totalScoreTextBox.Text = totalScore.ToString();
+                    totalScoreTextBlock.Text = totalScore.ToString();
                 }
 
             }
@@ -200,14 +196,6 @@ namespace YahtzeeWithATwist.Classes
         }
         #endregion
 
-        #region Overrides
-        // --------------------
-        #endregion
-
-        #region Accessors
-        // --------------------
-        #endregion
-
         #region Mutators
         // --------------------
         public static void resetTotalScore() => totalScore = 0;
@@ -255,7 +243,6 @@ namespace YahtzeeWithATwist.Classes
             if (foundDice == null)
                 throw new NullReferenceException("Could not find current dice");
 
-
             return foundDice;
         }
 
@@ -288,10 +275,11 @@ namespace YahtzeeWithATwist.Classes
 
         public static void resetDice()
         {
+            // Put all the dice back into the roll section
             for (int diceIndex = 1; diceIndex <= NUMBER_OF_DICE; diceIndex += 1)
             {
                 RollableDice[diceIndex].availability = Dice.Availability.Available;
-                HeldDice[diceIndex].availability = Dice.Availability.Unavailable;
+                HeldDice[diceIndex].availability     = Dice.Availability.Unavailable;
             }
 
             return;
@@ -305,6 +293,16 @@ namespace YahtzeeWithATwist.Classes
                 category.Value.scoreValue = category.Value.CalculateValue(GameBoard.ScoreableDice);
             }
             #endregion
+
+            return;
+        }
+
+        public static void resetScoreCategories()
+        {
+            foreach (Categories category in ScoreCategories.Keys)
+            {
+                ScoreCategories[category].status = ScoreCategory.Status.Unused;
+            }
 
             return;
         }

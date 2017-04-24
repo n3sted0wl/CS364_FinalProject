@@ -10,12 +10,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace YahtzeeWithATwist.Classes
 {
@@ -289,6 +285,9 @@ namespace YahtzeeWithATwist.Classes
             this.imageControl   = initialImage;
             this.availability   = initialAvailability;
             updateImageDelegate = initialImageModifier;
+
+            // Roll the dice
+            this.roll();
         }
         #endregion
 

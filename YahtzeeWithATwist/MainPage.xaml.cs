@@ -7,28 +7,19 @@
 
 #region Development Notes and TODOs
 // --------------------
-// TODO: Remove unnecessary using statements
 // TODO: Remove unnecessary documentation
 // TODO: Add exception documentation, if any
 #endregion
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
 using YahtzeeWithATwist.Classes;
 using static YahtzeeWithATwist.Classes.GameBoard;
 
@@ -131,7 +122,8 @@ namespace YahtzeeWithATwist
             ScoreCategories[Categories.Chance].scoreTextBlock                = chanceScore;
 
             // Map the gameboard controls
-            GameBoard.totalScoreTextBox = totalScore;
+            GameBoard.totalScoreTextBlock = totalScore;
+            GameBoard.bonusScoreTextBlock = bonusScore;
 
             // Buttons
             bt_rollDice = rollDieButton;
@@ -231,6 +223,14 @@ namespace YahtzeeWithATwist
 
         #region Event Handlers
         // --------------------
+        private void helpButton_Click(object sender, RoutedEventArgs e)
+        {
+            GameBoard.resetScoreCategories();
+            GameBoard.resetTotalScore();
+            GameBoard.resetDice();
+        }
+
+
         private void diceClicked(object sender, RoutedEventArgs e)
         {
             Dice currentDice = GameBoard.getDiceByImageControl((Image) sender);
@@ -286,7 +286,10 @@ namespace YahtzeeWithATwist
                     rollButton.IsEnabled = false;
                 }
 
+                // Update the roll counter
                 GameBoard.rollsRemaining -= 1;
+                rollButton.Content        = $" Rolls Remaining: ";
+                rollButton.Content       += GameBoard.rollsRemaining.ToString();
             }
 
             return;
@@ -303,6 +306,9 @@ namespace YahtzeeWithATwist
                     new SolidColorBrush(Colors.Black);
             }
 
+            // Remove possible bonus points from the display
+            GameBoard.bonusScoreTextBlock.Text = String.Empty;
+
             return;
         }
 
@@ -315,6 +321,10 @@ namespace YahtzeeWithATwist
                 currentCategory.descriptionTextBlock.Foreground =
                     new SolidColorBrush(Colors.OrangeRed);
             }
+
+            // Display possible bonus points
+            GameBoard.bonusScoreTextBlock.Text =
+                Yahtzee.calculateBonus(GameBoard.ScoreableDice).ToString();
 
             return;
         }
@@ -333,6 +343,7 @@ namespace YahtzeeWithATwist
 
                 // Apply points
                 GameBoard.totalScore += currentCategory.scoreValue;
+                GameBoard.totalScore += Yahtzee.calculateBonus(GameBoard.ScoreableDice);
 
                 // Reset all the dice
                 GameBoard.resetDice();
@@ -354,7 +365,8 @@ namespace YahtzeeWithATwist
             #region Logic
             bt_rollDice.IsEnabled    = true;
             GameBoard.rollsRemaining = GameBoard.ROLLS_PER_TURN;
-            bt_rollDice.Content      = GameBoard.rollsRemaining.ToString();
+            bt_rollDice.Content      = $" Rolls Remaining: ";
+            bt_rollDice.Content     += GameBoard.rollsRemaining.ToString();
             #endregion
 
             return;

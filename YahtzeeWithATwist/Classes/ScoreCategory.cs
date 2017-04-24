@@ -11,14 +11,9 @@
 // TODO: Remove unnecessary documentation
 #endregion
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
-using System.Windows;
 using Windows.UI;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
 namespace YahtzeeWithATwist.Classes
@@ -76,15 +71,17 @@ namespace YahtzeeWithATwist.Classes
                 {
                     if (descriptionTextBlock != null)
                     {
+                        descriptionTextBlock.Foreground = new SolidColorBrush(Colors.Black);
                     }
 
                     if (scoreTextBlock != null)
                     {
+                        scoreTextBlock.Foreground = new SolidColorBrush(Colors.Black);
                     }
 
                     if (EnableControl != null)
                     {
-                        EnableControl();
+                        EnableControl(this);
                     }
                 }
                 else if (value == Status.Used)
@@ -101,7 +98,7 @@ namespace YahtzeeWithATwist.Classes
 
                     if (DisableControl != null)
                     {
-                        DisableControl();
+                        DisableControl(this);
                     }
                 }
             }
@@ -187,8 +184,8 @@ namespace YahtzeeWithATwist.Classes
         #region Delegates
         // --------------------
         public delegate int  ValueCalculator(List<Dice> scoreableDice);
-        public delegate void EnableAssociatedControl();
-        public delegate void DisableAssociatedControl();
+        public delegate void EnableAssociatedControl(ScoreCategory category);
+        public delegate void DisableAssociatedControl(ScoreCategory category);
         #endregion
         #endregion
 

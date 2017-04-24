@@ -144,19 +144,8 @@ namespace YahtzeeWithATwist.Classes
             return (longestDetectedRun - 1) >= targetStraightLength;
         }
 
-        private static int getCategoryCount(bool hasStemen, BonusGroup currentBonusGroup)
-        {
-            #region Data
-            int categoryCount;
-            #endregion
-
-            #region Logic
-            categoryCount = currentBonusGroup.count;
-            if (hasStemen) categoryCount += 1;
-            #endregion
-
-            return categoryCount;
-        }
+        private static int getCategoryCount(int stemenCount, BonusGroup currentBonusGroup) =>
+            currentBonusGroup.count + stemenCount;
 
         public static int calculateAces(List<Dice> heldDice)
         {
@@ -383,25 +372,25 @@ namespace YahtzeeWithATwist.Classes
             #region Data
             int              bonusScore    = 0;
             int              categoryCount = 0;
-            bool             hasStemen     = false;
-            List<BonusGroup> diceByBonus;
+            int              stemenCount   = 0;
+            IEnumerable<BonusGroup> diceByBonus;
             BonusGroup       currentBonusGroup;
             #endregion
 
             #region Logic
             // Get the counts of each bonus grouping
-            diceByBonus = (List<BonusGroup>) groupDiceByBonuses(heldDice);
+            diceByBonus = groupDiceByBonuses(heldDice);
 
             // Check for all five of a kind or one of each
-            if (diceByBonus.Count() == 5) // One of each teacher
+            if ((diceByBonus.Count() == 5) && !(diceByBonus.Any(x => x.bonusFace == null))) // One of each teacher
                 bonusScore += 600;
-            else if (diceByBonus.Any(x => x.count == 5)) // Five of a teacher
+            else if (diceByBonus.Any(x => (x.count == 5) && (x.bonusFace != null))) // Five of a teacher
                 bonusScore += 1000;
 
             // Apply dice bonuses (preserver order of operations)
             #region STEMEN BONUS: Team Player; increase each category count by one
             if (diceByBonus.Any(group => group.bonusFace == Dice.BonusFaces.Stemen))
-                hasStemen = true;
+                stemenCount = diceByBonus.First(x => x.bonusFace == Dice.BonusFaces.Stemen).count;
             #endregion
 
             #region HOWELL BONUS: Risky; Lose or multiply total score
@@ -410,21 +399,21 @@ namespace YahtzeeWithATwist.Classes
                 currentBonusGroup =
                     diceByBonus.First(group => group.bonusFace == Dice.BonusFaces.Howell);
 
-                categoryCount = getCategoryCount(hasStemen, currentBonusGroup);
+                categoryCount = getCategoryCount(stemenCount, currentBonusGroup);
 
                 switch (categoryCount)
                 {
                     case 1:
-                        GameBoard.totalScore = 0;
+                        bonusScore -= GameBoard.totalScore;
                         break;
                     case 2:
-                        GameBoard.totalScore *= 2;
+                        bonusScore += GameBoard.totalScore;
                         break;
                     case 3:
-                        GameBoard.totalScore *= 3;
+                        bonusScore += (GameBoard.totalScore * 2);
                         break;
                     case 4:
-                        GameBoard.totalScore *= 4;
+                        bonusScore += (GameBoard.totalScore * 3);
                         break;
                     default:
                         break;
@@ -438,7 +427,7 @@ namespace YahtzeeWithATwist.Classes
                 currentBonusGroup =
                     diceByBonus.First(group => group.bonusFace == Dice.BonusFaces.Geary);
 
-                categoryCount = getCategoryCount(hasStemen, currentBonusGroup);
+                categoryCount = getCategoryCount(stemenCount, currentBonusGroup);
 
                 switch (categoryCount)
                 {
@@ -466,7 +455,7 @@ namespace YahtzeeWithATwist.Classes
                 currentBonusGroup =
                     diceByBonus.First(group => group.bonusFace == Dice.BonusFaces.Halsey);
 
-                categoryCount = getCategoryCount(hasStemen, currentBonusGroup);
+                categoryCount = getCategoryCount(stemenCount, currentBonusGroup);
 
                 switch (categoryCount)
                 {
@@ -494,7 +483,7 @@ namespace YahtzeeWithATwist.Classes
                 currentBonusGroup =
                     diceByBonus.First(group => group.bonusFace == Dice.BonusFaces.Sparks);
 
-                categoryCount = getCategoryCount(hasStemen, currentBonusGroup);
+                categoryCount = getCategoryCount(stemenCount, currentBonusGroup);
 
                 switch (categoryCount)
                 {
