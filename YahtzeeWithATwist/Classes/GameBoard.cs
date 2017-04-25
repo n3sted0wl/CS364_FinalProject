@@ -5,10 +5,6 @@
 // File Name:   GameBoard.cs
 
 #region Development Notes and TODOs
-// --------------------
-// TODO: Remove unnecessary using statements
-// TODO: Remove unnecessary documentation
-// TODO: Fill out Exception documentation
 #endregion
 
 using System;
@@ -18,8 +14,6 @@ using Windows.UI.Xaml.Controls;
 
 namespace YahtzeeWithATwist.Classes
 {
-    /// <exception cref="">
-    /// </exception>
     public static class GameBoard
     {
         /*************************************************************/
@@ -69,32 +63,29 @@ namespace YahtzeeWithATwist.Classes
 
         public static List<Dice> ScoreableDice
         {
+            // Read only; gets all the dice on the table, rollable and held
+
             get
             {
                 _scoreableDice = new List<Dice>();
+
+                // Get all held dice
                 foreach (Dice dice in GameBoard.HeldDice.Values)
                 {
                     if (dice.availability == Dice.Availability.Available)
-                    {
                         _scoreableDice.Add(dice);
-                    }
                 }
 
+                // Get all rollable dice
                 foreach (Dice dice in GameBoard.RollableDice.Values)
                 {
                     if (dice.availability == Dice.Availability.Available)
-                    {
                         _scoreableDice.Add(dice);
-                    }
                 }
 
                 return _scoreableDice;
             }
         }
-        #endregion
-
-        #region Structures
-        // --------------------
         #endregion
 
         #region Enumerations
@@ -121,11 +112,6 @@ namespace YahtzeeWithATwist.Classes
             Yahtzee,
             Chance
         }
-
-        #endregion
-
-        #region Objects
-        // --------------------
         #endregion
 
         #region Collections
@@ -137,10 +123,6 @@ namespace YahtzeeWithATwist.Classes
         public  static Dictionary<Categories, ScoreCategory> ScoreCategories;
         private static List<Dice>                            _scoreableDice;
         #endregion
-
-        #region Delegates
-        // --------------------
-        #endregion
         #endregion
 
         /*************************************************************/
@@ -149,6 +131,10 @@ namespace YahtzeeWithATwist.Classes
         #region Methods
         #region Initializer
         // --------------------
+        /// <summary>
+        /// Create all gameboard objects including dice and score
+        /// categories
+        /// </summary>
         public static void initialize()
         {
             // Create all the dice
@@ -167,12 +153,12 @@ namespace YahtzeeWithATwist.Classes
             // Create all the score categories
             ScoreCategories = new Dictionary<Categories, ScoreCategory>()
             {
-                { Categories.Aces,   new ScoreCategory("Aces")},
-                { Categories.Twos,   new ScoreCategory("Twos")},
-                { Categories.Threes, new ScoreCategory("Threes")},
-                { Categories.Fours,  new ScoreCategory("Fours")},
-                { Categories.Fives,  new ScoreCategory("Fives")},
-                { Categories.Sixes,  new ScoreCategory("Sixes")},
+                { Categories.Aces,            new ScoreCategory("Aces")},
+                { Categories.Twos,            new ScoreCategory("Twos")},
+                { Categories.Threes,          new ScoreCategory("Threes")},
+                { Categories.Fours,           new ScoreCategory("Fours")},
+                { Categories.Fives,           new ScoreCategory("Fives")},
+                { Categories.Sixes,           new ScoreCategory("Sixes")},
 
                 { Categories.Full_House,      new ScoreCategory("Full House")},
                 { Categories.Four_of_a_Kind,  new ScoreCategory("Four of a Kind")},
@@ -198,11 +184,21 @@ namespace YahtzeeWithATwist.Classes
 
         #region Mutators
         // --------------------
+        /// <summary>
+        /// Set the total score to zero
+        /// </summary>
         public static void resetTotalScore() => totalScore = 0;
         #endregion
 
         #region Other Methods
         // --------------------
+        /// <summary>
+        /// Get a score category object based on the TextBlock parameter
+        /// </summary>
+        /// <param name="targetTextBlock">
+        /// The TextBlock control associated with the ScoreCategory you're looking for
+        /// </param>
+        /// <returns>null if no associated ScoreCategory is found</returns>
         public static ScoreCategory getScoreCategoryByTextBlockControl(TextBlock targetTextBlock)
         {
             #region Data
@@ -224,10 +220,20 @@ namespace YahtzeeWithATwist.Classes
             return foundScoreCategory;
         }
 
+        /// <summary>
+        /// Get a dice object based on its associated Image control
+        /// </summary>
+        /// <param name="targetImageControl">
+        /// The Image control associated with the Dice you're looking for
+        /// </param>
+        /// <returns>null if no associated Dice object is found</returns>
         public static Dice getDiceByImageControl(Image targetImageControl)
         {
+            #region Data
             Dice foundDice = null;
+            #endregion
 
+            #region Logic
             foreach (Dice dice in RollableDice.Values)
             {
                 if (dice.imageControl == targetImageControl)
@@ -242,14 +248,29 @@ namespace YahtzeeWithATwist.Classes
 
             if (foundDice == null)
                 throw new NullReferenceException("Could not find current dice");
+            #endregion
 
             return foundDice;
         }
 
+        /// <summary>
+        /// Get the index of a Dice object in either the held or rollable
+        /// dice collections
+        /// </summary>
+        /// <param name="targetDice">
+        /// The target dice whose index you're looking for
+        /// </param>
+        /// <returns>The integer index of the found dice</returns>
+        /// <exception cref="InvalidOperationException">
+        /// Could not find an associated dice
+        /// </exception>
         public static int getDiceIndex(Dice targetDice)
         {
+            #region Data
             int index = 0;
+            #endregion
 
+            #region Logic
             if (RollableDice.Values.Contains(targetDice))
             {
                 foreach (KeyValuePair<int, Dice> entry in RollableDice)
@@ -269,10 +290,14 @@ namespace YahtzeeWithATwist.Classes
 
             if (index == 0)
                 throw new InvalidOperationException("Target dice not found");
+            #endregion
 
             return index;
         }
 
+        /// <summary>
+        /// Set all dice to rollable without rolling them
+        /// </summary>
         public static void resetDice()
         {
             // Put all the dice back into the roll section
@@ -285,6 +310,9 @@ namespace YahtzeeWithATwist.Classes
             return;
         }
 
+        /// <summary>
+        /// Set the score value of each ScoreCategory on the gameboard
+        /// </summary>
         public static void calculateAllScores()
         {
             #region Logic
@@ -297,6 +325,9 @@ namespace YahtzeeWithATwist.Classes
             return;
         }
 
+        /// <summary>
+        /// Make all ScoreCategory objects unused
+        /// </summary>
         public static void resetScoreCategories()
         {
             foreach (Categories category in ScoreCategories.Keys)
@@ -307,6 +338,10 @@ namespace YahtzeeWithATwist.Classes
             return;
         }
 
+        /// <summary>
+        /// Check if the condition for the end of the game has been reached
+        /// </summary>
+        /// <returns>True if the game is over</returns>
         public static bool isGameOver()
         {
             bool isGameOver = true;
@@ -323,6 +358,9 @@ namespace YahtzeeWithATwist.Classes
             return isGameOver;
         }
 
+        /// <summary>
+        /// Make all dice on the gameboard unavailable
+        /// </summary>
         public static void hideAllDice()
         {
             foreach (Dice dice in HeldDice.Values)

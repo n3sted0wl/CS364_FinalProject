@@ -6,9 +6,6 @@
 // File Name:   MainPage.xaml.cs
 
 #region Development Notes and TODOs
-// --------------------
-// TODO: Remove unnecessary documentation
-// TODO: Add exception documentation, if any
 #endregion
 
 using System;
@@ -65,7 +62,6 @@ namespace YahtzeeWithATwist
         public MainPage()
         {
             this.InitializeComponent();
-
             GameBoard.initialize(); // Includes score categories
             this.mapControls();
             this.initializePageControls();
@@ -304,8 +300,8 @@ namespace YahtzeeWithATwist
                 {
                     GameBoard.rollsRemaining -= 1;
                 }
-                rollButton.Content        = $" Rolls Remaining: ";
-                rollButton.Content       += GameBoard.rollsRemaining.ToString();
+                rollButton.Content  = $" Rolls Remaining: ";
+                rollButton.Content += GameBoard.rollsRemaining.ToString();
             }
 
             return;

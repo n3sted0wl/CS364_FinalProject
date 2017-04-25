@@ -136,7 +136,7 @@
             <Run FontWeight="Bold" Text="BONUS:"/>
         </TextBlock>
         <TextBlock x:Name="bonusScore" HorizontalAlignment="Left" Margin="1090,555,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" FontWeight="Bold" Width="70" />
-        <TextBlock x:Name="gameBoardMessageBox" HorizontalAlignment="Left" Margin="93,386,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" Width="550" Height="97" FontWeight="Bold" />
+        <TextBlock x:Name="gameBoardMessageBox" HorizontalAlignment="Left" Margin="93,386,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" Width="550" Height="97" FontWeight="Bold" TextAlignment="Center" />
         <TextBlock x:Name="yahtzeeGameTitle" HorizontalAlignment="Left" Margin="239,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontFamily="Segoe UI Black" Foreground="#FFEC962F">
             <Run Foreground="#FFF77E19" FontWeight="Bold" Text="Yahtzee!"/>
         </TextBlock>

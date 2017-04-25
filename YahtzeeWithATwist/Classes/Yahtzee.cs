@@ -5,10 +5,8 @@
 // File Name:   Yahtzee.cs
 
 #region Development Notes and TODOs
-// --------------------
 #endregion
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 

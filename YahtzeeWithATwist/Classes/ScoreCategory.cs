@@ -5,10 +5,6 @@
 // File Name:   ScoreCategory.cs
 
 #region Development Notes and TODOs
-// --------------------
-// TODO: Remove unnecessary using statements
-// TODO: Insert IntelliSense Documentation template before class
-// TODO: Remove unnecessary documentation
 #endregion
 
 using System.Collections.Generic;
@@ -18,11 +14,6 @@ using Windows.UI.Xaml.Media;
 
 namespace YahtzeeWithATwist.Classes
 {
-    #region IntelliSense Documentation
-    /// <exception cref="NullReferenceException">
-    ///     Thrown if a delegate with no methods assigned is called
-    /// </exception>
-    #endregion
     public class ScoreCategory
     {
         /*************************************************************/
@@ -164,21 +155,13 @@ namespace YahtzeeWithATwist.Classes
         }
         #endregion
 
-        #region Structures
-        // --------------------
-        #endregion
-
         #region Enumerations
         // --------------------
-        public enum Status { Used, Unused }
-        #endregion
-
-        #region Objects
-        // --------------------
-        #endregion
-
-        #region Collections
-        // --------------------
+        public enum Status
+        {
+            Used,
+            Unused
+        }
         #endregion
 
         #region Delegates
@@ -214,18 +197,26 @@ namespace YahtzeeWithATwist.Classes
 
         #region Overrides
         // --------------------
+        /// <summary>
+        /// Overriden ToString method
+        /// </summary>
+        /// <returns>
+        /// A description of the ScoreCategory
+        /// </returns>
         public override string ToString()
         {
             return $"Score Description: {this.description}";
         }
         #endregion
 
-        #region Accessors
-        // --------------------
-        #endregion
-
         #region Mutators
         // --------------------
+        /// <summary>
+        /// Set the delegate for calculating the value of the method
+        /// </summary>
+        /// <param name="calculatingMethod">
+        /// A delegate that returns an integer and receives a List<Dice> collection
+        /// </param>
         public void setCalculateValueMethod(ValueCalculator calculatingMethod)
         {
             this.clearCalculateValueMethod();
@@ -253,10 +244,6 @@ namespace YahtzeeWithATwist.Classes
 
         public void clearDisablingControlMethods() =>
             this.DisableControl = null;
-        #endregion
-
-        #region Other Methods
-        // --------------------
         #endregion
         #endregion
     }

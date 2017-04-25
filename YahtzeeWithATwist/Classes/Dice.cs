@@ -5,7 +5,6 @@
 // File Name:   Dice.cs
 
 #region Development Notes and TODOs
-// --------------------
 #endregion
 
 using System;
@@ -53,7 +52,6 @@ namespace YahtzeeWithATwist.Classes
         private BonusFaces?  _bonusFace;
 
         private static UpdateImageSource _updateImage;
-
         private static Random randomSeed = new Random();
         #endregion
 
@@ -81,16 +79,16 @@ namespace YahtzeeWithATwist.Classes
                 else
                 {
                     // Depending on probabilities, set a bonus face
-                    int probability = randomSeed.Next(1, 20);
-                    if (probability < 2)
+                    int probability = randomSeed.Next(1, 70);
+                    if (probability < 10)
                         this.bonusFace = BonusFaces.Howell;
-                    else if (probability < 5)
+                    else if (probability < 20)
                         this.bonusFace = BonusFaces.Sparks;
-                    else if (probability < 7)
+                    else if (probability < 30)
                         this.bonusFace = BonusFaces.Geary;
-                    else if (probability < 10)
+                    else if (probability < 40)
                         this.bonusFace = BonusFaces.Halsey;
-                    else if (probability < 12)
+                    else if (probability < 50)
                         this.bonusFace = BonusFaces.Stemen;
                     else
                         this.bonusFace = null;
@@ -110,12 +108,14 @@ namespace YahtzeeWithATwist.Classes
         public Image imageControl
         {
             get { return _imageControl; }
+
             set
             {
                 this._imageControl = value;
                 if (imageControl != null)
                 {
-                    updateImageDelegate?.Invoke(this.imageControl, this.imagePath);
+                    updateImageDelegate ?
+                        .Invoke(this.imageControl, this.imagePath);
                 }
             }
         } 
@@ -127,6 +127,8 @@ namespace YahtzeeWithATwist.Classes
         /// </summary>
         public string imagePath
         {
+            // Read-only
+
             get
             {
                 string imageLocation;
@@ -150,7 +152,9 @@ namespace YahtzeeWithATwist.Classes
         /// </summary>
         public Availability availability
         {
+            // Unavailable dice are generally skipped in processing
             get { return _availability; }
+
             set
             {
                 _availability = value;
@@ -201,19 +205,11 @@ namespace YahtzeeWithATwist.Classes
         }
         #endregion
 
-        #region Structures
-        // --------------------
-        #endregion
-
         #region Enumerations
         // --------------------
         public enum DiceType     { Rollable, Held }
         public enum Availability { Available, Unavailable}
         public enum BonusFaces   { Geary, Halsey, Sparks, Stemen, Howell }
-        #endregion
-
-        #region Objects
-        // --------------------
         #endregion
 
         #region Collections
@@ -269,10 +265,6 @@ namespace YahtzeeWithATwist.Classes
         ///     Thrown when trying to set the dice value outside the 
         ///     valid range of dice face values.
         /// </exception>
-        /// 
-        /// <returns>
-        ///     Nothing. This is a constructor.
-        /// </returns>
         public Dice(
             int               initialFaceValue     = MIN_FACE_VALUE,
             DiceType          initialType          = DiceType.Rollable,
@@ -316,10 +308,6 @@ namespace YahtzeeWithATwist.Classes
         }
         #endregion
 
-        #region Accessors
-        // --------------------
-        #endregion
-
         #region Mutators
         // --------------------
         /// <summary>
@@ -341,10 +329,6 @@ namespace YahtzeeWithATwist.Classes
             }
             return;
         }
-        #endregion
-
-        #region Other Methods
-        // --------------------
         #endregion
         #endregion
     }
