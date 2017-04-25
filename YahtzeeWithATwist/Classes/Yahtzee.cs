@@ -106,42 +106,35 @@ namespace YahtzeeWithATwist.Classes
 
         private static bool hasStraight(List<Dice> diceToScan, int targetStraightLength)
         {
-            #region Data
-            int longestDetectedRun = 1;
-            int currentRunLength = 1;
-            int previousFaceValue = 0;
-            int currentFaceValue = 0;
-            List<Dice> orderedDice;
+            #region Data 
+            int  runLength        = 0;
+            bool straightDetected = false;
+            List<int> orderedFaceValues;
             #endregion
 
             #region Logic
             // Order the list
-            orderedDice = diceToScan.OrderBy(dice => dice.faceValue).ToList();
+            orderedFaceValues = diceToScan
+                .Select  (dice => dice.faceValue)
+                .Distinct()
+                .OrderBy (dice => dice)
+                .ToList  ();
 
-            // Loop through looking for gaps in the list
-            foreach (Dice dice in orderedDice)
+            foreach (int faceValue in orderedFaceValues)
             {
-                currentFaceValue = dice.faceValue;
-                if (currentFaceValue - previousFaceValue == 1)
+                runLength =
+                    orderedFaceValues.Any(die => die == (faceValue - 1)) ?
+                        runLength + 1 :
+                        0;
+
+                if (runLength >= (targetStraightLength - 1))
                 {
-                    currentRunLength += 1;
-                    if (currentRunLength >= longestDetectedRun)
-                        longestDetectedRun = currentRunLength;
+                    straightDetected = true;
                 }
-                else if (currentFaceValue - previousFaceValue == 0)
-                {
-                    if (currentRunLength >= longestDetectedRun)
-                        longestDetectedRun = currentRunLength;
-                }
-                else
-                {
-                    currentRunLength = 1;
-                }
-                previousFaceValue = dice.faceValue;
             }
             #endregion
 
-            return (longestDetectedRun - 1) >= targetStraightLength;
+            return straightDetected;
         }
 
         private static int getCategoryCount(int stemenCount, BonusGroup currentBonusGroup) =>
@@ -335,10 +328,10 @@ namespace YahtzeeWithATwist.Classes
         public static int calculateLargeStraight(List<Dice> heldDice)
         {
             #region Data
-            bool hasSmStraight = hasStraight(heldDice, LG_STRAIGHT_SIZE);
+            bool hasLgStraight = hasStraight(heldDice, LG_STRAIGHT_SIZE);
             #endregion
 
-            return hasSmStraight ? LG_STRAIGHT_SCORE_VALUE : 0;
+            return hasLgStraight ? LG_STRAIGHT_SCORE_VALUE : 0;
         }
 
         public static int calculateYahtzee(List<Dice> heldDice)
@@ -367,14 +360,14 @@ namespace YahtzeeWithATwist.Classes
             return getSumOfDice(diceCountsByValue);
         }
 
-        public static int calculateBonus(List<Dice> heldDice)
+        public static int calculateBonus(List<Dice> heldDice, int baseScore = 0)
         {
             #region Data
-            int              bonusScore    = 0;
-            int              categoryCount = 0;
-            int              stemenCount   = 0;
+            int                     bonusScore    = 0;
+            int                     categoryCount = 0;
+            int                     stemenCount   = 0;
             IEnumerable<BonusGroup> diceByBonus;
-            BonusGroup       currentBonusGroup;
+            BonusGroup              currentBonusGroup;
             #endregion
 
             #region Logic
@@ -382,10 +375,10 @@ namespace YahtzeeWithATwist.Classes
             diceByBonus = groupDiceByBonuses(heldDice);
 
             // Check for all five of a kind or one of each
-            if ((diceByBonus.Count() == 5) && !(diceByBonus.Any(x => x.bonusFace == null))) // One of each teacher
-                bonusScore += 600;
-            else if (diceByBonus.Any(x => (x.count == 5) && (x.bonusFace != null))) // Five of a teacher
-                bonusScore += 1000;
+            if ((diceByBonus.Count() == 5) && !(diceByBonus.Any(x => x.bonusFace == null))) 
+                bonusScore += 600; // One of each teacher
+            else if (diceByBonus.Any(x => (x.count == 5) && (x.bonusFace != null))) 
+                bonusScore += 1000; // Five of a teacher
 
             // Apply dice bonuses (preserver order of operations)
             #region STEMEN BONUS: Team Player; increase each category count by one
@@ -488,16 +481,16 @@ namespace YahtzeeWithATwist.Classes
                 switch (categoryCount)
                 {
                     case 1:
-                        bonusScore *= 2;
+                        bonusScore += (2 * baseScore);
                         break;
                     case 2:
-                        bonusScore *= 3;
+                        bonusScore += (3 * baseScore);
                         break;
                     case 3:
-                        bonusScore *= 4;
+                        bonusScore += (4 * baseScore);
                         break;
                     case 4:
-                        bonusScore *= 5;
+                        bonusScore += (5 * baseScore);
                         break;
                     default:
                         break;

@@ -72,19 +72,19 @@ namespace YahtzeeWithATwist.Classes
             get
             {
                 _scoreableDice = new List<Dice>();
-                foreach (KeyValuePair<int, Dice> dice in GameBoard.HeldDice)
+                foreach (Dice dice in GameBoard.HeldDice.Values)
                 {
-                    if (dice.Value.availability == Dice.Availability.Available)
+                    if (dice.availability == Dice.Availability.Available)
                     {
-                        _scoreableDice.Add(dice.Value);
+                        _scoreableDice.Add(dice);
                     }
                 }
 
-                foreach (KeyValuePair<int, Dice> dice in GameBoard.RollableDice)
+                foreach (Dice dice in GameBoard.RollableDice.Values)
                 {
-                    if (dice.Value.availability == Dice.Availability.Available)
+                    if (dice.availability == Dice.Availability.Available)
                     {
-                        _scoreableDice.Add(dice.Value);
+                        _scoreableDice.Add(dice);
                     }
                 }
 
@@ -210,11 +210,11 @@ namespace YahtzeeWithATwist.Classes
             #endregion
 
             #region Logic
-            foreach (KeyValuePair<Categories, ScoreCategory> category in ScoreCategories)
+            foreach (ScoreCategory category in ScoreCategories.Values)
             {
-                if (targetTextBlock == category.Value.descriptionTextBlock)
+                if (targetTextBlock == category.descriptionTextBlock)
                 {
-                    foundScoreCategory = category.Value;
+                    foundScoreCategory = category;
                     break;
                 }
 
@@ -228,16 +228,16 @@ namespace YahtzeeWithATwist.Classes
         {
             Dice foundDice = null;
 
-            foreach (KeyValuePair<int, Dice> testDice in RollableDice)
+            foreach (Dice dice in RollableDice.Values)
             {
-                if (testDice.Value.imageControl == targetImageControl)
-                    foundDice = testDice.Value;
+                if (dice.imageControl == targetImageControl)
+                    foundDice = dice;
             }
 
-            foreach (KeyValuePair<int, Dice> testDice in HeldDice)
+            foreach (Dice dice in HeldDice.Values)
             {
-                if (testDice.Value.imageControl == targetImageControl)
-                    foundDice = testDice.Value;
+                if (dice.imageControl == targetImageControl)
+                    foundDice = dice;
             }
 
             if (foundDice == null)
@@ -288,9 +288,9 @@ namespace YahtzeeWithATwist.Classes
         public static void calculateAllScores()
         {
             #region Logic
-            foreach (KeyValuePair<Categories, ScoreCategory> category in GameBoard.ScoreCategories)
+            foreach (ScoreCategory category in GameBoard.ScoreCategories.Values)
             {
-                category.Value.scoreValue = category.Value.CalculateValue(GameBoard.ScoreableDice);
+                category.scoreValue = category.CalculateValue(GameBoard.ScoreableDice);
             }
             #endregion
 

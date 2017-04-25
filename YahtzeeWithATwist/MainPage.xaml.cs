@@ -34,6 +34,10 @@ namespace YahtzeeWithATwist
         /*                           Data                            */
         /*************************************************************/
         #region Data Elements
+        #region Settings
+        public const bool TESTING_MODE = false;
+        #endregion
+
         #region Controls
         // Backend Control mapping to decouple front-end naming 
         public Image  img_rollDice_1,
@@ -164,13 +168,13 @@ namespace YahtzeeWithATwist
             GameBoard.HeldDice[5].imageControl = img_heldDice_5;
 
             // Make all rollable dice images visible and each held dice invisible
-            foreach (KeyValuePair<int, Dice> item in GameBoard.RollableDice)
+            foreach (Dice dice in GameBoard.RollableDice.Values)
             {
-                item.Value.availability = Dice.Availability.Available;
+                dice.availability = Dice.Availability.Available;
             }
-            foreach (KeyValuePair<int, Dice> item in GameBoard.HeldDice)
+            foreach (Dice dice in GameBoard.HeldDice.Values)
             {
-                item.Value.availability = Dice.Availability.Unavailable;
+                dice.availability = Dice.Availability.Unavailable;
             }
 
             // Connect the click event handler
@@ -233,7 +237,9 @@ namespace YahtzeeWithATwist
             GameBoard.resetTotalScore();
             GameBoard.resetDice();
             GameBoard.calculateAllScores();
+            GameBoard.rollsRemaining = GameBoard.ROLLS_PER_TURN;
 
+            this.resetRollDiceButton();
             gameBoardMessageBox.Text = String.Empty;
             bt_rollDice.IsEnabled    = true;
         }
@@ -280,9 +286,9 @@ namespace YahtzeeWithATwist
             if (GameBoard.rollsRemaining >= 1) // TODO: Check for rollable dice
             {
                 // Roll the dice
-                foreach (KeyValuePair<int, Dice> rollableDice in GameBoard.RollableDice)
+                foreach (Dice dice in GameBoard.RollableDice.Values)
                 {
-                    rollableDice.Value.roll();
+                    dice.roll();
                 }
 
                 // Calculate the possible values
@@ -294,7 +300,10 @@ namespace YahtzeeWithATwist
                 }
 
                 // Update the roll counter
-                GameBoard.rollsRemaining -= 1;
+                if (!TESTING_MODE)
+                {
+                    GameBoard.rollsRemaining -= 1;
+                }
                 rollButton.Content        = $" Rolls Remaining: ";
                 rollButton.Content       += GameBoard.rollsRemaining.ToString();
             }
@@ -327,11 +336,12 @@ namespace YahtzeeWithATwist
             {
                 currentCategory.descriptionTextBlock.Foreground =
                     new SolidColorBrush(Colors.OrangeRed);
-            }
 
-            // Display possible bonus points
-            GameBoard.bonusScoreTextBlock.Text =
-                Yahtzee.calculateBonus(GameBoard.ScoreableDice).ToString();
+                // Display possible bonus points
+                GameBoard.bonusScoreTextBlock.Text =
+                    Yahtzee.calculateBonus(GameBoard.ScoreableDice,
+                        currentCategory.scoreValue).ToString();
+            }
 
             return;
         }
@@ -350,13 +360,14 @@ namespace YahtzeeWithATwist
 
                 // Apply points
                 GameBoard.totalScore += currentCategory.scoreValue;
-                GameBoard.totalScore += Yahtzee.calculateBonus(GameBoard.ScoreableDice);
+                GameBoard.totalScore += 
+                    Yahtzee.calculateBonus(GameBoard.ScoreableDice, currentCategory.scoreValue);
 
                 // Reset all the dice
                 GameBoard.resetDice();
-                foreach (KeyValuePair<int, Dice> dice in GameBoard.RollableDice)
+                foreach (Dice dice in GameBoard.RollableDice.Values)
                 {
-                    dice.Value.roll();
+                    dice.roll();
                 }
 
                 // Enable the roll button
