@@ -10,7 +10,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -281,9 +283,27 @@ namespace YahtzeeWithATwist
             return;
         }
 
-        private void rollDieButton_Click(object sender, RoutedEventArgs e)
+        private async void rollDieButton_Click(object sender, RoutedEventArgs e)
         {
             Button rollButton = (sender as Button);
+
+            // Add Dice Sound
+            try
+            {
+                var element = new MediaElement();
+                string soundFile = @"Assets\Sounds\roll-dice.wav";
+                StorageFolder folderLocation = Windows.ApplicationModel.Package.Current.InstalledLocation;
+                StorageFile file = await folderLocation.GetFileAsync(soundFile);
+                var stream = await file.OpenAsync(FileAccessMode.Read);
+                element.SetSource(stream, file.ContentType);
+                element.Play();
+            }
+            catch (FileNotFoundException ex)
+            {
+            }
+            // For if the sound causes a crash
+            catch (Exception)
+            { }
 
             if (GameBoard.rollsRemaining >= 1) // TODO: Check for rollable dice
             {
@@ -306,7 +326,7 @@ namespace YahtzeeWithATwist
                 {
                     GameBoard.rollsRemaining -= 1;
                 }
-                rollButton.Content  = $" Rolls Remaining: ";
+                rollButton.Content = $" Rolls Remaining: ";
                 rollButton.Content += GameBoard.rollsRemaining.ToString();
             }
 
