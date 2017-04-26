@@ -214,6 +214,11 @@ namespace YahtzeeWithATwist
             return;
         }
 
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            helpDialog.Visibility = Visibility.Collapsed;
+        }
+
         private void updateImageSource(Image imageToUpdate, string newImagePath)
         {
             imageToUpdate.Source =
@@ -225,6 +230,7 @@ namespace YahtzeeWithATwist
         // --------------------
         private void helpButton_Click(object sender, RoutedEventArgs e)
         {
+            helpDialog.Visibility = Visibility.Visible;
         }
 
         private void newGame_Click(object sender, RoutedEventArgs e)

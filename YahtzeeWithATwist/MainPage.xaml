@@ -15,7 +15,7 @@
         <Image x:Name="rollDie4" HorizontalAlignment="Left" Height="100" Margin="419,159,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice4.png"/>
         <Image x:Name="rollDie5" HorizontalAlignment="Left" Height="100" Margin="524,159,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice6.png"/>
         <Button x:Name="rollDieButton" Content="Roll Dice Now!" HorizontalAlignment="Left" Margin="169,294,0,0" VerticalAlignment="Top" Height="70" Width="396" FontSize="36" Click="rollDieButton_Click" Background="#33000000"/>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="608" Margin="692,40,0,0" Stroke="Black" VerticalAlignment="Top" Width="492"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="591" Margin="692,57,0,0" Stroke="Black" VerticalAlignment="Top" Width="492"/>
         <Rectangle HorizontalAlignment="Left" Height="144" Margin="93,137,0,0" Stroke="Black" VerticalAlignment="Top" Width="550" Canvas.ZIndex="-5">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -85,12 +85,12 @@
         <TextBlock x:Name="onesScore" HorizontalAlignment="Left" Margin="1090,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
             <Run FontWeight="Bold" Text="15"/>
         </TextBlock>
-        <TextBlock x:Name="textBlock1_Copy16" HorizontalAlignment="Left" Margin="742,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="textBlock1_Copy16" HorizontalAlignment="Left" Margin="732,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
             <Run FontWeight="Bold" Text="Score Category"/>
             <LineBreak/>
             <Run FontWeight="Bold"/>
         </TextBlock>
-        <TextBlock x:Name="textBlock1_Copy17" HorizontalAlignment="Left" Margin="1083,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" >
+        <TextBlock x:Name="textBlock1_Copy17" HorizontalAlignment="Left" Margin="1076,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" >
             <Run FontWeight="Bold" Text="Score"/>
         </TextBlock>
         <TextBlock x:Name="twosScore" HorizontalAlignment="Left" Margin="1090,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
@@ -148,7 +148,33 @@
 
         <Button x:Name="newGame" Content="New Game" HorizontalAlignment="Left" Margin="692,665,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Arial Black" Width="492" Click="newGame_Click" Height="39">
         </Button>
+        <ListView x:Name="helpDialog" HorizontalAlignment="Left" Height="368" Margin="868,227,0,0" VerticalAlignment="Top" Width="389" Background="White" Visibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <Button Name="Close" Content="Close" Click="Close_Click" HorizontalAlignment="Center" Margin="300,10,0,10"/>
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Instructions" FontWeight="Bold" FontSize="36" HorizontalAlignment="Center" Width="368" VerticalAlignment="Center" TextAlignment="Center"  Margin="0,0,0,10"/>
+            <TextBlock xml:space="preserve" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Auto" TextAlignment="Center" Width="355" SelectionHighlightColor="{x:Null}">
+                <Run Text=" To see the traditional Yahtzee rules, go to this link: "/>
+                <Run FontWeight="Bold" Text="https://www.hasbro.com/common/instruct/Yahtzee.pdf "/>
+                <LineBreak/>
+                <LineBreak/>
+                <Run Text="Here are the additional instructions for how to play Yahtzee Professor Edition"/>
+                <LineBreak/>
+                <LineBreak/>
+                <Run Text="Professor Types:"/>
+            </TextBlock>
+            <TextBlock x:Name="textBlock1" Height="auto" TextWrapping="Wrap" Width="369" Margin="0">
+                <Run Text="     Dr. Geary:                                             Bonus:     20"/>
+                <LineBreak/><LineBreak/>
+                <Run Text="    Dr. Howell:                                             Bonus:   -20"/>
+                <LineBreak/><LineBreak/>
+                <Run Text="    Dr. Sparks:                                             Bonus:   -20"/>
+                <LineBreak/><LineBreak/>
+                <Run Text="    Mr. Stemen:                                             Bonus:   -20"/>
+                <LineBreak/><LineBreak/>
+                <Run Text="    Mr. Halsey:                                             Bonus:   -20"/>
+            </TextBlock>
 
+
+        </ListView>
 
     </Grid>
 </Page>
