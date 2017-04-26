@@ -148,26 +148,44 @@
 
         <Button x:Name="newGame" Content="New Game" HorizontalAlignment="Left" Margin="692,665,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Arial Black" Width="492" Click="newGame_Click" Height="39">
         </Button>
-        <ListView x:Name="helpDialog" HorizontalAlignment="Left" Height="368" Margin="881,279,0,0" VerticalAlignment="Top" Width="389" Background="White" Visibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
-            <Button Name="Close" Content="Close" Click="Close_Click" HorizontalAlignment="Center" Margin="300,10,0,10"/>
+        <ListView x:Name="helpDialog" HorizontalAlignment="Left" Height="368" Margin="881,279,0,0" VerticalAlignment="Top" Width="389" Visibility="Collapsed" ScrollViewer.VerticalScrollBarVisibility="Visible" BorderBrush="#FFF9A209" BorderThickness="2" Opacity="0.995">
+            <ListView.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF474747" Offset="0.018"/>
+                    <GradientStop Color="#FF3A3A3A" Offset="1"/>
+                    <GradientStop Color="White" Offset="0.217"/>
+                    <GradientStop Color="White" Offset="0.829"/>
+                </LinearGradientBrush>
+            </ListView.Background>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <ContentPresenter/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <Button Name="Close" Content="Close" Click="Close_Click" HorizontalAlignment="Center" Margin="300,10,0,10" BorderBrush="#FFF59913"/>
             <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Instructions" FontWeight="Bold" FontSize="36" HorizontalAlignment="Center" Width="368" VerticalAlignment="Center" TextAlignment="Center"  Margin="0,0,0,10"/>
             <TextBlock xml:space="preserve" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Auto" TextAlignment="Center" Width="355">
                 <Run Text=" To see the traditional Yahtzee rules, go to this link: "/>
                 <Run FontWeight="Bold" Text="https://www.hasbro.com/common/instruct/Yahtzee.pdf "/>
                 <LineBreak/><LineBreak/><Run Text="Here are the additional instructions for how to play Yahtzee Professor Edition"/><LineBreak/><Run Text="Professor Types:"/>
             </TextBlock>
-            <TextBlock x:Name="textBlock1" Height="auto" TextWrapping="Wrap" Width="369" Margin="0">
-                <Run Text="     Dr. Geary:                                             Bonus:     20"/>
+            <TextBlock x:Name="textBlock1" Height="auto" TextWrapping="Wrap" Width="369" Margin="0,0,0,8" >
+                <Run Text="  Dr. Geary: Explanation here... or could do the bonus  format"/>
                 <LineBreak/><LineBreak/>
-                <Run Text="    Dr. Howell:                                             Bonus:   -20"/>
+                <Run Text=" Dr. Howell:                                             Bonus:   -20"/>
                 <LineBreak/><LineBreak/>
-                <Run Text="    Dr. Sparks:                                             Bonus:   -20"/>
+                <Run Text=" Dr. Sparks:                                             Bonus:   -20"/>
                 <LineBreak/><LineBreak/>
-                <Run Text="    Mr. Stemen:                                             Bonus:   -20"/>
+                <Run Text=" Mr. Stemen:                                             Bonus:   -20"/>
                 <LineBreak/><LineBreak/>
-                <Run Text="    Mr. Halsey:                                             Bonus:   -20"/>
-                <LineBreak/><LineBreak/>
-                <Run Text="Once you finish a game, you can simply click, NEW GAME to play again."/>
+                <Run Text=" Mr. Halsey:                                             Bonus:   -20"/>
+                <LineBreak/><LineBreak/><Run Text="Once you finish a game, simply click the NEW GAME button to play again."/>
             </TextBlock>
         </ListView>
 
