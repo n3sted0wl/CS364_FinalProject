@@ -148,7 +148,7 @@
 
         <Button x:Name="newGame" Content="New Game" HorizontalAlignment="Left" Margin="692,665,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Arial Black" Width="492" Click="newGame_Click" Height="39">
         </Button>
-        <ListView x:Name="helpDialog" HorizontalAlignment="Left" Height="368" Margin="868,227,0,0" VerticalAlignment="Top" Width="389" Background="White" Visibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <ListView x:Name="helpDialog" HorizontalAlignment="Left" Height="368" Margin="868,227,0,0" VerticalAlignment="Top" Width="389" Background="White" Visibility="Collapsed" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <Button Name="Close" Content="Close" Click="Close_Click" HorizontalAlignment="Center" Margin="300,10,0,10"/>
             <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Instructions" FontWeight="Bold" FontSize="36" HorizontalAlignment="Center" Width="368" VerticalAlignment="Center" TextAlignment="Center"  Margin="0,0,0,10"/>
             <TextBlock xml:space="preserve" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Auto" TextAlignment="Center" Width="355" SelectionHighlightColor="{x:Null}">
@@ -171,6 +171,8 @@
                 <Run Text="    Mr. Stemen:                                             Bonus:   -20"/>
                 <LineBreak/><LineBreak/>
                 <Run Text="    Mr. Halsey:                                             Bonus:   -20"/>
+                <LineBreak/><LineBreak/>
+                <Run Text="Once you finish a game, you can simply click, NEW GAME to play again."/>
             </TextBlock>
 
 
