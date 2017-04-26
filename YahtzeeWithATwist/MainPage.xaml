@@ -143,23 +143,18 @@
         <TextBlock x:Name="professorText" HorizontalAlignment="Left" Margin="239,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Gabriola" FontSize="48">
             <Run FontWeight="Bold" FontStyle="Italic" Text="Professor Edition"/>
         </TextBlock>
-        <Button x:Name="helpButton" Content="?" HorizontalAlignment="Left" Margin="1203,624,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Arial Black" Width="54" Click="helpButton_Click" RenderTransformOrigin="0.648,1.4">
+        <Button x:Name="helpButton" Content="?" HorizontalAlignment="Left" Margin="1202,586,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Yu Gothic UI Semibold" Width="68" Click="helpButton_Click" RenderTransformOrigin="0.648,1.4" FontWeight="Bold" Height="62">
         </Button>
 
         <Button x:Name="newGame" Content="New Game" HorizontalAlignment="Left" Margin="692,665,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Arial Black" Width="492" Click="newGame_Click" Height="39">
         </Button>
-        <ListView x:Name="helpDialog" HorizontalAlignment="Left" Height="368" Margin="868,227,0,0" VerticalAlignment="Top" Width="389" Background="White" Visibility="Collapsed" ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <ListView x:Name="helpDialog" HorizontalAlignment="Left" Height="368" Margin="881,279,0,0" VerticalAlignment="Top" Width="389" Background="White" Visibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <Button Name="Close" Content="Close" Click="Close_Click" HorizontalAlignment="Center" Margin="300,10,0,10"/>
             <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Instructions" FontWeight="Bold" FontSize="36" HorizontalAlignment="Center" Width="368" VerticalAlignment="Center" TextAlignment="Center"  Margin="0,0,0,10"/>
-            <TextBlock xml:space="preserve" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Auto" TextAlignment="Center" Width="355" SelectionHighlightColor="{x:Null}">
+            <TextBlock xml:space="preserve" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Auto" TextAlignment="Center" Width="355">
                 <Run Text=" To see the traditional Yahtzee rules, go to this link: "/>
                 <Run FontWeight="Bold" Text="https://www.hasbro.com/common/instruct/Yahtzee.pdf "/>
-                <LineBreak/>
-                <LineBreak/>
-                <Run Text="Here are the additional instructions for how to play Yahtzee Professor Edition"/>
-                <LineBreak/>
-                <LineBreak/>
-                <Run Text="Professor Types:"/>
+                <LineBreak/><LineBreak/><Run Text="Here are the additional instructions for how to play Yahtzee Professor Edition"/><LineBreak/><Run Text="Professor Types:"/>
             </TextBlock>
             <TextBlock x:Name="textBlock1" Height="auto" TextWrapping="Wrap" Width="369" Margin="0">
                 <Run Text="     Dr. Geary:                                             Bonus:     20"/>
@@ -174,8 +169,6 @@
                 <LineBreak/><LineBreak/>
                 <Run Text="Once you finish a game, you can simply click, NEW GAME to play again."/>
             </TextBlock>
-
-
         </ListView>
 
     </Grid>
