@@ -173,9 +173,17 @@
             <TextBlock xml:space="preserve" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Auto" TextAlignment="Center" Width="355">
                 <Run Text=" To see the traditional Yahtzee rules, go to this link: "/>
                 <Run FontWeight="Bold" Text="https://www.hasbro.com/common/instruct/Yahtzee.pdf "/>
-                <LineBreak/><LineBreak/><Run Text="Here are the additional instructions for how to play Yahtzee Professor Edition"/><LineBreak/><Run Text="Professor Types:"/>
+                <LineBreak/><LineBreak/>
+                <Run Text="Here are the additional instructions for how to play Yahtzee Professor Edition"/><LineBreak/><Run Text="Professor Types:"/>
             </TextBlock>
             <TextBlock x:Name="textBlock1" Height="auto" TextWrapping="Wrap" Width="369" Margin="0,0,0,8" >
+                <Run Text=" One of each" FontWeight="Bold"/>
+                <LineBreak/><LineBreak/>
+                <Run Text="    Holding one of each teacher adds 600 points."/>
+                <Run Text=" All of one" FontWeight="Bold"/>
+                <LineBreak/><LineBreak/>
+                <Run Text="    Having all dice of one teacher adds 1000 points."/>
+                <LineBreak/><LineBreak/>
                 <Run Text=" Dr. Howell: Risky" FontWeight="Bold"/>
                 <LineBreak/><LineBreak/>
                 <Run Text="    Holding only one Dr. Howell subtracts your total score from your bonus (you can end up negative). Note, this can be advantageous if your total score is in the negative. Holding more than one adds your total score times one, two, or three to your bonus."/>
@@ -184,13 +192,13 @@
                 <LineBreak/><LineBreak/>
                 <Run Text="    Positive 20, 50, 100, or 200 bonus points guaranteed"/>
                 <LineBreak/><LineBreak/>
-                <Run Text=" Mr. Halsey: Category Score Multiplier" FontWeight="Bold"/>
-                <LineBreak/><LineBreak/>
-                <Run Text="    Multiply your category score by 2, 3, 4, or 5"/>
-                <LineBreak/><LineBreak/>
-                <Run Text=" Dr. Sparks: Bonus Score Multiplier" FontWeight="Bold"/>
+                <Run Text=" Mr. Halsey: Bonus Score Multiplier" FontWeight="Bold"/>
                 <LineBreak/><LineBreak/>
                 <Run Text="    Multiply your bonus score by 2, 3, 4, or 5"/>
+                <LineBreak/><LineBreak/>
+                <Run Text=" Dr. Sparks: Category Score Multiplier" FontWeight="Bold"/>
+                <LineBreak/><LineBreak/>
+                <Run Text="    Add your category score multiplied by 1, 2, 3, or 4"/>
                 <LineBreak/><LineBreak/>
                 <Run Text=" Mr. Stemen: Team Player" FontWeight="Bold"/>                
                 <LineBreak/><LineBreak/>

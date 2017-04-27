@@ -440,7 +440,7 @@ namespace YahtzeeWithATwist.Classes
             }
             #endregion
 
-            #region HALSEY BONUS: Multiply category score
+            #region HALSEY BONUS: Multiply bonus score
             if (diceByBonus.Any(group => group.bonusFace == Dice.BonusFaces.Halsey))
             {
                 currentBonusGroup =
@@ -468,7 +468,7 @@ namespace YahtzeeWithATwist.Classes
             }
             #endregion
 
-            #region SPARKS BONUS: "Caveat"; Multiply bonus category, lose one roll
+            #region SPARKS BONUS: "Caveat"; Multiply base score
             if (diceByBonus.Any(group => group.bonusFace == Dice.BonusFaces.Sparks))
             {
                 currentBonusGroup =
@@ -479,16 +479,16 @@ namespace YahtzeeWithATwist.Classes
                 switch (categoryCount)
                 {
                     case 1:
-                        bonusScore += (2 * baseScore);
+                        bonusScore += (1 * baseScore);
                         break;
                     case 2:
-                        bonusScore += (3 * baseScore);
+                        bonusScore += (2 * baseScore);
                         break;
                     case 3:
-                        bonusScore += (4 * baseScore);
+                        bonusScore += (3 * baseScore);
                         break;
                     case 4:
-                        bonusScore += (5 * baseScore);
+                        bonusScore += (4 * baseScore);
                         break;
                     default:
                         break;
