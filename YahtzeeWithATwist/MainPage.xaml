@@ -8,15 +8,19 @@
     mc:Ignorable="d">
 
 
-    <Grid Background="#FF8B8B8B" Margin="10,-10,-10,10">
-        <Image x:Name="rollDie1" HorizontalAlignment="Left" Height="100" Margin="104,159,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice2.png"/>
-        <Image x:Name="rollDie2" HorizontalAlignment="Left" Height="100" Margin="209,159,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice5.png"/>
-        <Image x:Name="rollDie3" HorizontalAlignment="Left" Height="100" Margin="314,159,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice1.png"/>
-        <Image x:Name="rollDie4" HorizontalAlignment="Left" Height="100" Margin="419,159,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice4.png"/>
-        <Image x:Name="rollDie5" HorizontalAlignment="Left" Height="100" Margin="524,159,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice6.png"/>
+    <Grid Background="#FF8B8B8B" Margin="10,-10,-10,10" PointerReleased="Grid_PointerReleased">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="79*"/>
+            <ColumnDefinition Width="81*"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="rollDie1" HorizontalAlignment="Left" Height="100" Margin="104,159,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice2.png" PointerEntered="dice_PointerEntered" PointerExited="dice_PointerExited"/>
+        <Image x:Name="rollDie2" HorizontalAlignment="Left" Height="100" Margin="209,159,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice5.png" PointerEntered="dice_PointerEntered" PointerExited="dice_PointerExited"/>
+        <Image x:Name="rollDie3" HorizontalAlignment="Left" Height="100" Margin="314,159,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice1.png" PointerEntered="dice_PointerEntered" PointerExited="dice_PointerExited"/>
+        <Image x:Name="rollDie4" HorizontalAlignment="Left" Height="100" Margin="419,159,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice4.png" PointerEntered="dice_PointerEntered" PointerExited="dice_PointerExited"/>
+        <Image x:Name="rollDie5" HorizontalAlignment="Left" Height="100" Margin="524,159,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice6.png" PointerEntered="dice_PointerEntered" PointerExited="dice_PointerExited"/>
         <Button x:Name="rollDieButton" Content="Roll Dice Now!" HorizontalAlignment="Left" Margin="169,294,0,0" VerticalAlignment="Top" Height="70" Width="396" FontSize="36" Click="rollDieButton_Click" Background="#33000000"/>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="591" Margin="692,57,0,0" Stroke="Black" VerticalAlignment="Top" Width="492"/>
-        <Rectangle HorizontalAlignment="Left" Height="144" Margin="93,137,0,0" Stroke="Black" VerticalAlignment="Top" Width="550" Canvas.ZIndex="-5">
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="584" Margin="60,64,0,0" Stroke="Black" VerticalAlignment="Top" Width="492" Grid.Column="1"/>
+        <Rectangle HorizontalAlignment="Left" Height="144" Margin="93,137,0,0" Stroke="Black" VerticalAlignment="Top" Width="550" Canvas.ZIndex="-5" Grid.ColumnSpan="2">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF646464" Offset="0"/>
@@ -24,12 +28,12 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Image x:Name="heldDie1" HorizontalAlignment="Left" Height="100" Margin="104,529,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice2.png"/>
-        <Image x:Name="heldDie2" HorizontalAlignment="Left" Height="100" Margin="209,529,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice5.png"/>
-        <Image x:Name="heldDie3" HorizontalAlignment="Left" Height="100" Margin="314,529,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice1.png"/>
-        <Image x:Name="heldDie4" HorizontalAlignment="Left" Height="100" Margin="419,529,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice4.png"/>
-        <Image x:Name="heldDie5" HorizontalAlignment="Left" Height="100" Margin="524,529,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice6.png"/>
-        <Rectangle HorizontalAlignment="Left" Height="144" Margin="93,504,0,0" Stroke="Black" VerticalAlignment="Top" Width="550" Canvas.ZIndex="-5">
+        <Image x:Name="heldDie1" HorizontalAlignment="Left" Height="100" Margin="104,529,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice2.png" PointerEntered="dice_PointerEntered" PointerExited="dice_PointerExited"/>
+        <Image x:Name="heldDie2" HorizontalAlignment="Left" Height="100" Margin="209,529,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice5.png" PointerEntered="dice_PointerEntered" PointerExited="dice_PointerExited"/>
+        <Image x:Name="heldDie3" HorizontalAlignment="Left" Height="100" Margin="314,529,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice1.png" PointerEntered="dice_PointerEntered" PointerExited="dice_PointerExited"/>
+        <Image x:Name="heldDie4" HorizontalAlignment="Left" Height="100" Margin="419,529,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice4.png" PointerEntered="dice_PointerEntered" PointerExited="dice_PointerExited"/>
+        <Image x:Name="heldDie5" HorizontalAlignment="Left" Height="100" Margin="524,529,0,0" VerticalAlignment="Top" Width="100" Source="Dice/Dice6.png" PointerEntered="dice_PointerEntered" PointerExited="dice_PointerExited"/>
+        <Rectangle HorizontalAlignment="Left" Height="144" Margin="93,504,0,0" Stroke="Black" VerticalAlignment="Top" Width="550" Canvas.ZIndex="-5" Grid.ColumnSpan="2">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF646464" Offset="0"/>
@@ -40,115 +44,115 @@
 
 
 
-        <TextBlock x:Name="onesLabel" HorizontalAlignment="Left" Margin="769,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased">
+        <TextBlock x:Name="onesLabel" HorizontalAlignment="Left" Margin="137,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased" Grid.Column="1">
             <Run FontWeight="Bold" Text="Ones:"/>
         </TextBlock>
-        <TextBlock x:Name="twosLabel" HorizontalAlignment="Left" Margin="769,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased">
+        <TextBlock x:Name="twosLabel" HorizontalAlignment="Left" Margin="137,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased" Grid.Column="1">
             <Run FontWeight="Bold" Text="Twos:"/>
         </TextBlock>
-        <TextBlock x:Name="threesLabel" HorizontalAlignment="Left" Margin="769,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased">
+        <TextBlock x:Name="threesLabel" HorizontalAlignment="Left" Margin="137,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased" Grid.Column="1">
             <Run FontWeight="Bold" Text="Threes:"/>
         </TextBlock>
-        <TextBlock x:Name="foursLabel" HorizontalAlignment="Left" Margin="769,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased">
+        <TextBlock x:Name="foursLabel" HorizontalAlignment="Left" Margin="137,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased" Grid.Column="1">
             <Run FontWeight="Bold" Text="Fours:"/>
         </TextBlock>
-        <TextBlock x:Name="fivesLabel" HorizontalAlignment="Left" Margin="769,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased">
+        <TextBlock x:Name="fivesLabel" HorizontalAlignment="Left" Margin="137,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased" Grid.Column="1">
             <Run FontWeight="Bold" Text="Fives:"/>
         </TextBlock>
-        <TextBlock x:Name="sixesLabel" HorizontalAlignment="Left" Margin="768,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased">
+        <TextBlock x:Name="sixesLabel" HorizontalAlignment="Left" Margin="136,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased" Grid.Column="1">
             <Run FontWeight="Bold" Text="Sixes:"/>
         </TextBlock>
-        <TextBlock x:Name="threeOfKindLabel" HorizontalAlignment="Left" Margin="768,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased">
+        <TextBlock x:Name="threeOfKindLabel" HorizontalAlignment="Left" Margin="136,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased" Grid.Column="1">
             <Run FontWeight="Bold" Text="Three of a kind:"/>
         </TextBlock>
-        <TextBlock x:Name="fourOfKindLabel" HorizontalAlignment="Left" Margin="769,351,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased">
+        <TextBlock x:Name="fourOfKindLabel" HorizontalAlignment="Left" Margin="137,351,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased" Grid.Column="1">
             <Run FontWeight="Bold" Text="Four of a kind:"/>
         </TextBlock>
-        <TextBlock x:Name="fullHouseLabel" HorizontalAlignment="Left" Margin="769,385,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased">
+        <TextBlock x:Name="fullHouseLabel" HorizontalAlignment="Left" Margin="137,385,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased" Grid.Column="1">
             <Run FontWeight="Bold" Text="Full House:"/>
         </TextBlock>
-        <TextBlock x:Name="smallStraightLabel" HorizontalAlignment="Left" Margin="769,419,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased">
+        <TextBlock x:Name="smallStraightLabel" HorizontalAlignment="Left" Margin="137,419,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased" Grid.Column="1">
             <Run FontWeight="Bold" Text="Small Straight:"/>
         </TextBlock>
-        <TextBlock x:Name="largeStraightLabel" HorizontalAlignment="Left" Margin="768,453,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased">
+        <TextBlock x:Name="largeStraightLabel" HorizontalAlignment="Left" Margin="136,453,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased" Grid.Column="1">
             <Run FontWeight="Bold" Text="Large Straight:"/>
         </TextBlock>
-        <TextBlock x:Name="chanceLabel" HorizontalAlignment="Left" Margin="768,487,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased">
+        <TextBlock x:Name="chanceLabel" HorizontalAlignment="Left" Margin="136,487,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased" Grid.Column="1">
             <Run FontWeight="Bold" Text="Chance:"/>
         </TextBlock>
-        <TextBlock x:Name="yahtzeeLabel" HorizontalAlignment="Left" Margin="768,521,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased">
+        <TextBlock x:Name="yahtzeeLabel" HorizontalAlignment="Left" Margin="136,521,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" PointerEntered="scoreLabel_PointerEntered" PointerExited="scoreLabel_PointerExited" PointerReleased="scoreLabel_PointerReleased" Grid.Column="1">
             <Run FontWeight="Bold" Text="YAHTZEE:"/>
         </TextBlock>
-        <TextBlock x:Name="totalScoreLabel" HorizontalAlignment="Left" Margin="769,595,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="totalScoreLabel" HorizontalAlignment="Left" Margin="137,595,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" Grid.Column="1">
             <Run FontWeight="Bold" Text="Total Score:"/>
         </TextBlock>
-        <TextBlock x:Name="onesScore" HorizontalAlignment="Left" Margin="1090,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="onesScore" HorizontalAlignment="Left" Margin="458,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" Grid.Column="1">
             <Run FontWeight="Bold" Text="15"/>
         </TextBlock>
-        <TextBlock x:Name="textBlock1_Copy16" HorizontalAlignment="Left" Margin="732,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="textBlock1_Copy16" HorizontalAlignment="Left" Margin="88,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36" Grid.Column="1">
             <Run FontWeight="Bold" Text="Score Category"/>
             <LineBreak/>
             <Run FontWeight="Bold"/>
         </TextBlock>
-        <TextBlock x:Name="textBlock1_Copy17" HorizontalAlignment="Left" Margin="1076,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" >
+        <TextBlock x:Name="textBlock1_Copy17" HorizontalAlignment="Left" Margin="423,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36" Grid.Column="1" >
             <Run FontWeight="Bold" Text="Score"/>
         </TextBlock>
-        <TextBlock x:Name="twosScore" HorizontalAlignment="Left" Margin="1090,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
+        <TextBlock x:Name="twosScore" HorizontalAlignment="Left" Margin="458,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" Grid.Column="1">
             <Run FontWeight="Bold" Text="15"/>
         </TextBlock>
-        <TextBlock x:Name="threesScore" HorizontalAlignment="Left" Margin="1090,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
+        <TextBlock x:Name="threesScore" HorizontalAlignment="Left" Margin="458,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" Grid.Column="1">
             <Run FontWeight="Bold" Text="15"/>
         </TextBlock>
-        <TextBlock x:Name="foursScore" HorizontalAlignment="Left" Margin="1090,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
+        <TextBlock x:Name="foursScore" HorizontalAlignment="Left" Margin="458,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" Grid.Column="1">
             <Run FontWeight="Bold" Text="15"/>
         </TextBlock>
-        <TextBlock x:Name="fivesScore" HorizontalAlignment="Left" Margin="1090,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
+        <TextBlock x:Name="fivesScore" HorizontalAlignment="Left" Margin="458,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" Grid.Column="1">
             <Run FontWeight="Bold" Text="15"/>
         </TextBlock>
-        <TextBlock x:Name="sixesScore" HorizontalAlignment="Left" Margin="1090,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
+        <TextBlock x:Name="sixesScore" HorizontalAlignment="Left" Margin="458,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" Grid.Column="1">
             <Run FontWeight="Bold" Text="15"/>
         </TextBlock>
-        <TextBlock x:Name="threeOfKindScore" HorizontalAlignment="Left" Margin="1090,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
+        <TextBlock x:Name="threeOfKindScore" HorizontalAlignment="Left" Margin="458,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" Grid.Column="1">
             <Run FontWeight="Bold" Text="15"/>
         </TextBlock>
-        <TextBlock x:Name="fourOfKindScore" HorizontalAlignment="Left" Margin="1090,351,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
+        <TextBlock x:Name="fourOfKindScore" HorizontalAlignment="Left" Margin="458,351,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" Grid.Column="1">
             <Run FontWeight="Bold" Text="15"/>
         </TextBlock>
-        <TextBlock x:Name="fullHouseScore" HorizontalAlignment="Left" Margin="1090,385,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
+        <TextBlock x:Name="fullHouseScore" HorizontalAlignment="Left" Margin="458,385,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" Grid.Column="1">
             <Run FontWeight="Bold" Text="15"/>
         </TextBlock>
-        <TextBlock x:Name="smallStraightScore" HorizontalAlignment="Left" Margin="1090,419,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
+        <TextBlock x:Name="smallStraightScore" HorizontalAlignment="Left" Margin="458,419,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" Grid.Column="1">
             <Run FontWeight="Bold" Text="15"/>
         </TextBlock>
-        <TextBlock x:Name="largeStraightScore" HorizontalAlignment="Left" Margin="1090,453,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
+        <TextBlock x:Name="largeStraightScore" HorizontalAlignment="Left" Margin="458,453,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" Grid.Column="1">
             <Run FontWeight="Bold" Text="15"/>
         </TextBlock>
-        <TextBlock x:Name="chanceScore" HorizontalAlignment="Left" Margin="1090,487,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
+        <TextBlock x:Name="chanceScore" HorizontalAlignment="Left" Margin="458,487,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" Grid.Column="1">
             <Run FontWeight="Bold" Text="15"/>
         </TextBlock>
-        <TextBlock x:Name="yahtzeeScore" HorizontalAlignment="Left" Margin="1090,521,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793">
+        <TextBlock x:Name="yahtzeeScore" HorizontalAlignment="Left" Margin="458,521,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" Grid.Column="1">
             <Run FontWeight="Bold" Text="15"/>
         </TextBlock>
-        <TextBlock x:Name="totalScore" HorizontalAlignment="Left" Margin="1091,595,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" Width="69">
+        <TextBlock x:Name="totalScore" HorizontalAlignment="Left" Margin="459,595,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" Width="69" Grid.Column="1">
             <Run FontWeight="Bold" Text="0"/>
         </TextBlock>
-        <TextBlock x:Name="yahtzeeLabel_Copy" HorizontalAlignment="Left" Margin="769,555,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+        <TextBlock x:Name="yahtzeeLabel_Copy" HorizontalAlignment="Left" Margin="137,555,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" Grid.Column="1">
             <Run FontWeight="Bold" Text="BONUS:"/>
         </TextBlock>
-        <TextBlock x:Name="bonusScore" HorizontalAlignment="Left" Margin="1090,555,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" FontWeight="Bold" Width="70" />
-        <TextBlock x:Name="gameBoardMessageBox" HorizontalAlignment="Left" Margin="93,386,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" Width="550" Height="97" FontWeight="Bold" TextAlignment="Center" />
-        <TextBlock x:Name="yahtzeeGameTitle" HorizontalAlignment="Left" Margin="239,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontFamily="Segoe UI Black" Foreground="#FFEC962F">
-            <Run Foreground="#FFF77E19" FontWeight="Bold" Text="Yahtzee!"/>
+        <TextBlock x:Name="bonusScore" HorizontalAlignment="Left" Margin="458,555,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.64,1.793" FontWeight="Bold" Width="70" Grid.Column="1" />
+        <TextBlock x:Name="gameBoardMessageBox" HorizontalAlignment="Left" Margin="93,386,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Width="550" Height="97" TextAlignment="Center" Grid.ColumnSpan="2" />
+        <TextBlock x:Name="yahtzeeGameTitle" HorizontalAlignment="Left" Margin="239,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72" FontFamily="Segoe UI Black" Foreground="#FFEC962F" FontWeight="Bold">
+            <Run Foreground="#FFF77E19" Text="Yahtzee!"/>
         </TextBlock>
-        <TextBlock x:Name="professorText" HorizontalAlignment="Left" Margin="239,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Gabriola" FontSize="48">
-            <Run FontWeight="Bold" FontStyle="Italic" Text="Professor Edition"/>
+        <TextBlock x:Name="professorText" HorizontalAlignment="Left" Margin="251,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Gabriola" FontSize="48">
+            <Run FontStyle="Italic" Text="Professor Edition"/>
         </TextBlock>
-        <Button x:Name="helpButton" Content="?" HorizontalAlignment="Left" Margin="1202,586,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Yu Gothic UI Semibold" Width="68" Click="helpButton_Click" RenderTransformOrigin="0.648,1.4" FontWeight="Bold" Height="62">
+        <Button x:Name="helpButton" Content="?" HorizontalAlignment="Left" Margin="564,586,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Yu Gothic UI Semibold" Width="68" Click="helpButton_Click" RenderTransformOrigin="0.648,1.4" FontWeight="Bold" Height="62" Grid.Column="1">
         </Button>
 
-        <Button x:Name="newGame" Content="New Game" HorizontalAlignment="Left" Margin="692,665,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Arial Black" Width="492" Click="newGame_Click" Height="39">
+        <Button x:Name="newGame" Content="New Game" HorizontalAlignment="Left" Margin="60,665,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Arial Black" Width="492" Click="newGame_Click" Height="39" Grid.Column="1">
         </Button>
-        <ListView x:Name="helpDialog" HorizontalAlignment="Left" Height="368" Margin="881,279,0,0" VerticalAlignment="Top" Width="389" Visibility="Collapsed" ScrollViewer.VerticalScrollBarVisibility="Visible" BorderBrush="#FFF9A209" BorderThickness="2" Opacity="0.995">
+        <ListView x:Name="helpDialog" HorizontalAlignment="Left" Height="368" Margin="249,279,0,0" VerticalAlignment="Top" Width="389" Visibility="Collapsed" ScrollViewer.VerticalScrollBarVisibility="Visible" BorderBrush="#FFF9A209" BorderThickness="2" Opacity="0.995" Grid.Column="1">
             <ListView.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF474747" Offset="0.018"/>
@@ -168,42 +172,29 @@
                     </Setter>
                 </Style>
             </ListView.ItemContainerStyle>
-            <Button Name="Close" Content="Close" Click="Close_Click" HorizontalAlignment="Center" Margin="300,10,0,10" BorderBrush="#FFF59913"/>
+            <!--<Button Name="Close" Content="Close" Click="Close_Click" HorizontalAlignment="Center" Margin="300,10,0,10" BorderBrush="#FFF59913"/>-->
             <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Instructions" FontWeight="Bold" FontSize="36" HorizontalAlignment="Center" Width="368" VerticalAlignment="Center" TextAlignment="Center"  Margin="0,0,0,10"/>
             <TextBlock xml:space="preserve" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Auto" TextAlignment="Center" Width="355">
                 <Run Text=" To see the traditional Yahtzee rules, go to this link: "/>
-                <Run FontWeight="Bold" Text="https://www.hasbro.com/common/instruct/Yahtzee.pdf "/>
-                <LineBreak/><LineBreak/>
-                <Run Text="Here are the additional instructions for how to play Yahtzee Professor Edition"/><LineBreak/><Run Text="Professor Types:"/>
+                <Run FontWeight="Bold" Text="https://www.hasbro.com/common/instruct/Yahtzee.pdf "/><LineBreak />
             </TextBlock>
-            <TextBlock x:Name="textBlock1" Height="auto" TextWrapping="Wrap" Width="369" Margin="0,0,0,8" >
-                <Run Text=" One of each" FontWeight="Bold"/>
-                <LineBreak/><LineBreak/>
-                <Run Text="    Holding one of each teacher adds 600 points."/>
-                <Run Text=" All of one" FontWeight="Bold"/>
-                <LineBreak/><LineBreak/>
-                <Run Text="    Having all dice of one teacher adds 1000 points."/>
-                <LineBreak/><LineBreak/>
-                <Run Text=" Dr. Howell: Risky" FontWeight="Bold"/>
-                <LineBreak/><LineBreak/>
-                <Run Text="    Holding only one Dr. Howell subtracts your total score from your bonus (you can end up negative). Note, this can be advantageous if your total score is in the negative. Holding more than one adds your total score times one, two, or three to your bonus."/>
-                <LineBreak/><LineBreak/>
-                <Run Text="  Dr. Geary: Guaranteed points" FontWeight="Bold"/>
-                <LineBreak/><LineBreak/>
-                <Run Text="    Positive 20, 50, 100, or 200 bonus points guaranteed"/>
-                <LineBreak/><LineBreak/>
-                <Run Text=" Mr. Halsey: Bonus Score Multiplier" FontWeight="Bold"/>
-                <LineBreak/><LineBreak/>
-                <Run Text="    Multiply your bonus score by 2, 3, 4, or 5"/>
-                <LineBreak/><LineBreak/>
-                <Run Text=" Dr. Sparks: Category Score Multiplier" FontWeight="Bold"/>
-                <LineBreak/><LineBreak/>
-                <Run Text="    Add your category score multiplied by 1, 2, 3, or 4"/>
-                <LineBreak/><LineBreak/>
-                <Run Text=" Mr. Stemen: Team Player" FontWeight="Bold"/>                
-                <LineBreak/><LineBreak/>
-                <Run Text="    Increments the number of each other type of bonus dice held by one. Note, this negates the negative Howell effect. However, Mr. Stemen by himself has no effect."/>
-                <LineBreak/><LineBreak/>
+            <TextBlock x:Name="textBlock1" Height="auto" TextWrapping="Wrap" Width="369" Margin="0,0,0,8" ><LineBreak/>
+                <Run Text="Additional rules for Yahtzee: Professor Edition" FontWeight="Bold"/>
+                <LineBreak></LineBreak>
+                <Run Text="One of each" FontWeight="Bold"/><LineBreak/>
+                <Run Text="    Holding one of each teacher adds 600 points."/><LineBreak/>
+                <Run Text="All of one" FontWeight="Bold"/><LineBreak/>
+                <Run Text="    Having all dice of one teacher adds 1000 points."/><LineBreak/>
+                <Run Text="Dr. Howell: Risky" FontWeight="Bold"/><LineBreak/>
+                <Run Text="    Holding only one Dr. Howell subtracts your total score from your bonus (you can end up negative). Note, this can be advantageous if your total score is in the negative. Holding more than one adds your total score times one, two, or three to your bonus."/><LineBreak/>
+                <Run Text="Dr. Geary: Guaranteed points" FontWeight="Bold"/><LineBreak/>
+                <Run Text="    Positive 20, 50, 100, or 200 bonus points guaranteed"/><LineBreak/>
+                <Run Text="Mr. Halsey: Bonus Score Multiplier" FontWeight="Bold"/><LineBreak/>
+                <Run Text="    Multiply your bonus score by 2, 3, 4, or 5"/><LineBreak/>
+                <Run Text="Dr. Sparks: Category Score Multiplier" FontWeight="Bold"/><LineBreak/>
+                <Run Text="    Add your category score multiplied by 1, 2, 3, or 4"/><LineBreak/>
+                <Run Text="Mr. Stemen: Team Player" FontWeight="Bold"/><LineBreak/>
+                <Run Text="    Increments the number of each other type of bonus dice held by one. Note, this negates the negative Howell effect. However, Mr. Stemen by himself has no effect."/><LineBreak/>
             </TextBlock>
         </ListView>
 

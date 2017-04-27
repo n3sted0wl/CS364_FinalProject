@@ -5,9 +5,6 @@
 // Date:        April 27, 2017
 // File Name:   MainPage.xaml.cs
 
-#region Development Notes and TODOs
-#endregion
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -64,11 +61,14 @@ namespace YahtzeeWithATwist
         public MainPage()
         {
             this.InitializeComponent();
-            GameBoard.initialize(); // Includes score categories
+            GameBoard.initialize();
             this.mapControls();
             this.initializePageControls();
             this.initializeDice();
             this.initializeDelegates();
+
+            // Display all scores
+            GameBoard.calculateAllScores();
         }
 
         /*************************************************************/
@@ -216,23 +216,77 @@ namespace YahtzeeWithATwist
             return;
         }
 
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            helpDialog.Visibility = Visibility.Collapsed;
-        }
-
         private void updateImageSource(Image imageToUpdate, string newImagePath)
         {
             imageToUpdate.Source =
                 new BitmapImage(new Uri(this.BaseUri, newImagePath));
+            return;
         }
         #endregion
 
         #region Event Handlers
-        // --------------------
+        // --------------------        
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            helpDialog.Visibility = Visibility.Collapsed;
+            return;
+        }
+
+        private void Grid_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            // Hide any dialog boxes
+            if (helpDialog.Visibility == Visibility.Visible)
+                helpDialog.Visibility = Visibility.Collapsed;
+            return;
+        }
+
+        private void dice_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            // Check if it's a bonus dice
+            Dice highlightedDice = getDiceByImageControl(sender as Image);
+            if (highlightedDice.bonusFace != null)
+            {
+                // Display the bonus description
+                string description;
+
+                switch (highlightedDice.bonusFace)
+                {
+                    case Dice.BonusFaces.Geary:
+                        description = "Geary (Guaranteed): Positive 20, 50, 100, or 200 bonus points guaranteed";
+                        break;
+                    case Dice.BonusFaces.Halsey:
+                        description = "Halsey (Bonus Multiplier): Multiply your bonus score by 2, 3, 4, or 5";
+                        break;
+                    case Dice.BonusFaces.Howell:
+                        description = "Howell (Risky): Holding only one Dr. Howell subtracts your total score from your bonus. Holding more than one adds your total score times one, two, or three to your bonus";
+                        break;
+                    case Dice.BonusFaces.Sparks:
+                        description = "Sparks (Category Multiplier): Add your category score multiplied by 1, 2, 3, or 4";
+                        break;
+                    case Dice.BonusFaces.Stemen:
+                        description = "Stemen (Team Player): Increments the number of each other type of bonus dice held by one";
+                        break;
+                    default:
+                        description = string.Empty;
+                        break;
+                }
+
+                gameBoardMessageBox.Text = description;
+                return;
+            }
+        }
+
+        private void dice_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            // Clear the bonus dice description 
+            gameBoardMessageBox.Text = String.Empty;
+            return;
+        }
+
         private void helpButton_Click(object sender, RoutedEventArgs e)
         {
             helpDialog.Visibility = Visibility.Visible;
+            return;
         }
 
         private void newGame_Click(object sender, RoutedEventArgs e)
@@ -283,49 +337,44 @@ namespace YahtzeeWithATwist
             return;
         }
 
-        private async void rollDieButton_Click(object sender, RoutedEventArgs e)
+        private void rollDieButton_Click(object sender, RoutedEventArgs e)
         {
             Button rollButton = (sender as Button);
 
             // Add Dice Sound
-            try
-            {
-                var element = new MediaElement();
-                string soundFile = @"Assets\Sounds\roll-dice.wav";
-                StorageFolder folderLocation = Windows.ApplicationModel.Package.Current.InstalledLocation;
-                StorageFile file = await folderLocation.GetFileAsync(soundFile);
-                var stream = await file.OpenAsync(FileAccessMode.Read);
-                element.SetSource(stream, file.ContentType);
-                element.Play();
-            }
-            catch (FileNotFoundException ex)
-            {
-            }
-            // For if the sound causes a crash
-            catch (Exception)
-            { }
+            //try
+            //{
+            //    var           element        = new MediaElement();
+            //    string        soundFile      = @"Assets\Sounds\roll-dice.wav";
+            //    StorageFolder folderLocation = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            //    StorageFile   file           = await folderLocation.GetFileAsync(soundFile);
+            //    var           stream         = await file.OpenAsync(FileAccessMode.Read);
 
-            if (GameBoard.rollsRemaining >= 1) // TODO: Check for rollable dice
+            //    element.SetSource(stream, file.ContentType);
+            //    element.Play();
+            //}
+            //catch (FileNotFoundException ex)
+            //{
+            //}
+            //// For if the sound causes a crash
+            //catch (Exception)
+            //{ }
+
+            if (GameBoard.rollsRemaining >= 1) 
             {
                 // Roll the dice
                 foreach (Dice dice in GameBoard.RollableDice.Values)
-                {
-                    dice.roll();
-                }
+                { dice.roll(); }
 
                 // Calculate the possible values
                 GameBoard.calculateAllScores();
 
                 if (GameBoard.rollsRemaining == 1)
-                {
-                    rollButton.IsEnabled = false;
-                }
+                { rollButton.IsEnabled = false; }
 
                 // Update the roll counter
                 if (!TESTING_MODE)
-                {
-                    GameBoard.rollsRemaining -= 1;
-                }
+                { GameBoard.rollsRemaining -= 1; }
                 rollButton.Content = $" Rolls Remaining: ";
                 rollButton.Content += GameBoard.rollsRemaining.ToString();
             }
