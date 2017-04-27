@@ -176,16 +176,26 @@
                 <LineBreak/><LineBreak/><Run Text="Here are the additional instructions for how to play Yahtzee Professor Edition"/><LineBreak/><Run Text="Professor Types:"/>
             </TextBlock>
             <TextBlock x:Name="textBlock1" Height="auto" TextWrapping="Wrap" Width="369" Margin="0,0,0,8" >
-                <Run Text="  Dr. Geary: Explanation here... or could do the bonus  format"/>
+                <Run Text=" Dr. Howell: Risky" FontWeight="Bold"/>
                 <LineBreak/><LineBreak/>
-                <Run Text=" Dr. Howell:                                             Bonus:   -20"/>
+                <Run Text="    Holding only one Dr. Howell subtracts your total score from your bonus (you can end up negative). Note, this can be advantageous if your total score is in the negative. Holding more than one adds your total score times one, two, or three to your bonus."/>
                 <LineBreak/><LineBreak/>
-                <Run Text=" Dr. Sparks:                                             Bonus:   -20"/>
+                <Run Text="  Dr. Geary: Guaranteed points" FontWeight="Bold"/>
                 <LineBreak/><LineBreak/>
-                <Run Text=" Mr. Stemen:                                             Bonus:   -20"/>
+                <Run Text="    Positive 20, 50, 100, or 200 bonus points guaranteed"/>
                 <LineBreak/><LineBreak/>
-                <Run Text=" Mr. Halsey:                                             Bonus:   -20"/>
-                <LineBreak/><LineBreak/><Run Text="Once you finish a game, simply click the NEW GAME button to play again."/>
+                <Run Text=" Mr. Halsey: Category Score Multiplier" FontWeight="Bold"/>
+                <LineBreak/><LineBreak/>
+                <Run Text="    Multiply your category score by 2, 3, 4, or 5"/>
+                <LineBreak/><LineBreak/>
+                <Run Text=" Dr. Sparks: Bonus Score Multiplier" FontWeight="Bold"/>
+                <LineBreak/><LineBreak/>
+                <Run Text="    Multiply your bonus score by 2, 3, 4, or 5"/>
+                <LineBreak/><LineBreak/>
+                <Run Text=" Mr. Stemen: Team Player" FontWeight="Bold"/>                
+                <LineBreak/><LineBreak/>
+                <Run Text="    Increments the number of each other type of bonus dice held by one. Note, this negates the negative Howell effect. However, Mr. Stemen by himself has no effect."/>
+                <LineBreak/><LineBreak/>
             </TextBlock>
         </ListView>
 
